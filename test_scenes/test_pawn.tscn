@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqglpbw8lqs7f"]
+
+[ext_resource type="Texture2D" uid="uid://biypnnv8oumla" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_0dine"]
+[ext_resource type="PackedScene" uid="uid://bbaq72ngobmw1" path="res://player/player.tscn" id="2_0yn10"]
+[ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="3_tokra"]
+[ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_2fq4f"]
+[ext_resource type="PackedScene" uid="uid://d3fpypedn3irp" path="res://UI/game_ui.tscn" id="5_nk7b7"]
+
+[node name="TestPawn" type="Node2D"]
+
+[node name="WarriorPurple" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(1730, 767)
+texture = ExtResource("1_0dine")
+
+[node name="Player" parent="." instance=ExtResource("2_0yn10")]
+position = Vector2(138, 357)
+
+[node name="Pawn" parent="." instance=ExtResource("3_tokra")]
+position = Vector2(718, 328)
+health = 50
+
+[node name="Pawn2" parent="." instance=ExtResource("3_tokra")]
+position = Vector2(851, 348)
+health = 50
+
+[node name="Pawn3" parent="." instance=ExtResource("3_tokra")]
+position = Vector2(891, 262)
+health = 50
+
+[node name="Pawn4" parent="." instance=ExtResource("3_tokra")]
+position = Vector2(945, 348)
+health = 50
+
+[node name="Pawn5" parent="." instance=ExtResource("3_tokra")]
+position = Vector2(812, 265)
+health = 50
+
+[node name="Pawn6" parent="." instance=ExtResource("3_tokra")]
+position = Vector2(753, 418)
+health = 50
+
+[node name="Pawn7" parent="." instance=ExtResource("3_tokra")]
+position = Vector2(847, 453)
+health = 50
+
+[node name="Pawn8" parent="." instance=ExtResource("3_tokra")]
+position = Vector2(941, 429)
+health = 50
+
+[node name="Meat" parent="." instance=ExtResource("4_2fq4f")]
+position = Vector2(353, 499)
+
+[node name="Meat2" parent="." instance=ExtResource("4_2fq4f")]
+position = Vector2(182, 165)
+
+[node name="Meat3" parent="." instance=ExtResource("4_2fq4f")]
+position = Vector2(684, 114)
+
+[node name="Meat4" parent="." instance=ExtResource("4_2fq4f")]
+position = Vector2(908, 555)
+
+[node name="GameUI" parent="." instance=ExtResource("5_nk7b7")]

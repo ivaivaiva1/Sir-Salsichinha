@@ -1,0 +1,167 @@
+[gd_scene load_steps=18 format=3 uid="uid://1hwh0w4cfiv6"]
+
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_3aiyo"]
+[ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_b7hb4"]
+[ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="3_8f47n"]
+[ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_rkfx5"]
+[ext_resource type="Texture2D" uid="uid://c02epbuqq5l8f" path="res://addons/Tiny Swords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="3_ydidf"]
+[ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="4_1nbe1"]
+[ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_6vy33"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_snvqw"]
+resource_local_to_scene = true
+shader = ExtResource("3_8f47n")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mgme6"]
+radius = 20.0
+height = 123.994
+
+[sub_resource type="Animation" id="Animation_knnjm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_datu1"]
+resource_name = "attack"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_c7t5m"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rybet"]
+_data = {
+"RESET": SubResource("Animation_knnjm"),
+"attack": SubResource("Animation_datu1"),
+"idle": SubResource("Animation_c7t5m")
+}
+
+[sub_resource type="Animation" id="Animation_gv25h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_bt0ie"]
+resource_name = "hit_flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q2e3t"]
+_data = {
+"RESET": SubResource("Animation_gv25h"),
+"hit_flash": SubResource("Animation_bt0ie")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gemc8"]
+radius = 70.0
+height = 192.0
+
+[node name="Goblin" type="CharacterBody2D" groups=["enemies"]]
+motion_mode = 1
+script = ExtResource("1_3aiyo")
+health = 20
+death_effect_prefab = ExtResource("2_b7hb4")
+damage_ui_prefab = ExtResource("3_rkfx5")
+death_effect_scale = 1.4
+meat_scene = ExtResource("4_6vy33")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_snvqw")
+position = Vector2(-2, -74)
+scale = Vector2(2.505, 2.505)
+texture = ExtResource("3_ydidf")
+hframes = 7
+vframes = 5
+frame = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+rotation = -1.57225
+shape = SubResource("CapsuleShape2D_mgme6")
+debug_color = Color(0, 0.6, 0.701961, 0.141176)
+
+[node name="FollowPlayer" type="Node" parent="."]
+script = ExtResource("4_1nbe1")
+speed = 0.3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rybet")
+}
+autoplay = "idle"
+
+[node name="HitFlash" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_q2e3t")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+modulate = Color(1, 0, 1, 0.960784)
+position = Vector2(-1, -74)
+shape = SubResource("CapsuleShape2D_gemc8")
+debug_color = Color(0, 0.6, 0.701961, 0.12549)
+
+[node name="DamageUIPos" type="Marker2D" parent="."]
+position = Vector2(-1, -156)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
