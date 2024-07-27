@@ -3,7 +3,7 @@ extends CharacterBody2D
 
 @export var speed: float = 2.5
 @export var sword_damage: int = 0
-@export var sword_knockback_force: float = 800
+@export var sword_knockback_force: float = 500
 @export var health: int = 100
 @export var max_health: int = 100
 @export_category("Ritual")
@@ -157,8 +157,8 @@ func apply_damage(stop_time: float = 0.15):
 		if body.is_in_group("enemies"):
 			var enemy: Enemy = body
 			var direction = calculate_knockback_direction(enemy)
-			var damage_id = randi_range(0, 1000000)
-			enemy.get_hited(sword_damage, direction, sword_knockback_force, damage_id)
+			var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance(sword_damage, sword_knockback_force)
+			enemy.get_hited(new_damage_instance, direction)
 			enemy.pump()
 			total_direction += direction
 			enemies_hit += 1

@@ -31,7 +31,10 @@ func do_move():
 		move_direction = input_vector * speed * 100
 	else:
 		move_direction = input_vector * speed * 0
-	enemy.velocity = move_direction + enemy.knockback
+	if(enemy.actual_knockback.x > 0 or enemy.actual_knockback.y):
+		enemy.velocity = enemy.actual_knockback
+	else:
+		enemy.velocity = move_direction
 	enemy.move_and_slide()
 
 

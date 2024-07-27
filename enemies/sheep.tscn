@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bcefmaju7ccqn"]
+[gd_scene load_steps=19 format=3 uid="uid://bcefmaju7ccqn"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_5plw8"]
 [ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_6c1lq"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="3_owa2y"]
 [ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="4_83k6h"]
 [ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_r26or"]
+[ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_ybrkh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lfqla"]
 resource_local_to_scene = true
@@ -210,5 +211,8 @@ libraries = {
 
 [node name="DamageUIPos" type="Marker2D" parent="."]
 position = Vector2(-1, -41)
+
+[node name="Knockback Controller" type="Node" parent="."]
+script = ExtResource("8_ybrkh")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

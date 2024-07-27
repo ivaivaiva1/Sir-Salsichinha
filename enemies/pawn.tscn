@@ -7,7 +7,7 @@
 [ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="3_5asm1"]
 [ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_ydpu8"]
 [ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_pdasv"]
-[ext_resource type="Script" path="res://enemies/ApplyForce.gd" id="8_xfi83"]
+[ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_yafem"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_njmvc"]
 resource_local_to_scene = true
@@ -120,9 +120,11 @@ motion_mode = 1
 script = ExtResource("1_egxte")
 health = 100
 death_effect_prefab = ExtResource("2_jjofm")
+damage = null
 damage_ui_prefab = ExtResource("3_ydpu8")
 death_effect_scale = 0.9
 meat_scene = ExtResource("4_pdasv")
+weight = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_njmvc")
@@ -146,10 +148,6 @@ rotation = -1.56234
 shape = SubResource("CapsuleShape2D_y87au")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
-[node name="FollowPlayer" type="Node" parent="."]
-script = ExtResource("1_qs5qa")
-speed = 0.6
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_cofel")
@@ -164,13 +162,11 @@ libraries = {
 [node name="DamageUIPos" type="Marker2D" parent="."]
 position = Vector2(-5, -50)
 
-[node name="ApplyForce" type="Node" parent="."]
-script = ExtResource("8_xfi83")
+[node name="FollowPlayer" type="Node" parent="."]
+script = ExtResource("1_qs5qa")
+speed = 0.6
 
-[node name="ApplyForce2" type="Node" parent="."]
-script = ExtResource("8_xfi83")
-
-[node name="ApplyForce3" type="Node" parent="."]
-script = ExtResource("8_xfi83")
+[node name="Knockback Controller" type="Node" parent="."]
+script = ExtResource("8_yafem")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
