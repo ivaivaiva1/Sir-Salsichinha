@@ -42,15 +42,17 @@ animations = [{
 radius = 16.8597
 
 [node name="Tree" type="StaticBody2D"]
-position = Vector2(0, -118)
+y_sort_enabled = true
+position = Vector2(0, -119)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1.665, 1.665)
 sprite_frames = SubResource("SpriteFrames_gtmuw")
 autoplay = "default"
 frame_progress = 0.152183
+offset = Vector2(0, -78.87)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 107)
+position = Vector2(0, -19)
 scale = Vector2(1.665, 1.665)
 shape = SubResource("CircleShape2D_c34yx")

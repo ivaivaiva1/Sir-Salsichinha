@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cp3lkcabj2a6h"]
+[gd_scene load_steps=19 format=3 uid="uid://cp3lkcabj2a6h"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_egxte"]
 [ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="1_qs5qa"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="3_5asm1"]
 [ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_ydpu8"]
 [ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_pdasv"]
+[ext_resource type="Script" path="res://enemies/ApplyForce.gd" id="8_xfi83"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_njmvc"]
 resource_local_to_scene = true
@@ -14,8 +15,9 @@ shader = ExtResource("3_5asm1")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vyu18"]
-radius = 32.0624
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uulrl"]
+radius = 18.0
+height = 52.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y87au"]
 radius = 5.87162
@@ -93,7 +95,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_406b4"]
 resource_name = "hit_flash"
-length = 0.2
+length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -101,7 +103,7 @@ tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
@@ -116,7 +118,7 @@ _data = {
 [node name="Pawn" type="CharacterBody2D" groups=["enemies"]]
 motion_mode = 1
 script = ExtResource("1_egxte")
-health = 14
+health = 100
 death_effect_prefab = ExtResource("2_jjofm")
 damage_ui_prefab = ExtResource("3_ydpu8")
 death_effect_scale = 0.9
@@ -134,8 +136,8 @@ frame = 6
 position = Vector2(-2, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -27)
-shape = SubResource("CircleShape2D_vyu18")
+position = Vector2(-3, -30)
+shape = SubResource("CapsuleShape2D_uulrl")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Body2D" type="CollisionShape2D" parent="."]
@@ -147,11 +149,6 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 [node name="FollowPlayer" type="Node" parent="."]
 script = ExtResource("1_qs5qa")
 speed = 0.6
-
-[node name="PawnRed" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(169, -25)
-texture = ExtResource("2_cxpjj")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -166,5 +163,14 @@ libraries = {
 
 [node name="DamageUIPos" type="Marker2D" parent="."]
 position = Vector2(-5, -50)
+
+[node name="ApplyForce" type="Node" parent="."]
+script = ExtResource("8_xfi83")
+
+[node name="ApplyForce2" type="Node" parent="."]
+script = ExtResource("8_xfi83")
+
+[node name="ApplyForce3" type="Node" parent="."]
+script = ExtResource("8_xfi83")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

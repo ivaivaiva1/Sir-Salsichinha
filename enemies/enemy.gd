@@ -74,7 +74,6 @@ func apply_knockback(knockback_direction: Vector2, knockback_force: float, damag
 	if(striker):
 		striked_enemies.append(striker)
 	if(knockback_force > 0):
-		
 		is_striking = true
 		animation_player.play("idle")
 		check_and_strike_enemies(damage_id)
@@ -107,8 +106,10 @@ func die():
 		var death_effect_object = death_effect_prefab.instantiate()
 		death_effect_object.position = position
 		death_effect_object.scale *= death_effect_scale
+		death_effect_object.flip_h = true
 		if(sprite2d.flip_h):
-			death_effect_object.flip_h = true
+			#
+			pass
 		get_parent().add_child(death_effect_object)
 	var index = randf_range(0, 100)
 	if(index <= 2):
@@ -123,17 +124,21 @@ func do_rest():
 	is_resting = true
 
 func _on_area_2d_area_entered(area):
+	if area == null: return
 	if is_striking:
 		if area.is_in_group("enemies"):
 			var enemy: Enemy = area.get_parent()
 			#if enemy not in striked_enemies:
 			striked_enemies.append(enemy)
 			var direction = calculate_knockback_direction(enemy)
-			enemy.get_hited(2, direction, body_knockback_force, last_damage_id)
-			if(get_hited_cooldown <= 0):
-				enemy.pump()
+			await get_tree().create_timer(0.05).timeout
+			if enemy != null:
+				enemy.get_hited(15, direction, body_knockback_force, last_damage_id)
+				if(get_hited_cooldown <= 0):
+					enemy.pump()
 	
 	if is_striking: return
+	if area == null: return
 	if area.is_in_group("player"):
 		do_rest()
 		animation_player.play("attack")
@@ -188,14 +193,19 @@ func pump():
 func check_and_strike_enemies(damage_id: int):
 	var areas = area2d.get_overlapping_areas()
 	for area in areas:
-		if area.is_in_group("enemies"):
-			var enemy: Enemy = area.get_parent()
-			#if enemy not in striked_enemies:
-			striked_enemies.append(enemy)
-			var direction = calculate_knockback_direction(enemy)
-			enemy.get_hited(2, direction, body_knockback_force, damage_id, self)
-			if get_hited_cooldown < 0:
-				enemy.pump()
+		if area != null:
+			if area.is_in_group("enemies"):
+				var enemy: Enemy = area.get_parent()
+				#if enemy not in striked_enemies:
+				striked_enemies.append(enemy)
+				var direction = calculate_knockback_direction(enemy)
+				await get_tree().create_timer(0.05).timeout
+				if enemy != null: 
+					enemy.get_hited(15, direction, body_knockback_force, damage_id, self)
+					if get_hited_cooldown < 0:
+						enemy.pump()
+
+
 
 # Função que calcula a direção do knockback para um inimigo
 func calculate_knockback_direction(enemy: Enemy) -> Vector2:

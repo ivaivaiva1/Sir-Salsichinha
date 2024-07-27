@@ -64,6 +64,7 @@ animations = [{
 radius = 25.0
 
 [node name="Meat" type="AnimatedSprite2D"]
+y_sort_enabled = true
 sprite_frames = SubResource("SpriteFrames_so6gw")
 autoplay = "default"
 frame = 6
