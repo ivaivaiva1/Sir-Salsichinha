@@ -13,7 +13,7 @@ func deal_damage():
 			var enemy: Enemy = body
 			var direction = calculate_knockback_direction(enemy)
 			var damage_id = randi_range(0, 1000000)
-			enemy.get_hited(damage_amount, direction, knockback_force, damage_id)
+			#enemy.get_hited(damage_amount, direction, knockback_force, damage_id)
 
 # Função que calcula a direção do knockback para um inimigo
 func calculate_knockback_direction(enemy: Enemy) -> Vector2:

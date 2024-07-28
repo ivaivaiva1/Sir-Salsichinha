@@ -15,9 +15,8 @@ shader = ExtResource("3_5asm1")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uulrl"]
-radius = 18.0
-height = 52.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_prtl7"]
+radius = 38.0132
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y87au"]
 radius = 5.87162
@@ -120,11 +119,9 @@ motion_mode = 1
 script = ExtResource("1_egxte")
 health = 100
 death_effect_prefab = ExtResource("2_jjofm")
-damage = null
 damage_ui_prefab = ExtResource("3_ydpu8")
 death_effect_scale = 0.9
 meat_scene = ExtResource("4_pdasv")
-weight = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_njmvc")
@@ -138,15 +135,20 @@ frame = 6
 position = Vector2(-2, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-3, -30)
-shape = SubResource("CapsuleShape2D_uulrl")
-debug_color = Color(0, 0.6, 0.701961, 0)
+position = Vector2(-2, -29)
+shape = SubResource("CircleShape2D_prtl7")
 
 [node name="Body2D" type="CollisionShape2D" parent="."]
 position = Vector2(-2, -5)
 rotation = -1.56234
 shape = SubResource("CapsuleShape2D_y87au")
 debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="StrikeArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea2D"]
+position = Vector2(-4, -26)
+shape = SubResource("CircleShape2D_prtl7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

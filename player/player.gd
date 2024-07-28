@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
+# ------------- Player Balance Variables ---------------
 @export var speed: float = 2.5
 @export var sword_damage: int = 0
 @export var sword_knockback_force: float = 500
@@ -14,6 +15,7 @@ extends CharacterBody2D
 @export var ritual_knockback_force: float = 500
 
 var knockback: Vector2 = Vector2(0, 0)
+var max_enemies_knockback: int = 10
 var knockback_tween
 var auto_knock_back_force: float = 200
 var keep_input_x: float = 0
@@ -157,7 +159,7 @@ func apply_damage(stop_time: float = 0.15):
 		if body.is_in_group("enemies"):
 			var enemy: Enemy = body
 			var direction = calculate_knockback_direction(enemy)
-			var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance(sword_damage, sword_knockback_force)
+			var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance(sword_damage, sword_knockback_force, max_enemies_knockback)
 			enemy.get_hited(new_damage_instance, direction)
 			enemy.pump()
 			total_direction += direction
