@@ -18,3 +18,11 @@ func create_damage_instance(force_damage: float, force_power: float, max_hited_e
 	damage_instance.force_decay_time = force_decay_time
 	all_game_damages.append(damage_instance)
 	return damage_instance
+
+func check_max_hited_enemies(damage_instance = Damage_Instance) -> bool:
+	var damage_is_enabled: bool
+	damage_instance.max_hited_enemies -= 1
+	if damage_instance.max_hited_enemies < 0:
+		return false
+	else:
+		return true

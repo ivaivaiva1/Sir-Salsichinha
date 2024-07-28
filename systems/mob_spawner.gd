@@ -43,9 +43,6 @@ func return_valid_spawn_point() -> Vector2:
 		var parameters = PhysicsPointQueryParameters2D.new()
 		parameters.position = point
 		var result: Array = world_state.intersect_point(parameters, 1)
-		if loop_break > 1000: 
-			print("Ponto n encontrado")
-			break
 		if result.is_empty():
 			point_is_safe = true
 		else:

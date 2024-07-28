@@ -19,107 +19,81 @@ health = 200
 
 [node name="Pawn" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(651, 349)
-health = 200
 
 [node name="Pawn2" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(717, 349)
-health = 200
 
 [node name="Pawn3" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(717, 277)
-health = 200
 
 [node name="Pawn4" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(717, 199)
-health = 200
 
 [node name="Pawn5" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(717, 134)
-health = 200
 
 [node name="Pawn6" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(717, 634)
-health = 200
 
 [node name="Pawn7" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(717, 562)
-health = 200
 
 [node name="Pawn8" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(717, 484)
-health = 200
 
 [node name="Pawn9" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(717, 419)
-health = 200
 
 [node name="Pawn10" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(780, 348)
-health = 200
 
 [node name="Pawn11" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(780, 276)
-health = 200
 
 [node name="Pawn12" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(780, 198)
-health = 200
 
 [node name="Pawn13" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(780, 133)
-health = 200
 
 [node name="Pawn14" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(780, 633)
-health = 200
 
 [node name="Pawn15" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(780, 561)
-health = 200
 
 [node name="Pawn16" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(780, 483)
-health = 200
 
 [node name="Pawn17" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(780, 418)
-health = 200
 
 [node name="Pawn18" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(848, 348)
-health = 200
 
 [node name="Pawn19" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(848, 276)
-health = 200
 
 [node name="Pawn20" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(848, 198)
-health = 200
 
 [node name="Pawn21" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(848, 133)
-health = 200
 
 [node name="Pawn22" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(848, 633)
-health = 200
 
 [node name="Pawn23" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(848, 561)
-health = 200
 
 [node name="Pawn24" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(848, 483)
-health = 200
 
 [node name="Pawn25" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(848, 418)
-health = 200
 
 [node name="Pawn26" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(911, 348)
-health = 200
 
 [node name="Pawn27" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(911, 276)

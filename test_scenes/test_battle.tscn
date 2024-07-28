@@ -1,60 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://cuh1arc88iii"]
+[gd_scene load_steps=3 format=3 uid="uid://cuh1arc88iii"]
 
 [ext_resource type="PackedScene" uid="uid://bbaq72ngobmw1" path="res://player/player.tscn" id="1_q1jom"]
 [ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="2_f7phi"]
-[ext_resource type="PackedScene" uid="uid://bcefmaju7ccqn" path="res://enemies/sheep.tscn" id="4_h7x08"]
-[ext_resource type="PackedScene" uid="uid://1hwh0w4cfiv6" path="res://enemies/goblin.tscn" id="5_6ayr8"]
-[ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="6_c3l5d"]
 
 [node name="TestBattle" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_q1jom")]
 position = Vector2(555, 337)
-rotation = -6.28319
 
 [node name="Pawn" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(1577, 374)
-
-[node name="Pawn2" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(-424, 178)
-
-[node name="Pawn3" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(240, -139)
-
-[node name="Pawn4" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(210, 850)
-
-[node name="Pawn5" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(897, 831)
-
-[node name="Pawn6" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(1203, -249)
-
-[node name="Sheep" parent="." instance=ExtResource("4_h7x08")]
-position = Vector2(-297, 606)
-
-[node name="Sheep2" parent="." instance=ExtResource("4_h7x08")]
-position = Vector2(709, -300)
-
-[node name="Sheep3" parent="." instance=ExtResource("4_h7x08")]
-position = Vector2(2002, -161)
-
-[node name="Sheep4" parent="." instance=ExtResource("4_h7x08")]
-position = Vector2(-582, -289)
-
-[node name="Sheep5" parent="." instance=ExtResource("4_h7x08")]
-position = Vector2(1939, 814)
-
-[node name="Goblin" parent="." instance=ExtResource("5_6ayr8")]
-position = Vector2(1256, 18)
-
-[node name="Goblin2" parent="." instance=ExtResource("5_6ayr8")]
-position = Vector2(744, 1199)
-
-[node name="Meat" parent="." instance=ExtResource("6_c3l5d")]
-position = Vector2(309, 176)
-regeneration_amount = 10
-
-[node name="Meat2" parent="." instance=ExtResource("6_c3l5d")]
-position = Vector2(1051, 508)
-regeneration_amount = 10
+position = Vector2(874, 319)
+health = 1000

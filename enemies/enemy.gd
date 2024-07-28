@@ -11,7 +11,7 @@ var major_knockback_force: DamageController.Damage_Instance
 
 var is_striking: bool = false
 var actual_knockback: Vector2 = Vector2(0, 0)
-var knockback_tween
+var actual_knockback_float: float
 @export var weight: float
 var striked_enemies = []
 var damages_receiveds = []
@@ -29,12 +29,13 @@ var suffered_damages_id: Array[int] = []
 @onready var strike_area2d: Area2D = $StrikeArea2D
 @onready var damage_ui_pos: Marker2D = $DamageUIPos
 
-
 var is_resting: bool = false
 var rest_time: float = 0
 var get_hited_cooldown: float = 0
 
 func _process(delta):
+	check_actualKnockback_and_strike()
+	actual_knockback_float = actual_knockback.x + actual_knockback.y
 	if rest_time > 0:
 		rest_time -= delta
 	else:
@@ -44,26 +45,43 @@ func _process(delta):
 	if(get_hited_cooldown > 0):
 		get_hited_cooldown -= delta
 	
-	if actual_knockback.x > 0 or actual_knockback.y:
-		is_striking = true
-	else:
-		is_striking = false
-	
-	if not is_striking:
-		if health <= 0:
-			die()
+	if health <= 0:
+		die()
+
+func check_actualKnockback_and_strike():
+	if actual_knockback != Vector2(0, 0):
+		var areas_around = strike_area2d.get_overlapping_areas()
+		for area in areas_around:
+			if area.is_in_group("enemies"):
+				do_strike(area)
+
+func do_strike(striked_area: Area2D):
+	var enemy: Enemy = striked_area.get_parent()
+	var direction = calculate_knockback_direction(enemy)
+	var major_knockback = major_knockback_force
+	await get_tree().create_timer(0.1).timeout
+	if enemy != null:
+		enemy.get_hited(major_knockback, direction)
 
 func get_hited(damage_instance: DamageController.Damage_Instance, knockback_direction: Vector2):
-	print(damage_instance)
+	#if damage_instance != null:
+		#print("tem força")
+		##if not DamageController.check_max_hited_enemies(damage_instance): return
+		##var can_hit = DamageController.check_max_hited_enemies(damage_instance)
+		##if can_hit == false: return
+		#pass
+	#else: 
+		#print("sem força")
+		#return
 	if damage_instance == null: return
 	for ids in suffered_damages_id:
 		if ids == damage_instance.force_id:
-			print("id repetido")
+			#print("id repetido")
 			return
 	suffered_damages_id.append(damage_instance.force_id)
 	if damage_instance.force_power > 0:
+		is_striking = true
 		knockback_controller.call_knockback_controller(damage_instance, knockback_direction)
-		strike_enemies_around()
 		animation_player.play("idle")
 	if damage_instance.force_damage > 0:
 		take_damage(damage_instance.force_damage)
@@ -75,6 +93,34 @@ func take_damage(damage_amount: int):
 	damage_ui.global_position = damage_ui_pos.global_position
 	get_parent().add_child(damage_ui)
 	hit_flash.play("hit_flash")
+
+func strike_enemies_around():
+	if actual_knockback_float == 0: 
+		#print("to cansadão...")
+		return
+	var areas = strike_area2d.get_overlapping_areas()
+	for area in areas:
+		#if area != null:
+		if area.is_in_group("enemies"):
+			do_strike(area)
+	pass
+
+# Player's collision area
+func _on_area_2d_area_entered(area):
+	if actual_knockback != Vector2(0, 0): return
+	if area.is_in_group("player"):
+		do_rest()
+		animation_player.play("attack")
+		await get_tree().create_timer(0.4).timeout
+		if GameManager.is_game_over: return
+		if(animation_player.current_animation == "attack"):
+			var player: Player = area.get_parent()
+			player.take_damage(damage)
+
+func update_is_striking():
+	print(actual_knockback)
+	if actual_knockback == Vector2(0, 0):
+		is_striking = false
 
 func die():
 	if is_striking: return
@@ -98,38 +144,6 @@ func die():
 func do_rest():
 	rest_time = 0.6
 	is_resting = true
-
-func do_strike(area: Area2D):
-	var enemy: Enemy = area.get_parent()
-	var direction = calculate_knockback_direction(enemy)
-	await get_tree().create_timer(0.05).timeout
-	if enemy != null:
-		enemy.get_hited(major_knockback_force, direction)
-
-func strike_enemies_around():
-	var areas = strike_area2d.get_overlapping_areas()
-	for area in areas:
-		if area != null:
-			if area.is_in_group("enemies"):
-				do_strike(area)
-
-func _on_area_2d_area_entered(area):
-	if area == null: return
-	if actual_knockback.x > 0 or actual_knockback.y > 0:
-		if area.is_in_group("enemies"):
-			do_strike(area)
-
-	
-	if is_striking: return
-	if area == null: return
-	if area.is_in_group("player"):
-		do_rest()
-		animation_player.play("attack")
-		await get_tree().create_timer(0.4).timeout
-		if GameManager.is_game_over: return
-		if(animation_player.current_animation == "attack"):
-				var player: Player = area.get_parent()
-				player.take_damage(damage)
 
 func pump():
 	# --------------- Amassada --------------------
@@ -173,7 +187,9 @@ func pump():
 	jump_tween.set_trans(Tween.TRANS_QUAD)
 	jump_tween.tween_property(sprite2d, "position:y", 0, 0.1)
 
-
 # Função que calcula a direção do knockback para um inimigo
 func calculate_knockback_direction(enemy: Enemy) -> Vector2:
 	return (enemy.global_position - global_position).normalized()
+
+
+

@@ -250,7 +250,6 @@ death_effect_prefab = ExtResource("2_4mbyv")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
 texture = ExtResource("1_pohw4")
-flip_h = true
 hframes = 6
 vframes = 8
 
@@ -290,8 +289,7 @@ offset_right = 96.0
 offset_bottom = 33.975
 theme_override_styles/background = SubResource("StyleBoxFlat_uo4p8")
 theme_override_styles/fill = SubResource("StyleBoxFlat_q85dn")
-max_value = 1000.0
-value = 848.12
+value = 100.0
 show_percentage = false
 
 [node name="Area2D" type="Area2D" parent="." groups=["player"]]

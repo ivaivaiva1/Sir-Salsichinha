@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bcefmaju7ccqn"]
+[gd_scene load_steps=20 format=3 uid="uid://bcefmaju7ccqn"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_5plw8"]
 [ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_6c1lq"]
@@ -15,13 +15,16 @@ shader = ExtResource("3_owa2y")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mgme6"]
+radius = 3.99997
+height = 33.8407
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7n1ll"]
 radius = 14.9993
 height = 38.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mgme6"]
-radius = 3.99997
-height = 33.8407
+[sub_resource type="CircleShape2D" id="CircleShape2D_y8k6p"]
+radius = 26.8328
 
 [sub_resource type="Animation" id="Animation_21qug"]
 length = 0.001
@@ -181,6 +184,12 @@ position = Vector2(0, -26)
 texture = ExtResource("3_2ryns")
 hframes = 6
 
+[node name="Body2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -13)
+rotation = -1.56681
+shape = SubResource("CapsuleShape2D_mgme6")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
 [node name="Area2D" type="Area2D" parent="." groups=["enemies"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -188,15 +197,16 @@ position = Vector2(0, -25)
 rotation = -1.57047
 shape = SubResource("CapsuleShape2D_7n1ll")
 
-[node name="Body2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, -13)
-rotation = -1.56681
-shape = SubResource("CapsuleShape2D_mgme6")
-debug_color = Color(0, 0.6, 0.701961, 0)
+[node name="StrikeArea2D" type="Area2D" parent="." groups=["enemies"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea2D"]
+position = Vector2(-1, -25)
+rotation = -1.57047
+shape = SubResource("CircleShape2D_y8k6p")
 
 [node name="FollowPlayer" type="Node" parent="."]
 script = ExtResource("4_83k6h")
-speed = 1.6
+speed = 1.1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -216,3 +226,5 @@ position = Vector2(-1, -41)
 script = ExtResource("8_ybrkh")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
