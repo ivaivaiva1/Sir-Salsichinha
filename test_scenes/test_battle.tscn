@@ -1,76 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cuh1arc88iii"]
+[gd_scene load_steps=5 format=3 uid="uid://cuh1arc88iii"]
 
 [ext_resource type="PackedScene" uid="uid://bbaq72ngobmw1" path="res://player/player.tscn" id="1_q1jom"]
 [ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="2_f7phi"]
 [ext_resource type="PackedScene" uid="uid://bkxacenkudy3r" path="res://enemies/pawn red.tscn" id="3_lir7n"]
+[ext_resource type="PackedScene" uid="uid://bcefmaju7ccqn" path="res://enemies/sheep.tscn" id="4_ppvdw"]
 
 [node name="TestBattle" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_q1jom")]
-position = Vector2(555, 337)
+position = Vector2(192, 340)
 
-[node name="Pawn" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(874, 319)
-health = 1000
+[node name="Sheep8" parent="." instance=ExtResource("4_ppvdw")]
+position = Vector2(264, 342)
 
-[node name="Pawn4" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(961, 260)
-health = 1000
+[node name="Pawn19" parent="." instance=ExtResource("2_f7phi")]
+position = Vector2(435, 362)
 
-[node name="Pawn5" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(964, 381)
-health = 1000
-
-[node name="Pawn2" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(965, 321)
-health = 1000
-
-[node name="Pawn3" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(867, 398)
-health = 1000
-
-[node name="Pawn6" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(1146, 314)
-health = 1000
-
-[node name="Pawn7" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(1233, 255)
-health = 1000
-
-[node name="Pawn8" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(1236, 376)
-health = 1000
-
-[node name="Pawn9" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(1237, 316)
-health = 1000
-
-[node name="Pawn10" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(1324, 315)
-health = 1000
-
-[node name="Pawn11" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(1406, 313)
-health = 1000
-
-[node name="Pawn12" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(1485, 310)
-health = 1000
-
-[node name="Pawn13" parent="." instance=ExtResource("3_lir7n")]
-position = Vector2(1090, 220)
-
-[node name="Pawn14" parent="." instance=ExtResource("3_lir7n")]
-position = Vector2(1106, 437)
-
-[node name="Pawn16" parent="." instance=ExtResource("3_lir7n")]
-position = Vector2(868, 233)
-
-[node name="Pawn17" parent="." instance=ExtResource("3_lir7n")]
-position = Vector2(1332, 239)
-
-[node name="Pawn18" parent="." instance=ExtResource("3_lir7n")]
-position = Vector2(1341, 413)
-
-[node name="Pawn15" parent="." instance=ExtResource("3_lir7n")]
-position = Vector2(1051, 318)
+[node name="Pawn20" parent="." instance=ExtResource("3_lir7n")]
+position = Vector2(422, 438)

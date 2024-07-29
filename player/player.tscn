@@ -240,6 +240,7 @@ rotation = -6.28319
 motion_mode = 1
 script = ExtResource("1_pam3q")
 sword_damage = 23
+max_enemies_knockback = 100
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -32)

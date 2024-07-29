@@ -31,7 +31,6 @@ var suffered_damages_id: Array[int] = []
 var is_resting: bool = false
 var rest_time: float = 0
 
-
 func _process(delta):
 	check_actualKnockback_and_strike()
 	actual_knockback_float = actual_knockback.x + actual_knockback.y
@@ -57,9 +56,17 @@ func do_strike(striked_area: Area2D):
 	var major_knockback = major_knockback_force
 	await get_tree().create_timer(0.1).timeout
 	if enemy != null:
-		enemy.get_hited(major_knockback, direction)
+		enemy.get_hited(major_knockback, direction, adjust_damage(major_knockback.force_damage))
 
-func get_hited(damage_instance: DamageController.Damage_Instance, knockback_direction: Vector2):
+# Adjust the damage of the bounce based on the enemy's weight
+func adjust_damage(base_force_power: float) -> float:
+	var min_adjustment: float = 1 / 3.0  # Decrease by 3 times for weight 0
+	var max_adjustment: float = 3.0  # Increase by 3 times for weight 10
+	var max_weight: float = 10.0
+	var adjustment: float = min_adjustment + (weight / max_weight) * (max_adjustment - min_adjustment)
+	return base_force_power * adjustment
+
+func get_hited(damage_instance: DamageController.Damage_Instance, knockback_direction: Vector2, real_damage: float):
 	if damage_instance.force_id in suffered_damages_id: return
 	suffered_damages_id.append(damage_instance.force_id)
 	if not DamageController.check_max_hited_enemies(damage_instance): return
@@ -69,13 +76,14 @@ func get_hited(damage_instance: DamageController.Damage_Instance, knockback_dire
 		is_striking = true
 		knockback_controller.call_knockback_controller(damage_instance, knockback_direction)
 		animation_player.play("idle")
-	if damage_instance.force_damage > 0:
-		take_damage(damage_instance.force_damage)
+	if real_damage > 0:
+		take_damage(real_damage)
 
 func take_damage(damage_amount: int):
-	health -= damage_amount
+	var real_damage = randf_range((damage_amount / 1.30), (damage_amount * 1.30))
+	health -= real_damage
 	var damage_ui = damage_ui_prefab.instantiate()
-	damage_ui.value = damage_amount
+	damage_ui.value = real_damage
 	damage_ui.global_position = damage_ui_pos.global_position
 	get_parent().add_child(damage_ui)
 	hit_flash.play("hit_flash")

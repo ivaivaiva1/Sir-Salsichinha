@@ -7,7 +7,8 @@ extends CharacterBody2D
 @export var sword_knockback_force: float = 700
 @export var max_health: int = 100
 @export var max_enemies_knockback: int = 30
-@export var auto_knock_back_force: float = 600
+@export var auto_knock_back_force: float = 500
+#max 900 min 500?
 
 @export_category("Other vars")
 var knockback: Vector2 = Vector2(0, 0)
@@ -95,8 +96,11 @@ func do_move():
 	var target_velocity = input_vector * speed * 100
 	if is_attacking:
 		target_velocity *= 0.5
-	var movement_direction = lerp(velocity, target_velocity, 0.35)
-	velocity = movement_direction + knockback
+	if(knockback != Vector2(0, 0)):
+		velocity = knockback
+	else:
+		var movement_direction = lerp(velocity, target_velocity, 0.35)
+		velocity = movement_direction
 	move_and_slide()
 
 # Toca as animações run e idle
@@ -137,7 +141,7 @@ func attack():
 	can_flip = true
 
 # Aplica o dano do ataque ao inimigo
-func apply_damage(stop_time: float = 0.15):
+func apply_damage():
 	var bodies = get_overlapping_bodies()
 	var total_direction = Vector2(0, 0)
 	var enemies_hit = 0
@@ -147,7 +151,7 @@ func apply_damage(stop_time: float = 0.15):
 			var enemy: Enemy = body
 			var direction = calculate_knockback_direction(enemy)
 			var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance(sword_damage, sword_knockback_force, max_enemies_knockback)
-			enemy.get_hited(new_damage_instance, direction)
+			enemy.get_hited(new_damage_instance, direction, new_damage_instance.force_damage)
 			enemy.pump()
 			total_direction += direction
 			enemies_hit += 1
@@ -155,7 +159,7 @@ func apply_damage(stop_time: float = 0.15):
 	if enemies_hit > 0:
 		pump()
 		var average_direction = total_direction / enemies_hit
-		apply_knockback(-average_direction, stop_time)
+		receive_knockback(-average_direction, 0.35)
 
 # Função que obtém os corpos sobrepostos
 func get_overlapping_bodies() -> Array:
@@ -169,7 +173,7 @@ func calculate_knockback_direction(enemy: Enemy) -> Vector2:
 	return (enemy.global_position - global_position).normalized()
 
 # Função que aplica o knockback ao player
-func apply_knockback(knockback_direction: Vector2, stop_time: float):
+func receive_knockback(knockback_direction: Vector2, stop_time: float):
 	knockback = knockback_direction * auto_knock_back_force
 	if knockback_tween:
 		knockback_tween.kill()

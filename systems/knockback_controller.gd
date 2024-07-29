@@ -29,13 +29,22 @@ func populate_force_data(damage_Instance: DamageController.Damage_Instance, forc
 	data_force_instance.force_decay_time = damage_Instance.force_decay_time
 	create_force_decay_tween(data_force_instance)
 
+# Adjust the decay time of the bounce based on the enemy's weight
+func adjust_decay_time(base_decay_time: float) -> float:
+	var min_adjustment: float = 1.5  # Increase by 50% for weight 0
+	var max_adjustment: float = 0.5  # Decrease by 50% for weight 10
+	var max_weight: float = 10.0
+	var weight: float = enemy.weight
+	var adjustment: float = min_adjustment + (weight / max_weight) * (max_adjustment - min_adjustment)
+	return base_decay_time * adjustment
+
 # Step 3
 # Create a tween with current data_force_instance to decay force_power over force_time_decay time
 func create_force_decay_tween(data_force_instance: Force_Data_Class):
 	var knockback_tween: Tween = get_tree().create_tween()
 	knockback_tween.set_ease(Tween.EASE_IN)
 	knockback_tween.set_trans(Tween.TRANS_QUINT)
-	knockback_tween.tween_property(data_force_instance, "force_power", 0, data_force_instance.force_decay_time)
+	knockback_tween.tween_property(data_force_instance, "force_power", 0, adjust_decay_time(data_force_instance.force_decay_time))
 	knockback_tween.connect("finished", Callable(self, "_on_tween_finished").bind(data_force_instance))
 	data_force_instance.tween = knockback_tween
 	applied_forces.append(data_force_instance)
