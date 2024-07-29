@@ -23,9 +23,9 @@ func _process(delta):
 	var index: int
 	var random = randi_range(0, 100)
 	if random < 10:
-		index = 1
+		index = 2
 	else:
-		index = 0
+		index = randi_range(0, 1)
 	#var index = 0
 	var creature_scene = creatures[index]
 	var creature = creature_scene.instantiate()

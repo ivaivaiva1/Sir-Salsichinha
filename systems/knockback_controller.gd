@@ -25,18 +25,27 @@ func populate_force_data(damage_Instance: DamageController.Damage_Instance, forc
 	var data_force_instance: Force_Data_Class = Force_Data_Class.new()
 	data_force_instance.damage_instance = damage_Instance
 	data_force_instance.force_direction = force_Direction
-	data_force_instance.force_power = damage_Instance.force_power
+	data_force_instance.force_power = adjust_force_power(damage_Instance.force_power)
 	data_force_instance.force_decay_time = damage_Instance.force_decay_time
 	create_force_decay_tween(data_force_instance)
 
 # Adjust the decay time of the bounce based on the enemy's weight
 func adjust_decay_time(base_decay_time: float) -> float:
-	var min_adjustment: float = 1.5  # Increase by 50% for weight 0
 	var max_adjustment: float = 0.5  # Decrease by 50% for weight 10
+	var min_adjustment: float = 1.3  # Increase by 30% for weight 0
 	var max_weight: float = 10.0
 	var weight: float = enemy.weight
 	var adjustment: float = min_adjustment + (weight / max_weight) * (max_adjustment - min_adjustment)
 	return base_decay_time * adjustment
+
+# Adjust the decay time of the bounce based on the enemy's weight
+func adjust_force_power(base_force_power: float) -> float:
+	var max_adjustment: float = 1  # Decrease by 20% for weight 10
+	var min_adjustment: float = 1.2  # Increase by 20% for weight 
+	var max_weight: float = 10.0
+	var weight: float = enemy.weight
+	var adjustment: float = min_adjustment + (weight / max_weight) * (max_adjustment - min_adjustment)
+	return base_force_power * adjustment
 
 # Step 3
 # Create a tween with current data_force_instance to decay force_power over force_time_decay time

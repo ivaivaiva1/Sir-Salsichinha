@@ -1,13 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://cisrofx8e15gh"]
+[gd_scene load_steps=18 format=3 uid="uid://cisrofx8e15gh"]
 
 [ext_resource type="PackedScene" uid="uid://b6nai3c6y8vsw" path="res://UI/game_over_ui.tscn" id="1_gq0a3"]
 [ext_resource type="PackedScene" uid="uid://bbaq72ngobmw1" path="res://player/player.tscn" id="1_p4arj"]
 [ext_resource type="Script" path="res://game.gd" id="1_qx51r"]
 [ext_resource type="PackedScene" uid="uid://c1hfqnqtf42hc" path="res://systems/mob_spawner.tscn" id="2_elc6l"]
 [ext_resource type="PackedScene" uid="uid://d3fpypedn3irp" path="res://UI/game_ui.tscn" id="3_ocq85"]
-[ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="4_27xn7"]
-[ext_resource type="PackedScene" uid="uid://bcefmaju7ccqn" path="res://enemies/sheep.tscn" id="5_yhe11"]
-[ext_resource type="PackedScene" uid="uid://1hwh0w4cfiv6" path="res://enemies/goblin.tscn" id="6_ybvqk"]
 [ext_resource type="Texture2D" uid="uid://cdpnfvc0abymo" path="res://addons/Tiny Swords/Deco/09.png" id="7_72upk"]
 [ext_resource type="Texture2D" uid="uid://chn8nrklkr8xs" path="res://addons/Tiny Swords/Deco/08.png" id="8_6y2yv"]
 [ext_resource type="Texture2D" uid="uid://bsyjgrc580ixp" path="res://addons/Tiny Swords/Deco/07.png" id="9_g52so"]
@@ -88,13 +85,12 @@ texture = ExtResource("14_5uic8")
 [node name="Player" parent="." instance=ExtResource("1_p4arj")]
 position = Vector2(552, 365)
 
-[node name="MobSpawner" parent="Player" instance=ExtResource("2_elc6l")]
-position = Vector2(8.00012, -30)
-creatures = Array[PackedScene]([ExtResource("4_27xn7"), ExtResource("5_yhe11"), ExtResource("6_ybvqk")])
-mobs_per_minute = 1000.0
-
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(5.06079e-05, -11)
+
+[node name="MobSpawner" parent="Player" instance=ExtResource("2_elc6l")]
+position = Vector2(1.00012, -27)
+mobs_per_minute = 1000.0
 
 [node name="Trees" type="Node2D" parent="."]
 y_sort_enabled = true

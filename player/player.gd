@@ -140,12 +140,12 @@ func attack():
 	await get_tree().create_timer(0.5).timeout 
 	can_flip = true
 
-# Aplica o dano do ataque ao inimigo
 func apply_damage():
 	var bodies = get_overlapping_bodies()
 	var total_direction = Vector2(0, 0)
-	var enemies_hit = 0
+	var enemies_hit = []
 	
+	# Passo 1: Colete os inimigos atingidos e seus bounceness
 	for body in bodies:
 		if body.is_in_group("enemies"):
 			var enemy: Enemy = body
@@ -154,12 +154,23 @@ func apply_damage():
 			enemy.get_hited(new_damage_instance, direction, new_damage_instance.force_damage)
 			enemy.pump()
 			total_direction += direction
-			enemies_hit += 1
+			enemies_hit.append(enemy)  # Adicione o inimigo à lista de inimigos atingidos
 	
-	if enemies_hit > 0:
+	# Passo 2: Calcule o bounceness máximo dos inimigos atingidos
+	var max_bounceness = get_max_bounceness(enemies_hit)
+	
+	if enemies_hit.size() > 0:
 		pump()
-		var average_direction = total_direction / enemies_hit
-		receive_knockback(-average_direction, 0.35)
+		var average_direction = total_direction / enemies_hit.size()
+		receive_knockback(-average_direction, 0.25, max_bounceness)
+
+# Função para obter o bounceness máximo dos inimigos atingidos
+func get_max_bounceness(enemies_hit: Array) -> float:
+	var max_bounceness = 0.0
+	for enemy in enemies_hit:
+		if enemy.bounceness > max_bounceness:
+			max_bounceness = enemy.bounceness
+	return max_bounceness
 
 # Função que obtém os corpos sobrepostos
 func get_overlapping_bodies() -> Array:
@@ -173,8 +184,8 @@ func calculate_knockback_direction(enemy: Enemy) -> Vector2:
 	return (enemy.global_position - global_position).normalized()
 
 # Função que aplica o knockback ao player
-func receive_knockback(knockback_direction: Vector2, stop_time: float):
-	knockback = knockback_direction * auto_knock_back_force
+func receive_knockback(knockback_direction: Vector2, stop_time: float, enemy_bounceness: float):
+	knockback = knockback_direction * adjust_auto_knockback(enemy_bounceness)
 	if knockback_tween:
 		knockback_tween.kill()
 	var knockback_tween = get_tree().create_tween()
@@ -182,6 +193,16 @@ func receive_knockback(knockback_direction: Vector2, stop_time: float):
 	knockback_tween.set_trans(Tween.TRANS_QUINT)
 	knockback_tween.tween_property(self, "knockback", Vector2(0, 0), stop_time)
 
+# Função que mapeia o bounceness para a força do knockback
+func adjust_auto_knockback(bounceness: float) -> float:
+	var min_bounceness = 0.0
+	var max_bounceness = 10.0
+	var min_knockback = 500
+	var max_knockback = 1300
+	
+	# Regra de três para mapear o bounceness para a força do knockback
+	var knockback_force = min_knockback + (bounceness - min_bounceness) / (max_bounceness - min_bounceness) * (max_knockback - min_knockback)
+	return knockback_force
 
 func call_manager():
 	GameManager.player_position = position
