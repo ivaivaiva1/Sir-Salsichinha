@@ -1,17 +1,17 @@
-[gd_scene load_steps=20 format=3 uid="uid://cp3lkcabj2a6h"]
+[gd_scene load_steps=20 format=3 uid="uid://bkxacenkudy3r"]
 
-[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_egxte"]
-[ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="1_qs5qa"]
-[ext_resource type="Texture2D" uid="uid://bnlo48w450esu" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="2_cxpjj"]
-[ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_jjofm"]
-[ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="3_5asm1"]
-[ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_ydpu8"]
-[ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_pdasv"]
-[ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_yafem"]
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_v7q3t"]
+[ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_0y67k"]
+[ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_jn0hb"]
+[ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_mk72d"]
+[ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="5_pvccg"]
+[ext_resource type="Texture2D" uid="uid://bnlo48w450esu" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="6_fjckk"]
+[ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="7_rsoh0"]
+[ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_lxett"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_njmvc"]
 resource_local_to_scene = true
-shader = ExtResource("3_5asm1")
+shader = ExtResource("5_pvccg")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
@@ -121,20 +121,21 @@ _data = {
 [node name="Pawn" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
 motion_mode = 1
-script = ExtResource("1_egxte")
+script = ExtResource("1_v7q3t")
 health = 100
-weight = 3.0
-bounceness = 7.0
-death_effect_prefab = ExtResource("2_jjofm")
-damage_ui_prefab = ExtResource("3_ydpu8")
+weight = 1.0
+bounceness = 10.0
+death_effect_prefab = ExtResource("2_0y67k")
+damage_ui_prefab = ExtResource("3_jn0hb")
 death_effect_scale = 0.9
-meat_scene = ExtResource("4_pdasv")
+meat_scene = ExtResource("4_mk72d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(6.25, 0, 0, 1)
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_njmvc")
 position = Vector2(-2, -26)
-texture = ExtResource("2_cxpjj")
+texture = ExtResource("6_fjckk")
 hframes = 6
 vframes = 6
 frame = 6
@@ -173,11 +174,11 @@ libraries = {
 position = Vector2(-5, -50)
 
 [node name="FollowPlayer" type="Node" parent="."]
-script = ExtResource("1_qs5qa")
+script = ExtResource("7_rsoh0")
 speed = 0.6
 
 [node name="Knockback Controller" type="Node" parent="."]
-script = ExtResource("8_yafem")
+script = ExtResource("8_lxett")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]

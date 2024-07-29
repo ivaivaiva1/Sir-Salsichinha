@@ -1,9 +1,14 @@
 class_name Enemy
 extends CharacterBody2D
 
-@export var health: int = 10
-@export var death_effect_prefab: PackedScene
+@export_category("Balancing Vars")
 @export var damage: float = 2
+@export var health: int = 10
+@export var weight: float
+@export var bounceness: float
+
+@export_category("Other vars")
+@export var death_effect_prefab: PackedScene
 @export var damage_ui_prefab: PackedScene
 @export var death_effect_scale: float
 @export var meat_scene: PackedScene
@@ -12,13 +17,7 @@ var major_knockback_force: DamageController.Damage_Instance
 var is_striking: bool = false
 var actual_knockback: Vector2 = Vector2(0, 0)
 var actual_knockback_float: float
-@export var weight: float
-var striked_enemies = []
-var damages_receiveds = []
-var last_damage_id : int
-var body_knockback_force = 500
 var actual_body_damage: float = 0
-
 var suffered_damages_id: Array[int] = []
 
 @onready var knockback_controller: Knockback_Controller = $"Knockback Controller"
@@ -31,7 +30,7 @@ var suffered_damages_id: Array[int] = []
 
 var is_resting: bool = false
 var rest_time: float = 0
-var get_hited_cooldown: float = 0
+
 
 func _process(delta):
 	check_actualKnockback_and_strike()
@@ -41,9 +40,6 @@ func _process(delta):
 	else:
 		animation_player.play("idle")
 		is_resting = false
-	
-	if(get_hited_cooldown > 0):
-		get_hited_cooldown -= delta
 	
 	if health <= 0:
 		die()
@@ -64,22 +60,12 @@ func do_strike(striked_area: Area2D):
 		enemy.get_hited(major_knockback, direction)
 
 func get_hited(damage_instance: DamageController.Damage_Instance, knockback_direction: Vector2):
-	#if damage_instance != null:
-		#print("tem força")
-		##if not DamageController.check_max_hited_enemies(damage_instance): return
-		##var can_hit = DamageController.check_max_hited_enemies(damage_instance)
-		##if can_hit == false: return
-		#pass
-	#else: 
-		#print("sem força")
-		#return
-	if damage_instance == null: return
-	for ids in suffered_damages_id:
-		if ids == damage_instance.force_id:
-			#print("id repetido")
-			return
+	if damage_instance.force_id in suffered_damages_id: return
 	suffered_damages_id.append(damage_instance.force_id)
+	if not DamageController.check_max_hited_enemies(damage_instance): return
+	if damage_instance == null: return
 	if damage_instance.force_power > 0:
+		GameManager.im_hited()
 		is_striking = true
 		knockback_controller.call_knockback_controller(damage_instance, knockback_direction)
 		animation_player.play("idle")
@@ -95,12 +81,9 @@ func take_damage(damage_amount: int):
 	hit_flash.play("hit_flash")
 
 func strike_enemies_around():
-	if actual_knockback_float == 0: 
-		#print("to cansadão...")
-		return
+	if actual_knockback_float == 0: return
 	var areas = strike_area2d.get_overlapping_areas()
 	for area in areas:
-		#if area != null:
 		if area.is_in_group("enemies"):
 			do_strike(area)
 	pass
@@ -118,7 +101,6 @@ func _on_area_2d_area_entered(area):
 			player.take_damage(damage)
 
 func update_is_striking():
-	print(actual_knockback)
 	if actual_knockback == Vector2(0, 0):
 		is_striking = false
 

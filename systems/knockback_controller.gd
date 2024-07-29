@@ -90,5 +90,5 @@ func update_strongest_force():
 			major_force = force_data.force_power
 			strongest_force = force_data
 	
-	if strongest_force.damage_instance == null: return
+	if strongest_force == null: return
 	enemy.major_knockback_force = strongest_force.damage_instance

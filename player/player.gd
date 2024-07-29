@@ -1,25 +1,20 @@
 class_name Player
 extends CharacterBody2D
 
-# ------------- Player Balance Variables ---------------
+@export_category("Balancing Vars")
 @export var speed: float = 2.5
 @export var sword_damage: int = 0
-@export var sword_knockback_force: float = 500
-@export var health: int = 100
+@export var sword_knockback_force: float = 700
 @export var max_health: int = 100
-@export_category("Ritual")
-@export var ritual_damage: int = 1
-@export var ritual_interval: float = 30
-@export var ritual_scene: PackedScene
-@export var death_effect_prefab: PackedScene
-@export var ritual_knockback_force: float = 500
+@export var max_enemies_knockback: int = 30
+@export var auto_knock_back_force: float = 600
 
+@export_category("Other vars")
 var knockback: Vector2 = Vector2(0, 0)
-var max_enemies_knockback: int = 10
 var knockback_tween
-var auto_knock_back_force: float = 200
 var keep_input_x: float = 0
 var can_flip: bool = true
+var health: int = 0
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -43,6 +38,7 @@ signal meat_collected(value:int)
 func _ready():
 	# Ritual
 	#do_ritual()
+	health = max_health
 	GameManager.player = self
 	pass
 
@@ -69,15 +65,6 @@ func _process(delta):
 
 func _physics_process(delta):
 	do_move()
-
-# Faz o ritual automaticamente
-func do_ritual():
-	await get_tree().create_timer(ritual_interval).timeout 
-	var ritual = ritual_scene.instantiate()
-	ritual.knockback_force = ritual_knockback_force
-	ritual.damage_amount = ritual_damage
-	add_child(ritual)
-	do_ritual()
 
 # Conta o cooldown de ataque
 func  update_attack_cast(delta: float):
@@ -220,10 +207,6 @@ func frameFreeze():
 	frame_freeze_cooldown = frame_freeze_time
 
 func die():
-	if death_effect_prefab:
-		var death_effect_object = death_effect_prefab.instantiate()
-		death_effect_object.position = position
-		get_parent().add_child(death_effect_object)
 	GameManager.end_game()
 	GameManager.is_game_over = true
 	queue_free()

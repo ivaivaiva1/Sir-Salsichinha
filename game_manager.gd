@@ -9,7 +9,10 @@ var is_game_over: bool = false
 var time_elapsed: float = 0
 var time_elapsed_string: String
 
+var enemies_hited: int = 0
+
 func _process(delta):
+	print(enemies_hited)
 	# Update timer
 	time_elapsed += delta
 	var time_elapsed_seconds: int = floori(time_elapsed)
@@ -21,3 +24,6 @@ func end_game():
 	if is_game_over: return
 	is_game_over = true
 	game_over.emit()
+
+func im_hited():
+	enemies_hited += 1

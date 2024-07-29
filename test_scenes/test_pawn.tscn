@@ -15,7 +15,6 @@ texture = ExtResource("1_0dine")
 
 [node name="Player" parent="." instance=ExtResource("2_0yn10")]
 position = Vector2(118, 362)
-health = 200
 
 [node name="Pawn" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(651, 349)
@@ -225,6 +224,7 @@ health = 200
 
 [node name="Pawn59" parent="." instance=ExtResource("3_tokra")]
 position = Vector2(1140, 276)
+damage = 20.0
 health = 200
 
 [node name="Pawn60" parent="." instance=ExtResource("3_tokra")]
