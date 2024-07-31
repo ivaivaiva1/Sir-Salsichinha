@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GameManager="*res://game_manager.gd"
 DamageController="*res://damage_controller.gd"
+LevelingController="*res://player/Player Scripts/Leveling Controller.gd"
 
 [display]
 

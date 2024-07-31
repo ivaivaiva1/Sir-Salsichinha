@@ -22,13 +22,13 @@ func _process(delta):
 	# Instancia o monstro
 	var index: int
 	var random = randi_range(0, 1000)
-	if(random < 990):
-		index = randi_range(0, 5)
-	else:
-		index = randi_range(6, 8)
-		print(index)
+	#if(random < 990):
+		#index = randi_range(0, 5)
+	#else:
+		#index = randi_range(6, 8)
+		#print(index)
 	
-	#var index = 0
+	index = 0
 	var creature_scene = creatures[index]
 	var creature = creature_scene.instantiate()
 	creature.global_position = spawn_point

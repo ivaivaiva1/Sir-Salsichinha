@@ -142,6 +142,7 @@ health = 70
 weight = 3.0
 bounceness = 6.0
 rest_needed_time = 1.0
+xp_value = 1.0
 movement_type = "default_movement"
 death_effect_prefab = ExtResource("2_jjofm")
 damage_ui_prefab = ExtResource("3_ydpu8")

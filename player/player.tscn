@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=3 uid="uid://bbaq72ngobmw1"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="1_pam3q"]
 [ext_resource type="Texture2D" uid="uid://biypnnv8oumla" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_pohw4"]
+[ext_resource type="Script" path="res://player/Player Scripts/player.gd" id="1_tjkta"]
 
 [sub_resource type="Animation" id="Animation_621t3"]
 length = 0.001
@@ -266,7 +266,7 @@ height = 62.0
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 rotation = -6.28319
 motion_mode = 1
-script = ExtResource("1_pam3q")
+script = ExtResource("1_tjkta")
 sword_damage = 23
 max_health = 1000
 max_enemies_knockback = 100
@@ -338,5 +338,3 @@ visible = false
 position = Vector2(9.3794e-05, -21)
 shape = SubResource("CapsuleShape2D_mkqyb")
 debug_color = Color(0, 0.6, 0.701961, 0.517647)
-
-[node name="Leveling Controller" type="Node" parent="."]

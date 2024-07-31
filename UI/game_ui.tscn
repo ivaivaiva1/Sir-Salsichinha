@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d3fpypedn3irp"]
+[gd_scene load_steps=10 format=3 uid="uid://d3fpypedn3irp"]
 
 [ext_resource type="Script" path="res://UI/game_ui.gd" id="1_dcuoc"]
 [ext_resource type="Texture2D" uid="uid://dwd3v4gfacawk" path="res://addons/Tiny Swords/Factions/Knights/Troops/Dead/Dead.png" id="3_xvp84"]
@@ -13,6 +13,12 @@ font_size = 70
 outline_size = 13
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="LabelSettings" id="LabelSettings_h17bb"]
+font = SubResource("SystemFont_ph7yv")
+font_size = 35
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
+
 [sub_resource type="SystemFont" id="SystemFont_wlsfi"]
 font_names = PackedStringArray("Comic Sans MS")
 font_weight = 100
@@ -20,10 +26,16 @@ subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_yy58m"]
 font = SubResource("SystemFont_wlsfi")
-font_size = 32
+font_size = 40
 font_color = Color(0.835294, 0.709804, 0.513726, 1)
 outline_size = 12
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2eakd"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4u8x"]
+bg_color = Color(0.713726, 0.909804, 0, 1)
 
 [node name="GameUI" type="CanvasLayer"]
 script = ExtResource("1_dcuoc")
@@ -33,13 +45,22 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -96.0
-offset_top = 34.0
+offset_top = 17.0
 offset_right = 97.0
-offset_bottom = 133.0
+offset_bottom = 116.0
 grow_horizontal = 2
 text = "00:00
 "
 label_settings = SubResource("LabelSettings_00t6c")
+
+[node name="LevelLabel" type="Label" parent="."]
+unique_name_in_owner = true
+offset_left = 27.0
+offset_top = 20.0
+offset_right = 220.0
+offset_bottom = 119.0
+text = "Level: 1"
+label_settings = SubResource("LabelSettings_h17bb")
 
 [node name="Panel" type="Panel" parent="."]
 visible = false
@@ -59,7 +80,8 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_xvp84")
 
 [node name="Dead" type="Sprite2D" parent="."]
-position = Vector2(1123, 9)
+position = Vector2(1119, 27.8)
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("3_xvp84")
 hframes = 7
 vframes = 2
@@ -72,15 +94,26 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 434.0
-offset_top = -350.0
-offset_right = 524.0
-offset_bottom = -255.0
+offset_left = 424.0
+offset_top = -310.2
+offset_right = 514.0
+offset_bottom = -133.2
 grow_horizontal = 2
 grow_vertical = 2
-text = "50 
+text = "
+50 
 
 "
 label_settings = SubResource("LabelSettings_yy58m")
 horizontal_alignment = 2
-vertical_alignment = 1
+
+[node name="ExperienceBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 17.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_2eakd")
+theme_override_styles/fill = SubResource("StyleBoxFlat_d4u8x")
+value = 30.0
+show_percentage = false

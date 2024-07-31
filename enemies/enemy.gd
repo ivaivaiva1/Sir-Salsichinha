@@ -8,6 +8,7 @@ extends CharacterBody2D
 @export var weight: float
 @export var bounceness: float
 @export var rest_needed_time: float
+@export var xp_value: float
 
 @export_category("Other vars")
 @export var movement_type: String
@@ -139,6 +140,7 @@ func die():
 		meat_object.position = position
 		get_parent().add_child(meat_object)
 	GameManager.kills += 1
+	LevelingController.gain_experience(xp_value)
 	queue_free()
 
 func do_rest():

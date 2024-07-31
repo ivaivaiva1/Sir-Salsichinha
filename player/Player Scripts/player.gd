@@ -243,8 +243,8 @@ func take_damage(amount: int):
 
 func frameFreeze():
 	if frame_freeze_cooldown > 0: return
-	Engine.time_scale = 0.3
-	await get_tree().create_timer(frame_freeze_time * 0.3).timeout 
+	Engine.time_scale = 0.1
+	await get_tree().create_timer(frame_freeze_time * 0.1).timeout 
 	Engine.time_scale = 1
 	frame_freeze_cooldown = frame_freeze_time
 
