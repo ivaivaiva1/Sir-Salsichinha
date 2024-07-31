@@ -338,3 +338,5 @@ visible = false
 position = Vector2(9.3794e-05, -21)
 shape = SubResource("CapsuleShape2D_mkqyb")
 debug_color = Color(0, 0.6, 0.701961, 0.517647)
+
+[node name="Leveling Controller" type="Node" parent="."]
