@@ -206,8 +206,7 @@ rotation = -1.56681
 shape = SubResource("CapsuleShape2D_mgme6")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
-[node name="Area2D" type="Area2D" parent="." groups=["enemies"]]
-visible = false
+[node name="Area2D" type="Area2D" parent="." groups=["player_enemies"]]
 position = Vector2(0, 25.51)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -266,5 +265,5 @@ drag_factor = 0.01
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="AreaToDash" to="DashHit" method="_on_area_to_dash_area_entered"]
 [connection signal="area_exited" from="AreaToDash" to="DashHit" method="_on_area_to_dash_area_exited"]
-[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]

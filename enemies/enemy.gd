@@ -146,6 +146,7 @@ func do_rest():
 	is_resting = true
 
 func pump():
+	return
 	# --------------- Amassada --------------------
 	var scale_tween = get_tree().create_tween()
 	scale_tween.set_ease(Tween.EASE_IN_OUT)

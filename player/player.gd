@@ -141,14 +141,14 @@ func attack():
 	can_flip = true
 
 func apply_damage():
-	var bodies = get_overlapping_bodies()
+	var areas = get_overlapping_areas()
 	var total_direction = Vector2(0, 0)
 	var enemies_hit = []
 	
 	# Passo 1: Colete os inimigos atingidos e seus bounceness
-	for body in bodies:
-		if body.is_in_group("enemies"):
-			var enemy: Enemy = body
+	for area in areas:
+		if area.is_in_group("player_enemies"):
+			var enemy: Enemy = area.get_parent()
 			var direction = calculate_knockback_direction(enemy)
 			var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance(sword_damage, sword_knockback_force, max_enemies_knockback)
 			enemy.get_hited(new_damage_instance, direction, new_damage_instance.force_damage)
@@ -173,11 +173,11 @@ func get_max_bounceness(enemies_hit: Array) -> float:
 	return max_bounceness
 
 # Função que obtém os corpos sobrepostos
-func get_overlapping_bodies() -> Array:
+func get_overlapping_areas() -> Array:
 	if not sprite.flip_h:
-		return sword_area_left.get_overlapping_bodies()
+		return sword_area_left.get_overlapping_areas()
 	else:
-		return sword_area_right.get_overlapping_bodies()
+		return sword_area_right.get_overlapping_areas()
 
 # Função que calcula a direção do knockback para um inimigo
 func calculate_knockback_direction(enemy: Enemy) -> Vector2:

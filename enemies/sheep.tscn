@@ -204,12 +204,13 @@ texture = ExtResource("3_2ryns")
 hframes = 6
 
 [node name="Body2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1, -13)
 rotation = -1.56681
 shape = SubResource("CapsuleShape2D_mgme6")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
-[node name="Area2D" type="Area2D" parent="." groups=["enemies"]]
+[node name="Area2D" type="Area2D" parent="." groups=["player_enemies"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -25)
@@ -217,6 +218,7 @@ rotation = -1.57047
 shape = SubResource("CapsuleShape2D_7n1ll")
 
 [node name="StrikeArea2D" type="Area2D" parent="." groups=["enemies"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea2D"]
 position = Vector2(-1, -25)
@@ -248,5 +250,5 @@ libraries = {
 autoplay = "idle"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
