@@ -22,6 +22,8 @@ var health: int = 0
 @onready var hit_box: Area2D = $Area2D
 @onready var sword_area_left: Area2D = $SwordAreaLeft
 @onready var sword_area_right: Area2D = $SwordAreaRight
+@onready var sword_area_up: Area2D = $SwordAreaUp
+@onready var sword_area_down: Area2D = $SwordAreaDown
 @onready var sprite2d: Sprite2D = $Sprite2D
 @onready var health_bar: ProgressBar = $HealthBar
 
@@ -133,15 +135,21 @@ func attack():
 	#elif choseAttack == 1:
 	#	animation_player.play("attack_side_2")
 	can_flip = false
-	animation_player.play("attack_side_1")
+	var attack_direction: String
+	if input_vector.y > 0:
+		animation_player.play("attack_down_1")
+	elif input_vector.y < 0:
+		animation_player.play("attack_up_1")
+	else:
+		animation_player.play("attack_side_1")
 	attack_cast = 0.6
 	is_attacking = true
 	can_flip = false
 	await get_tree().create_timer(0.5).timeout 
 	can_flip = true
 
-func apply_damage():
-	var areas = get_overlapping_areas()
+func apply_damage(attack_direction: String):
+	var areas = get_hited_enemys(attack_direction)
 	var total_direction = Vector2(0, 0)
 	var enemies_hit = []
 	
@@ -164,6 +172,22 @@ func apply_damage():
 		var average_direction = total_direction / enemies_hit.size()
 		receive_knockback(-average_direction, 0.25, max_bounceness)
 
+# Função que obtém os corpos sobrepostos
+func get_hited_enemys(attack_direction: String) -> Array:
+	if attack_direction == "up":
+		return sword_area_up.get_overlapping_areas()
+	elif attack_direction == "down":
+		return sword_area_down.get_overlapping_areas()
+	elif attack_direction == "side":
+			if not sprite.flip_h:
+				return sword_area_right.get_overlapping_areas()
+			else:
+				return sword_area_left.get_overlapping_areas()
+	else:
+		print("no attack")
+		return sword_area_right.get_overlapping_areas()
+
+
 # Função para obter o bounceness máximo dos inimigos atingidos
 func get_max_bounceness(enemies_hit: Array) -> float:
 	var max_bounceness = 0.0
@@ -171,13 +195,6 @@ func get_max_bounceness(enemies_hit: Array) -> float:
 		if enemy.bounceness > max_bounceness:
 			max_bounceness = enemy.bounceness
 	return max_bounceness
-
-# Função que obtém os corpos sobrepostos
-func get_overlapping_areas() -> Array:
-	if not sprite.flip_h:
-		return sword_area_left.get_overlapping_areas()
-	else:
-		return sword_area_right.get_overlapping_areas()
 
 # Função que calcula a direção do knockback para um inimigo
 func calculate_knockback_direction(enemy: Enemy) -> Vector2:
