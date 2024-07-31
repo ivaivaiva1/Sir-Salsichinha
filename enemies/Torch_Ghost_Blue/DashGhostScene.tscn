@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://dx63q6r5wwpo"]
+
+[ext_resource type="Texture2D" uid="uid://c02epbuqq5l8f" path="res://addons/Tiny Swords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="1_7qimy"]
+[ext_resource type="Script" path="res://enemies/Torch_Ghost_Yellow/DashGhostScene.gd" id="2_qbieb"]
+
+[sub_resource type="Animation" id="Animation_fqkhp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(5, 5, 2.3451, 0.823529)]
+}
+
+[sub_resource type="Animation" id="Animation_kbodp"]
+resource_name = "fade_out"
+length = 0.22
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.22),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"auto_destroy"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1.03526, 1),
+"update": 0,
+"values": [Color(5, 2.345, 4.687, 0.55), Color(5, 2.345, 4.687, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_13b6u"]
+_data = {
+"RESET": SubResource("Animation_fqkhp"),
+"fade_out": SubResource("Animation_kbodp")
+}
+
+[node name="DashGhostScene" type="Sprite2D"]
+modulate = Color(5, 2.345, 4.687, 0.633)
+y_sort_enabled = true
+position = Vector2(0, -41.714)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("1_7qimy")
+hframes = 7
+vframes = 5
+script = ExtResource("2_qbieb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_13b6u")
+}
+autoplay = "fade_out"
+speed_scale = 0.5

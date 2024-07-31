@@ -27,43 +27,6 @@ height = 38.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_y8k6p"]
 radius = 26.8328
 
-[sub_resource type="Animation" id="Animation_ehfvn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_7wq4b"]
-resource_name = "hit_flash"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3r2co"]
-_data = {
-"RESET": SubResource("Animation_ehfvn"),
-"hit_flash": SubResource("Animation_7wq4b")
-}
-
 [sub_resource type="Animation" id="Animation_21qug"]
 length = 0.001
 tracks/0/type = "value"
@@ -144,20 +107,6 @@ tracks/2/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -10), Vector2(0, -20), Vector2(0, -20), Vector2(0, -15), Vector2(0, 0), Vector2(0, 0), Vector2(0, -10), Vector2(0, -20), Vector2(0, -20), Vector2(0, -15), Vector2(0, 0)]
 }
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0.2),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"hit_player"
-}]
-}
 
 [sub_resource type="Animation" id="Animation_7omyd"]
 resource_name = "idle"
@@ -182,16 +131,51 @@ _data = {
 "idle": SubResource("Animation_7omyd")
 }
 
+[sub_resource type="Animation" id="Animation_ehfvn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7wq4b"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3r2co"]
+_data = {
+"RESET": SubResource("Animation_ehfvn"),
+"hit_flash": SubResource("Animation_7wq4b")
+}
+
 [node name="Sheep" type="CharacterBody2D" groups=["enemies"]]
 position = Vector2(0, 9)
 motion_mode = 1
 script = ExtResource("1_5plw8")
-speed = 2.0
+speed = 1.2
 damage = 1.0
 health = 30
 bounceness = 3.0
-rest_needed_time = 1.0
-movement_type = "drag_movement"
 death_effect_prefab = ExtResource("2_6c1lq")
 damage_ui_prefab = ExtResource("3_fkisk")
 death_effect_scale = 0.9
@@ -223,6 +207,12 @@ position = Vector2(-1, -25)
 rotation = -1.57047
 shape = SubResource("CircleShape2D_y8k6p")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ycyst")
+}
+autoplay = "idle"
+
 [node name="HitFlash" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_3r2co")
@@ -237,16 +227,13 @@ script = ExtResource("4_83k6h")
 [node name="Knockback Controller" type="Node" parent="."]
 script = ExtResource("8_ybrkh")
 
-[node name="Drag_Follow_Player" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="."]
 script = ExtResource("9_ujhh4")
-drag_factor = 0.1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ycyst")
-}
-autoplay = "idle"
+max_speed = null
+drag_factor_1 = null
+drag_factor_2 = null
+transition_time = null
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]

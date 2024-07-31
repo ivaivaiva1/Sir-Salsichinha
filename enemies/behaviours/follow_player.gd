@@ -1,7 +1,5 @@
 extends Node
 
-@export var speed: float = 1
-
 var sprite: Sprite2D
 
 var input_vector: Vector2 = Vector2(0, 0)
@@ -13,9 +11,11 @@ func _ready():
 	sprite = enemy.get_node("Sprite2D")
 
 func _process(delta):
+	if enemy.movement_type != "default_movement": return
 	rotate_sprite()
 
 func _physics_process(delta):
+	if enemy.movement_type != "default_movement": return
 	if GameManager.is_game_over: return
 	set_move_direction()
 	do_move()
@@ -28,9 +28,9 @@ func set_move_direction():
 func do_move():  
 	var move_direction
 	if(!enemy.is_resting):
-		move_direction = input_vector * speed * 100
+		move_direction = input_vector * enemy.speed * 100
 	else:
-		move_direction = input_vector * speed * 0
+		move_direction = input_vector * enemy.speed * 0
 	if(enemy.actual_knockback.x > 0 or enemy.actual_knockback.y):
 		enemy.velocity = enemy.actual_knockback
 	else:

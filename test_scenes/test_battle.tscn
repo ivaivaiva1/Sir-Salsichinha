@@ -1,116 +1,21 @@
-[gd_scene load_steps=24 format=3 uid="uid://cuh1arc88iii"]
+[gd_scene load_steps=5 format=3 uid="uid://cuh1arc88iii"]
 
 [ext_resource type="PackedScene" uid="uid://bbaq72ngobmw1" path="res://player/player.tscn" id="1_q1jom"]
-[ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="2_f7phi"]
-[ext_resource type="PackedScene" uid="uid://bkxacenkudy3r" path="res://enemies/pawn red.tscn" id="3_lir7n"]
-[ext_resource type="PackedScene" uid="uid://bcefmaju7ccqn" path="res://enemies/sheep.tscn" id="4_ppvdw"]
-[ext_resource type="Texture2D" uid="uid://bvxxst51cldqv" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.43 (1).jpeg" id="5_bk7eu"]
-[ext_resource type="Texture2D" uid="uid://cb8ipicuy1480" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.43.jpeg" id="6_jhy11"]
-[ext_resource type="Texture2D" uid="uid://gtxcsuax1xg7" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.44.jpeg" id="7_fld8l"]
-[ext_resource type="Texture2D" uid="uid://cu3ilvodmmqkn" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.45 (1).jpeg" id="8_n43f2"]
-[ext_resource type="Texture2D" uid="uid://xen51rejilhc" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.45.jpeg" id="9_nyuh6"]
-[ext_resource type="Texture2D" uid="uid://bi6m60ml7c05n" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.46 (1).jpeg" id="10_ucum5"]
-[ext_resource type="Texture2D" uid="uid://bs4nuetq5i034" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.46.jpeg" id="11_cjv7x"]
-[ext_resource type="Texture2D" uid="uid://cmmjl01dwlo1t" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.47 (1).jpeg" id="12_o5kdc"]
-[ext_resource type="Texture2D" uid="uid://oflreysgi5se" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.47 (2).jpeg" id="13_etbkv"]
-[ext_resource type="Texture2D" uid="uid://cta1vllqfeiq" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.47.jpeg" id="14_tbmnq"]
-[ext_resource type="Texture2D" uid="uid://b3kk5n5sm2pbn" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.48 (1).jpeg" id="15_furik"]
-[ext_resource type="Texture2D" uid="uid://bk21jl31lpce8" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.48 (2).jpeg" id="16_5u1jx"]
-[ext_resource type="Texture2D" uid="uid://b7oi7whw4fd6l" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.48.jpeg" id="17_t0y3o"]
-[ext_resource type="Texture2D" uid="uid://bygtndbdypds8" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.49 (1).jpeg" id="18_n23kn"]
-[ext_resource type="Texture2D" uid="uid://enlhnerbflv5" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.49 (2).jpeg" id="19_wyr8i"]
-[ext_resource type="Texture2D" uid="uid://dasrw3xitc1kk" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.49.jpeg" id="20_h6bq7"]
-[ext_resource type="Texture2D" uid="uid://dim4vbmrjsyna" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.50 (1).jpeg" id="21_xd0c2"]
-[ext_resource type="Texture2D" uid="uid://b2bxi7iwioq1l" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.50 (2).jpeg" id="22_p2rer"]
-[ext_resource type="Texture2D" uid="uid://c1c6j3mu4hhhq" path="res://WhatsApp Unknown 2024-07-27 at 19.57.52/WhatsApp Image 2024-07-27 at 18.26.50.jpeg" id="23_7f4u0"]
+[ext_resource type="PackedScene" uid="uid://b1ikot3kbdjj6" path="res://enemies/Torch_Ghost_Blue/torch_ghost_blue.tscn" id="2_s3jty"]
+[ext_resource type="PackedScene" uid="uid://bpcb52l7k4e8h" path="res://enemies/Torch_Ghost_Red/torch_ghost_red.tscn" id="3_6j30m"]
+[ext_resource type="PackedScene" uid="uid://b842t75ru46wf" path="res://enemies/Torch_Ghost_Yellow/torch_ghost_yellow.tscn" id="4_du181"]
 
 [node name="TestBattle" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_q1jom")]
 position = Vector2(192, 340)
+max_health = 500
 
-[node name="Sheep8" parent="." instance=ExtResource("4_ppvdw")]
-position = Vector2(621, -11)
-weight = 1.5
+[node name="Torch Ghost Blue" parent="." instance=ExtResource("2_s3jty")]
+position = Vector2(693, 55.286)
 
-[node name="Pawn19" parent="." instance=ExtResource("2_f7phi")]
-position = Vector2(691, 322)
+[node name="Torch Ghost Red" parent="." instance=ExtResource("3_6j30m")]
+position = Vector2(770, 217)
 
-[node name="Pawn20" parent="." instance=ExtResource("3_lir7n")]
-position = Vector2(690, 672)
-
-[node name="WhatsAppImage2024-07-27At18_26_43(1)" type="Sprite2D" parent="."]
-position = Vector2(10677, 1597)
-texture = ExtResource("5_bk7eu")
-
-[node name="WhatsAppImage2024-07-27At18_26_43" type="Sprite2D" parent="."]
-position = Vector2(8220, 1598)
-texture = ExtResource("6_jhy11")
-
-[node name="WhatsAppImage2024-07-27At18_26_44" type="Sprite2D" parent="."]
-position = Vector2(6973, 1670)
-texture = ExtResource("7_fld8l")
-
-[node name="WhatsAppImage2024-07-27At18_26_45(1)" type="Sprite2D" parent="."]
-position = Vector2(12041, 151)
-texture = ExtResource("8_n43f2")
-
-[node name="WhatsAppImage2024-07-27At18_26_45" type="Sprite2D" parent="."]
-position = Vector2(4466, 1665)
-texture = ExtResource("9_nyuh6")
-
-[node name="WhatsAppImage2024-07-27At18_26_46(1)" type="Sprite2D" parent="."]
-position = Vector2(9447, 1632)
-texture = ExtResource("10_ucum5")
-
-[node name="WhatsAppImage2024-07-27At18_26_46" type="Sprite2D" parent="."]
-position = Vector2(5707, 1667)
-texture = ExtResource("11_cjv7x")
-
-[node name="WhatsAppImage2024-07-27At18_26_47(1)" type="Sprite2D" parent="."]
-position = Vector2(13286, 141)
-texture = ExtResource("12_o5kdc")
-
-[node name="WhatsAppImage2024-07-27At18_26_47(2)" type="Sprite2D" parent="."]
-position = Vector2(14558, 131)
-texture = ExtResource("13_etbkv")
-
-[node name="WhatsAppImage2024-07-27At18_26_47" type="Sprite2D" parent="."]
-position = Vector2(3251, 1689)
-texture = ExtResource("14_tbmnq")
-
-[node name="WhatsAppImage2024-07-27At18_26_48(1)" type="Sprite2D" parent="."]
-position = Vector2(10767, 166)
-texture = ExtResource("15_furik")
-
-[node name="WhatsAppImage2024-07-27At18_26_48(2)" type="Sprite2D" parent="."]
-position = Vector2(9556, 172)
-texture = ExtResource("16_5u1jx")
-
-[node name="WhatsAppImage2024-07-27At18_26_48" type="Sprite2D" parent="."]
-position = Vector2(8331, 186)
-texture = ExtResource("17_t0y3o")
-
-[node name="WhatsAppImage2024-07-27At18_26_49(1)" type="Sprite2D" parent="."]
-position = Vector2(7100, 193)
-texture = ExtResource("18_n23kn")
-
-[node name="WhatsAppImage2024-07-27At18_26_49(2)" type="Sprite2D" parent="."]
-position = Vector2(5849, 206)
-texture = ExtResource("19_wyr8i")
-
-[node name="WhatsAppImage2024-07-27At18_26_49" type="Sprite2D" parent="."]
-position = Vector2(4605, 226)
-texture = ExtResource("20_h6bq7")
-
-[node name="WhatsAppImage2024-07-27At18_26_50(1)" type="Sprite2D" parent="."]
-position = Vector2(3319, 226)
-texture = ExtResource("21_xd0c2")
-
-[node name="WhatsAppImage2024-07-27At18_26_50(2)" type="Sprite2D" parent="."]
-position = Vector2(2029, 1677)
-texture = ExtResource("22_p2rer")
-
-[node name="WhatsAppImage2024-07-27At18_26_50" type="Sprite2D" parent="."]
-position = Vector2(2023, 235)
-texture = ExtResource("23_7f4u0")
+[node name="Torch Ghost Yellow" parent="." instance=ExtResource("4_du181")]
+position = Vector2(782, 380.286)

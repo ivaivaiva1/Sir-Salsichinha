@@ -242,65 +242,57 @@ position = Vector2(1154, 631)
 bounceness = 0.0
 
 [node name="Sheep" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(778, 127)
+position = Vector2(879, 127)
 bounceness = 0.0
 
 [node name="Sheep2" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(777, 201)
+position = Vector2(878, 201)
 bounceness = 0.0
 
 [node name="Sheep3" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(778, 277)
+position = Vector2(879, 277)
 bounceness = 0.0
 
 [node name="Sheep4" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(778, 349)
+position = Vector2(879, 349)
 bounceness = 0.0
 
 [node name="Sheep5" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(777, 405)
-bounceness = 0.0
-
-[node name="Sheep6" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(776, 479)
-bounceness = 0.0
-
-[node name="Sheep7" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(777, 555)
+position = Vector2(878, 405)
 bounceness = 0.0
 
 [node name="Sheep8" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(777, 627)
+position = Vector2(878, 627)
 bounceness = 0.0
 
 [node name="Sheep9" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(1034, 127)
+position = Vector2(1115, 127)
 bounceness = 0.0
 
 [node name="Sheep10" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(1033, 201)
+position = Vector2(1114, 201)
 bounceness = 0.0
 
 [node name="Sheep11" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(1034, 277)
+position = Vector2(1115, 277)
 bounceness = 0.0
 
 [node name="Sheep12" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(1034, 349)
+position = Vector2(1115, 349)
 bounceness = 0.0
 
 [node name="Sheep13" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(1033, 405)
+position = Vector2(1114, 405)
 bounceness = 0.0
 
 [node name="Sheep14" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(1032, 479)
+position = Vector2(1113, 479)
 bounceness = 0.0
 
 [node name="Sheep15" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(1033, 555)
+position = Vector2(1114, 555)
 bounceness = 0.0
 
 [node name="Sheep16" parent="." instance=ExtResource("7_w0x3f")]
-position = Vector2(1033, 627)
+position = Vector2(1114, 627)
 bounceness = 0.0

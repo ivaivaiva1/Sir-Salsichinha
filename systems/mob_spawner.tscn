@@ -1,20 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1hfqnqtf42hc"]
+[gd_scene load_steps=12 format=3 uid="uid://c1hfqnqtf42hc"]
 
 [ext_resource type="Script" path="res://systems/mob_spawner.gd" id="1_ehhe5"]
 [ext_resource type="PackedScene" uid="uid://bkxacenkudy3r" path="res://enemies/pawn red.tscn" id="2_px5wh"]
 [ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="3_sn7ao"]
+[ext_resource type="PackedScene" uid="uid://b842t75ru46wf" path="res://enemies/Torch_Ghost_Yellow/torch_ghost_yellow.tscn" id="4_goaj5"]
 [ext_resource type="PackedScene" uid="uid://bcefmaju7ccqn" path="res://enemies/sheep.tscn" id="4_ui8fi"]
+[ext_resource type="PackedScene" uid="uid://djh7jr6ghidmo" path="res://enemies/pawn_big.tscn" id="6_fftex"]
+[ext_resource type="PackedScene" uid="uid://ccycxp4nib7yo" path="res://enemies/pawn_blue.tscn" id="7_fnkht"]
+[ext_resource type="PackedScene" uid="uid://cenncpwdd6sr0" path="res://enemies/pawn_mini.tscn" id="8_gfnc6"]
+[ext_resource type="PackedScene" uid="uid://b1ikot3kbdjj6" path="res://enemies/Torch_Ghost_Blue/torch_ghost_blue.tscn" id="9_xshc0"]
+[ext_resource type="PackedScene" uid="uid://bpcb52l7k4e8h" path="res://enemies/Torch_Ghost_Red/torch_ghost_red.tscn" id="10_u5h8n"]
 
 [sub_resource type="Curve2D" id="Curve2D_33tt0"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -784, -465, 0, 0, 0, 0, 763, -507, 0, 0, 0, 0, 793, 535, 0, 0, 0, 0, -784, 535, 0, 0, 0, 0, -784, -465)
+"points": PackedVector2Array(0, 0, 0, 0, -1345, -980, 0, 0, 0, 0, 1320, -980, 0, 0, 0, 0, 1313, 945, 0, 0, 0, 0, -1, 975, 0, 0, 0, 0, -1338, 953, 0, 0, 0, 0, -1323, -965)
 }
-point_count = 5
+point_count = 6
 
 [node name="MobSpawner" type="Node2D"]
 position = Vector2(581, 330)
 script = ExtResource("1_ehhe5")
-creatures = Array[PackedScene]([ExtResource("3_sn7ao"), ExtResource("2_px5wh"), ExtResource("4_ui8fi")])
+creatures = Array[PackedScene]([ExtResource("3_sn7ao"), ExtResource("2_px5wh"), ExtResource("4_ui8fi"), ExtResource("6_fftex"), ExtResource("7_fnkht"), ExtResource("8_gfnc6"), ExtResource("9_xshc0"), ExtResource("10_u5h8n"), ExtResource("4_goaj5")])
 mobs_per_minute = 300.0
 
 [node name="Path2D" type="Path2D" parent="."]
@@ -22,8 +28,8 @@ curve = SubResource("Curve2D_33tt0")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 unique_name_in_owner = true
-position = Vector2(-784, -464.999)
-rotation = -1.5708
+position = Vector2(736.165, 958.17)
+rotation = 3.11877
 progress = 5167.0
 
 [node name="_Timer_101948" type="Timer" parent="Path2D/PathFollow2D"]

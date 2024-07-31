@@ -1,22 +1,22 @@
-[gd_scene load_steps=20 format=3 uid="uid://bkxacenkudy3r"]
+[gd_scene load_steps=20 format=3 uid="uid://djh7jr6ghidmo"]
 
-[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_v7q3t"]
-[ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_0y67k"]
-[ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_jn0hb"]
-[ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_mk72d"]
-[ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="5_pvccg"]
-[ext_resource type="Texture2D" uid="uid://bnlo48w450esu" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="6_fjckk"]
-[ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="7_rsoh0"]
-[ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_lxett"]
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_ex6uv"]
+[ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_gkl5s"]
+[ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_h0dhp"]
+[ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_ogyh7"]
+[ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="5_qpwsf"]
+[ext_resource type="Texture2D" uid="uid://bnlo48w450esu" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="6_mwleq"]
+[ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="7_kkhb6"]
+[ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_odl4j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_njmvc"]
 resource_local_to_scene = true
-shader = ExtResource("5_pvccg")
+shader = ExtResource("5_qpwsf")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y87au"]
-radius = 4.01113
+radius = 5.87162
 height = 35.2509
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_71pim"]
@@ -132,43 +132,43 @@ _data = {
 "hit_flash": SubResource("Animation_406b4")
 }
 
-[node name="Pawn Red" type="CharacterBody2D" groups=["enemies"]]
+[node name="Pawn Big" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
-position = Vector2(0, -35)
-scale = Vector2(1.5, 1.5)
+position = Vector2(0, -57)
+scale = Vector2(2.5, 2.5)
 motion_mode = 1
-script = ExtResource("1_v7q3t")
+script = ExtResource("1_ex6uv")
 speed = 0.6
 damage = 5.0
 health = 90
-weight = 5.0
+weight = 7.0
 bounceness = 8.0
 rest_needed_time = 1.0
 movement_type = "default_movement"
-death_effect_prefab = ExtResource("2_0y67k")
-damage_ui_prefab = ExtResource("3_jn0hb")
+death_effect_prefab = ExtResource("2_gkl5s")
+damage_ui_prefab = ExtResource("3_h0dhp")
 death_effect_scale = 0.9
-meat_scene = ExtResource("4_mk72d")
+meat_scene = ExtResource("4_ogyh7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1.3, 1.06, 0.78, 1)
+modulate = Color(0.2795, 0.2795, 0.65, 1)
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_njmvc")
-texture = ExtResource("6_fjckk")
+texture = ExtResource("6_mwleq")
 hframes = 6
 vframes = 6
 frame = 6
 
 [node name="Body2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(0, 20.6667)
+position = Vector2(-0.8, 19.6)
 rotation = -1.56234
 shape = SubResource("CapsuleShape2D_y87au")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false
-position = Vector2(-1.42857, 27.1429)
+position = Vector2(-0.4, 27.6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-2, -29)
@@ -176,7 +176,7 @@ shape = SubResource("CapsuleShape2D_71pim")
 
 [node name="StrikeArea2D" type="Area2D" parent="." groups=["enemies"]]
 visible = false
-position = Vector2(2, 25.3333)
+position = Vector2(2.4, 26.8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea2D"]
 position = Vector2(-4, -26)
@@ -197,10 +197,10 @@ libraries = {
 position = Vector2(-5, -50)
 
 [node name="FollowPlayer" type="Node" parent="."]
-script = ExtResource("7_rsoh0")
+script = ExtResource("7_kkhb6")
 
 [node name="Knockback Controller" type="Node" parent="."]
-script = ExtResource("8_lxett")
+script = ExtResource("8_odl4j")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]

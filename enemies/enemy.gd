@@ -2,12 +2,15 @@ class_name Enemy
 extends CharacterBody2D
 
 @export_category("Balancing Vars")
+@export var speed: float = 1
 @export var damage: float = 2
 @export var health: int = 10
 @export var weight: float
 @export var bounceness: float
+@export var rest_needed_time: float
 
 @export_category("Other vars")
+@export var movement_type: String
 @export var death_effect_prefab: PackedScene
 @export var damage_ui_prefab: PackedScene
 @export var death_effect_scale: float
@@ -27,6 +30,7 @@ var suffered_damages_id: Array[int] = []
 @onready var area2d: Area2D = $Area2D
 @onready var strike_area2d: Area2D = $StrikeArea2D
 @onready var damage_ui_pos: Marker2D = $DamageUIPos
+@onready var dash_hit: Dash_Hit = $DashHit
 
 var is_resting: bool = false
 var rest_time: float = 0
@@ -39,6 +43,7 @@ func _process(delta):
 	else:
 		animation_player.play("idle")
 		is_resting = false
+		pass
 	
 	if health <= 0:
 		die()
@@ -54,7 +59,7 @@ func do_strike(striked_area: Area2D):
 	var enemy: Enemy = striked_area.get_parent()
 	var direction = calculate_knockback_direction(enemy)
 	var major_knockback = major_knockback_force
-	await get_tree().create_timer(0.1).timeout
+	await get_tree().create_timer(0.05).timeout
 	if enemy != null:
 		enemy.get_hited(major_knockback, direction, adjust_damage(major_knockback.force_damage))
 
@@ -67,6 +72,7 @@ func adjust_damage(base_force_power: float) -> float:
 	return base_force_power * adjustment
 
 func get_hited(damage_instance: DamageController.Damage_Instance, knockback_direction: Vector2, real_damage: float):
+	if dash_hit: dash_hit.is_following_player = false
 	if damage_instance.force_id in suffered_damages_id: return
 	suffered_damages_id.append(damage_instance.force_id)
 	if not DamageController.check_max_hited_enemies(damage_instance): return
@@ -80,6 +86,9 @@ func get_hited(damage_instance: DamageController.Damage_Instance, knockback_dire
 		take_damage(real_damage)
 
 func take_damage(damage_amount: int):
+	if(is_resting):
+		animation_player.play("idle")
+		is_resting = false
 	var real_damage = randf_range((damage_amount / 1.30), (damage_amount * 1.30))
 	health -= real_damage
 	var damage_ui = damage_ui_prefab.instantiate()
@@ -102,11 +111,12 @@ func _on_area_2d_area_entered(area):
 	if area.is_in_group("player"):
 		do_rest()
 		animation_player.play("attack")
-		await get_tree().create_timer(0.4).timeout
-		if GameManager.is_game_over: return
-		if(animation_player.current_animation == "attack"):
-			var player: Player = area.get_parent()
-			player.take_damage(damage)
+
+func hit_player():
+	if GameManager.is_game_over: return
+	#var player: Player = area.get_parent()
+	GameManager.player.take_damage(damage)
+
 
 func update_is_striking():
 	if actual_knockback == Vector2(0, 0):
@@ -132,7 +142,7 @@ func die():
 	queue_free()
 
 func do_rest():
-	rest_time = 0.6
+	rest_time = rest_needed_time
 	is_resting = true
 
 func pump():

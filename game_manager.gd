@@ -12,7 +12,6 @@ var time_elapsed_string: String
 var enemies_hited: int = 0
 
 func _process(delta):
-	print(enemies_hited)
 	# Update timer
 	time_elapsed += delta
 	var time_elapsed_seconds: int = floori(time_elapsed)

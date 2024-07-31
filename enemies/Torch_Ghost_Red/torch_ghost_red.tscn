@@ -1,0 +1,270 @@
+[gd_scene load_steps=24 format=3 uid="uid://bpcb52l7k4e8h"]
+
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_immey"]
+[ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_wsmoy"]
+[ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_wr5we"]
+[ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_jcoay"]
+[ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="5_sbfv1"]
+[ext_resource type="Texture2D" uid="uid://c02epbuqq5l8f" path="res://addons/Tiny Swords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="6_tbqnu"]
+[ext_resource type="Script" path="res://enemies/Torch_Ghost_Yellow/DashHit.gd" id="7_tmg53"]
+[ext_resource type="PackedScene" uid="uid://c2vi0j0kkkmd4" path="res://enemies/Torch_Ghost_Red/DashGhostScene.tscn" id="8_8thev"]
+[ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="9_lmp2p"]
+[ext_resource type="Script" path="res://systems/knockback_controller.gd" id="10_neaee"]
+[ext_resource type="Script" path="res://enemies/behaviours/follow_player_drag.gd" id="11_sjer1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lfqla"]
+resource_local_to_scene = true
+shader = ExtResource("5_sbfv1")
+shader_parameter/enabled = false
+shader_parameter/tint = Color(1, 1, 1, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mgme6"]
+radius = 5.99995
+height = 39.9997
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7n1ll"]
+radius = 18.9213
+height = 64.031
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j3wkg"]
+radius = 159.516
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_y8k6p"]
+radius = 41.7732
+
+[sub_resource type="Animation" id="Animation_21qug"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_xx550"]
+resource_name = "attack"
+length = 0.82
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 0.366022, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 2), Vector2i(1, 2), Vector2i(2, 2), Vector2i(3, 2), Vector2i(4, 2), Vector2i(5, 2)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"hit_player"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DashHit")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"enemy_is_attacking"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_7omyd"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ycyst"]
+_data = {
+"RESET": SubResource("Animation_21qug"),
+"attack": SubResource("Animation_xx550"),
+"idle": SubResource("Animation_7omyd")
+}
+
+[sub_resource type="Animation" id="Animation_pv51a"]
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(5, 5, 2.3451, 1), Color(5, 5, 2.3451, 0.313726)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath(".:material:shader_parameter/enabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_pcn0k"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(6, 0, 0.8, 1), Color(6, 0, 0.8, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rxkwq"]
+_data = {
+"RESET": SubResource("Animation_pv51a"),
+"hit_flash": SubResource("Animation_pcn0k")
+}
+
+[node name="Torch Ghost Red" type="CharacterBody2D" groups=["enemies"]]
+position = Vector2(0, -69)
+scale = Vector2(2.3, 2.3)
+motion_mode = 1
+script = ExtResource("1_immey")
+speed = 2.0
+damage = 20.0
+health = 250
+bounceness = 3.0
+rest_needed_time = 2.0
+death_effect_prefab = ExtResource("2_wsmoy")
+damage_ui_prefab = ExtResource("3_wr5we")
+death_effect_scale = 0.9
+meat_scene = ExtResource("4_jcoay")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(6, 0, 0.8, 0.5)
+material = SubResource("ShaderMaterial_lfqla")
+texture = ExtResource("6_tbqnu")
+hframes = 7
+vframes = 5
+
+[node name="Body2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 3)
+rotation = -1.56681
+shape = SubResource("CapsuleShape2D_mgme6")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="Area2D" type="Area2D" parent="." groups=["enemies"]]
+visible = false
+position = Vector2(0, 25.51)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-5.96046e-08, -24)
+rotation = -3.10768
+scale = Vector2(0.992611, 1.01605)
+shape = SubResource("CapsuleShape2D_7n1ll")
+
+[node name="AreaToDash" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaToDash"]
+position = Vector2(-0.714286, 7.65286)
+shape = SubResource("CircleShape2D_j3wkg")
+
+[node name="StrikeArea2D" type="Area2D" parent="." groups=["enemies"]]
+visible = false
+position = Vector2(-0.714286, 26.2243)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea2D"]
+position = Vector2(0.714286, -22.8571)
+rotation = -1.57047
+shape = SubResource("CircleShape2D_y8k6p")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ycyst")
+}
+autoplay = "idle"
+
+[node name="HitFlash" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Sprite2D")
+libraries = {
+"": SubResource("AnimationLibrary_rxkwq")
+}
+
+[node name="DamageUIPos" type="Marker2D" parent="."]
+position = Vector2(-1, -41)
+
+[node name="DashHit" type="Node" parent="."]
+script = ExtResource("7_tmg53")
+ghost_scene = ExtResource("8_8thev")
+normal_speed = 2.0
+chase_speed = 10.0
+
+[node name="FollowPlayer" type="Node" parent="."]
+script = ExtResource("9_lmp2p")
+
+[node name="Knockback Controller" type="Node" parent="."]
+script = ExtResource("10_neaee")
+
+[node name="Drag_Follow_Player" type="Node2D" parent="."]
+script = ExtResource("11_sjer1")
+drag_factor = 0.01
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="AreaToDash" to="DashHit" method="_on_area_to_dash_area_entered"]
+[connection signal="area_exited" from="AreaToDash" to="DashHit" method="_on_area_to_dash_area_exited"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
