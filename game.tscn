@@ -89,8 +89,7 @@ position = Vector2(552, 365)
 position = Vector2(5.06079e-05, -11)
 
 [node name="MobSpawner" parent="Player" instance=ExtResource("2_elc6l")]
-position = Vector2(1.00012, -27)
-mobs_per_minute = 1000.0
+position = Vector2(-0.999878, -27)
 
 [node name="Trees" type="Node2D" parent="."]
 y_sort_enabled = true

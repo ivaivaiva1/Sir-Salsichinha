@@ -16,8 +16,8 @@ shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y87au"]
-radius = 4.99982
-height = 33.9988
+radius = 8.99968
+height = 35.9987
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_71pim"]
 radius = 19.0
@@ -138,7 +138,8 @@ position = Vector2(0, -23)
 motion_mode = 1
 script = ExtResource("1_egxte")
 speed = 0.9
-health = 70
+damage = 50.0
+health = 40
 weight = 3.0
 bounceness = 6.0
 rest_needed_time = 1.0
@@ -158,13 +159,13 @@ vframes = 6
 frame = 6
 
 [node name="Body2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, 20)
+position = Vector2(-1.19209e-07, 16)
 rotation = -1.56234
 shape = SubResource("CapsuleShape2D_y87au")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Area2D" type="Area2D" parent="." groups=["player_enemies"]]
+visible = false
 position = Vector2(-1, 27)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

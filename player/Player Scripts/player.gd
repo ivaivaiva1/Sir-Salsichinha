@@ -37,7 +37,6 @@ var frame_freeze_cooldown: float = 0
 @export var frame_freeze_time: float = 0.1
 signal meat_collected(value:int)
 
-
 func _ready():
 	# Ritual
 	#do_ritual()
@@ -153,7 +152,6 @@ func apply_damage(attack_direction: String):
 	var total_direction = Vector2(0, 0)
 	var enemies_hit = []
 	
-	# Passo 1: Colete os inimigos atingidos e seus bounceness
 	for area in areas:
 		if area.is_in_group("player_enemies"):
 			var enemy: Enemy = area.get_parent()
@@ -162,9 +160,8 @@ func apply_damage(attack_direction: String):
 			enemy.get_hited(new_damage_instance, direction, new_damage_instance.force_damage)
 			enemy.pump()
 			total_direction += direction
-			enemies_hit.append(enemy)  # Adicione o inimigo à lista de inimigos atingidos
+			enemies_hit.append(enemy)  
 	
-	# Passo 2: Calcule o bounceness máximo dos inimigos atingidos
 	var max_bounceness = get_max_bounceness(enemies_hit)
 	
 	if enemies_hit.size() > 0:
@@ -214,8 +211,8 @@ func receive_knockback(knockback_direction: Vector2, stop_time: float, enemy_bou
 func adjust_auto_knockback(bounceness: float) -> float:
 	var min_bounceness = 0.0
 	var max_bounceness = 10.0
-	var min_knockback = 500
-	var max_knockback = 1300
+	var min_knockback = sword_knockback_force / 1.3
+	var max_knockback = sword_knockback_force * 1.3
 	
 	# Regra de três para mapear o bounceness para a força do knockback
 	var knockback_force = min_knockback + (bounceness - min_bounceness) / (max_bounceness - min_bounceness) * (max_knockback - min_knockback)

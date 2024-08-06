@@ -13,4 +13,3 @@ func trigger_game_over():
 	
 	var game_over_ui: GameOverUI = game_over_ui_scene.instantiate()
 	add_child(game_over_ui)
-

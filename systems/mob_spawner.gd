@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var creatures: Array[PackedScene]
-@export var mobs_per_minute: float = 60
+@export var  mobs_per_second: float = 10
 
 @onready var path_follow_2d: PathFollow2D = %PathFollow2D
 var cooldown: float = 0
@@ -13,7 +13,7 @@ func _process(delta):
 	if cooldown > 0: return
 	
 	# Seta o cooldown
-	var interval = 60 / mobs_per_minute
+	var interval = mobs_per_second
 	cooldown = interval
 	
 	# Cria um spawn point valído
