@@ -1,18 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://cisrofx8e15gh"]
+[gd_scene load_steps=10 format=3 uid="uid://cisrofx8e15gh"]
 
 [ext_resource type="PackedScene" uid="uid://b6nai3c6y8vsw" path="res://UI/game_over_ui.tscn" id="1_gq0a3"]
 [ext_resource type="PackedScene" uid="uid://bbaq72ngobmw1" path="res://player/player.tscn" id="1_p4arj"]
 [ext_resource type="Script" path="res://game.gd" id="1_qx51r"]
 [ext_resource type="PackedScene" uid="uid://c1hfqnqtf42hc" path="res://systems/mob_spawner.tscn" id="2_elc6l"]
 [ext_resource type="PackedScene" uid="uid://d3fpypedn3irp" path="res://UI/game_ui.tscn" id="3_ocq85"]
-[ext_resource type="Texture2D" uid="uid://cdpnfvc0abymo" path="res://addons/Tiny Swords/Deco/09.png" id="7_72upk"]
-[ext_resource type="Texture2D" uid="uid://chn8nrklkr8xs" path="res://addons/Tiny Swords/Deco/08.png" id="8_6y2yv"]
-[ext_resource type="Texture2D" uid="uid://bsyjgrc580ixp" path="res://addons/Tiny Swords/Deco/07.png" id="9_g52so"]
-[ext_resource type="Texture2D" uid="uid://ctoahk4kc1jn" path="res://addons/Tiny Swords/Deco/06.png" id="10_skxgp"]
-[ext_resource type="Texture2D" uid="uid://dsrbasnpl5cnj" path="res://addons/Tiny Swords/Deco/05.png" id="11_sgi0n"]
-[ext_resource type="Texture2D" uid="uid://wm0e3bejs4an" path="res://addons/Tiny Swords/Deco/04.png" id="12_gqv7s"]
-[ext_resource type="Texture2D" uid="uid://c432scrnes6bh" path="res://addons/Tiny Swords/Deco/03.png" id="13_7ukdx"]
-[ext_resource type="Texture2D" uid="uid://durqnwoto4qlm" path="res://addons/Tiny Swords/Deco/02.png" id="14_5uic8"]
 [ext_resource type="PackedScene" uid="uid://jj7g8l3ihb3" path="res://misc/tree.tscn" id="17_ivwgq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c0cpe"]
@@ -31,56 +23,6 @@ game_ui = NodePath("GameUI")
 game_over_ui_scene = ExtResource("1_gq0a3")
 
 [node name="GameUI" parent="." instance=ExtResource("3_ocq85")]
-
-[node name="Details" type="Node2D" parent="."]
-
-[node name="09" type="Sprite2D" parent="Details"]
-position = Vector2(290, 306)
-texture = ExtResource("7_72upk")
-
-[node name="10" type="Sprite2D" parent="Details"]
-position = Vector2(824, 140)
-texture = ExtResource("7_72upk")
-
-[node name="08" type="Sprite2D" parent="Details"]
-position = Vector2(445, 106)
-texture = ExtResource("8_6y2yv")
-
-[node name="07" type="Sprite2D" parent="Details"]
-position = Vector2(1000, 452)
-texture = ExtResource("9_g52so")
-
-[node name="11" type="Sprite2D" parent="Details"]
-position = Vector2(123, 454)
-texture = ExtResource("9_g52so")
-
-[node name="06" type="Sprite2D" parent="Details"]
-position = Vector2(176, 191)
-texture = ExtResource("10_skxgp")
-
-[node name="05" type="Sprite2D" parent="Details"]
-position = Vector2(695, 560)
-texture = ExtResource("11_sgi0n")
-
-[node name="04" type="Sprite2D" parent="Details"]
-position = Vector2(960, 306)
-texture = ExtResource("12_gqv7s")
-
-[node name="12" type="Sprite2D" parent="Details"]
-position = Vector2(600, 138)
-texture = ExtResource("12_gqv7s")
-
-[node name="13" type="Sprite2D" parent="Details"]
-position = Vector2(271, 526)
-texture = ExtResource("12_gqv7s")
-
-[node name="03" type="Sprite2D" parent="Details"]
-position = Vector2(277, 134)
-texture = ExtResource("13_7ukdx")
-
-[node name="02" type="Sprite2D" parent="Details"]
-position = Vector2(820, 267)
-texture = ExtResource("14_5uic8")
 
 [node name="Player" parent="." instance=ExtResource("1_p4arj")]
 position = Vector2(552, 365)

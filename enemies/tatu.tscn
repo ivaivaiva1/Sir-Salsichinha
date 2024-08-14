@@ -1,31 +1,32 @@
-[gd_scene load_steps=21 format=3 uid="uid://bcefmaju7ccqn"]
+[gd_scene load_steps=21 format=3 uid="uid://ga6qgfhod7uv"]
 
-[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_5plw8"]
-[ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_6c1lq"]
-[ext_resource type="Texture2D" uid="uid://dsbr72ipgto0e" path="res://addons/Tiny Swords/Resources/Sheep/HappySheep_Bouncing.png" id="3_2ryns"]
-[ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_fkisk"]
-[ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="3_owa2y"]
-[ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="4_83k6h"]
-[ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_r26or"]
-[ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_ybrkh"]
-[ext_resource type="Script" path="res://enemies/behaviours/follow_player_drag.gd" id="9_ujhh4"]
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_7o01l"]
+[ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_grlsl"]
+[ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_1v8yl"]
+[ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_kmwlc"]
+[ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="5_vri6l"]
+[ext_resource type="Texture2D" uid="uid://bnffomgdxsfaf" path="res://marcio sprites/tatu01.png" id="6_a4xkt"]
+[ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="7_ivpct"]
+[ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_18vdq"]
+[ext_resource type="Script" path="res://enemies/behaviours/follow_player_drag.gd" id="9_3srj1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lfqla"]
 resource_local_to_scene = true
-shader = ExtResource("3_owa2y")
+shader = ExtResource("5_vri6l")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mgme6"]
-radius = 5.99995
-height = 33.8407
+radius = 7.00393
+height = 43.9997
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7n1ll"]
-radius = 14.9993
-height = 38.0
+radius = 14.0
+height = 59.9993
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_y8k6p"]
-radius = 26.8328
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2uqw2"]
+radius = 21.0003
+height = 76.0
 
 [sub_resource type="Animation" id="Animation_ehfvn"]
 length = 0.001
@@ -182,31 +183,31 @@ _data = {
 "idle": SubResource("Animation_7omyd")
 }
 
-[node name="Sheep" type="CharacterBody2D" groups=["enemies"]]
-position = Vector2(0, 9)
+[node name="Tatu" type="CharacterBody2D" groups=["enemies"]]
+position = Vector2(0, 7)
+scale = Vector2(0.8, 0.8)
 motion_mode = 1
-script = ExtResource("1_5plw8")
-speed = 2.0
+script = ExtResource("1_7o01l")
+speed = 0.9
 damage = 20.0
 health = 30
 bounceness = 3.0
 rest_needed_time = 1.0
 xp_value = 2.0
 movement_type = "drag_movement"
-death_effect_prefab = ExtResource("2_6c1lq")
-damage_ui_prefab = ExtResource("3_fkisk")
+death_effect_prefab = ExtResource("2_grlsl")
+damage_ui_prefab = ExtResource("3_1v8yl")
 death_effect_scale = 0.9
-meat_scene = ExtResource("4_r26or")
+meat_scene = ExtResource("4_kmwlc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_lfqla")
-position = Vector2(0, -26)
-texture = ExtResource("3_2ryns")
-hframes = 6
+position = Vector2(-9, -26)
+texture = ExtResource("6_a4xkt")
 
 [node name="Body2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(-1, -15)
+position = Vector2(-5, -16)
 rotation = -1.56681
 shape = SubResource("CapsuleShape2D_mgme6")
 debug_color = Color(0, 0.6, 0.701961, 0)
@@ -215,7 +216,7 @@ debug_color = Color(0, 0.6, 0.701961, 0)
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -25)
+position = Vector2(3, -23)
 rotation = -1.57047
 shape = SubResource("CapsuleShape2D_7n1ll")
 
@@ -223,9 +224,9 @@ shape = SubResource("CapsuleShape2D_7n1ll")
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea2D"]
-position = Vector2(-1, -25)
+position = Vector2(1, -24)
 rotation = -1.57047
-shape = SubResource("CircleShape2D_y8k6p")
+shape = SubResource("CapsuleShape2D_2uqw2")
 
 [node name="HitFlash" type="AnimationPlayer" parent="."]
 libraries = {
@@ -236,13 +237,13 @@ libraries = {
 position = Vector2(-1, -41)
 
 [node name="FollowPlayer" type="Node" parent="."]
-script = ExtResource("4_83k6h")
+script = ExtResource("7_ivpct")
 
 [node name="Knockback Controller" type="Node" parent="."]
-script = ExtResource("8_ybrkh")
+script = ExtResource("8_18vdq")
 
 [node name="Drag_Follow_Player" type="Node2D" parent="."]
-script = ExtResource("9_ujhh4")
+script = ExtResource("9_3srj1")
 drag_factor = 0.1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

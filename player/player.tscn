@@ -286,6 +286,7 @@ libraries = {
 autoplay = "idle"
 
 [node name="SwordAreaRight" type="Area2D" parent="."]
+visible = false
 position = Vector2(41.0001, -30.9998)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaRight"]
@@ -293,6 +294,7 @@ shape = SubResource("CapsuleShape2D_tfs0v")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="SwordAreaLeft" type="Area2D" parent="."]
+visible = false
 position = Vector2(-40.9999, -31.0002)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaLeft"]
@@ -300,6 +302,7 @@ shape = SubResource("CapsuleShape2D_tfs0v")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="SwordAreaUp" type="Area2D" parent="."]
+visible = false
 position = Vector2(0.000415373, -93)
 rotation = 1.5708
 
@@ -308,6 +311,7 @@ shape = SubResource("CapsuleShape2D_tfs0v")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="SwordAreaDown" type="Area2D" parent="."]
+visible = false
 position = Vector2(-0.000165256, 37)
 rotation = 1.5708
 
