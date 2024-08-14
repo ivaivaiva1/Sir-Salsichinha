@@ -15,9 +15,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_33tt0"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -877.263, -464, 0, 0, 0, 0, -60.1893, -464, 0, 0, 0, 0, 766.67, -466.243, 0, 0, 0, 0, 769.116, -25.5463, 0, 0, 0, 0, 766.67, 431.971, 0, 0, 0, 0, -883.379, 428.607, 0, 0, 0, 0, -877.263, -23.0001, 0, 0, 0, 0, -879.709, -460.636)
+"points": PackedVector2Array(0, 0, 0, 0, -793.172, -496.842, 0, 0, 0, 0, 827.182, -494.503, 0, 0, 0, 0, 827.182, 500.456, 0, 0, 0, 0, -796.687, 502.795, 0, 0, 0, 0, -796.687, -494.503)
 }
-point_count = 8
+point_count = 5
 
 [node name="MobSpawner" type="Node2D"]
 position = Vector2(581, 330)
@@ -34,14 +34,16 @@ torch_blue = ExtResource("9_xshc0")
 torch_red = ExtResource("10_u5h8n")
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2(43.2079, 45.7814)
-scale = Vector2(0.817552, 0.89177)
+position = Vector2(-17.0143, 16.9541)
+scale = Vector2(0.853517, 0.855311)
+
 curve = SubResource("Curve2D_33tt0")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 unique_name_in_owner = true
-position = Vector2(-879.709, -460.636)
-rotation = -1.57639
+position = Vector2(-796.687, -425.016)
+rotation = -1.5708
+
 progress = 5167.0
 
 [node name="_Timer_101948" type="Timer" parent="Path2D/PathFollow2D"]
