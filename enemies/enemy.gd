@@ -16,6 +16,7 @@ extends CharacterBody2D
 @export var damage_ui_prefab: PackedScene
 @export var death_effect_scale: float
 @export var meat_scene: PackedScene
+var born_time: float
 var major_knockback_force: DamageController.Damage_Instance
 
 var is_striking: bool = false
@@ -35,6 +36,9 @@ var suffered_damages_id: Array[int] = []
 
 var is_resting: bool = false
 var rest_time: float = 0
+
+func _ready():
+	born_time = GameManager.time_elapsed
 
 func _process(delta):
 	check_actualKnockback_and_strike()

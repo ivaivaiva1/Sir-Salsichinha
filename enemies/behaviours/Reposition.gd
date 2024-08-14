@@ -7,12 +7,15 @@ func _ready():
 
 func _process(delta):
 	check_if_player_is_far()
-	print(enemy.position)
 
 func check_if_player_is_far():
 	if abs(enemy.position.x - GameManager.player_position.x) > 2000 or abs(enemy.position.y - GameManager.player_position.y) > 2000:
-		var new_position: Vector2 = get_new_position()
-		enemy_reposition(new_position)
+		print(abs(enemy.born_time - GameManager.time_elapsed))
+		if abs(enemy.born_time - GameManager.time_elapsed) < 140:
+			var new_position: Vector2 = get_new_position()
+			enemy_reposition(new_position)
+		else:
+			enemy.queue_free()
 
 func get_new_position() -> Vector2:
 	var index = randi_range(0, 1)
