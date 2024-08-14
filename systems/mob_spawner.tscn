@@ -13,9 +13,9 @@
 
 [sub_resource type="Curve2D" id="Curve2D_33tt0"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -1345, -980, 0, 0, 0, 0, 1320, -980, 0, 0, 0, 0, 1313, 945, 0, 0, 0, 0, -1, 975, 0, 0, 0, 0, -1338, 953, 0, 0, 0, 0, -1323, -965)
+"points": PackedVector2Array(0, 0, 0, 0, -793.172, -496.842, 0, 0, 0, 0, 827.182, -494.503, 0, 0, 0, 0, 827.182, 500.456, 0, 0, 0, 0, -796.687, 502.795, 0, 0, 0, 0, -796.687, -494.503)
 }
-point_count = 6
+point_count = 5
 
 [node name="MobSpawner" type="Node2D"]
 position = Vector2(581, 330)
@@ -24,12 +24,14 @@ creatures = Array[PackedScene]([ExtResource("3_sn7ao"), ExtResource("2_px5wh"), 
 mobs_per_minute = 300.0
 
 [node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-17.0143, 16.9541)
+scale = Vector2(0.853517, 0.855311)
 curve = SubResource("Curve2D_33tt0")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 unique_name_in_owner = true
-position = Vector2(736.165, 958.17)
-rotation = 3.11877
+position = Vector2(-796.687, -425.016)
+rotation = -1.5708
 progress = 5167.0
 
 [node name="_Timer_101948" type="Timer" parent="Path2D/PathFollow2D"]

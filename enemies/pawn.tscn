@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cp3lkcabj2a6h"]
+[gd_scene load_steps=21 format=3 uid="uid://cp3lkcabj2a6h"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_egxte"]
 [ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="1_qs5qa"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_ydpu8"]
 [ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_pdasv"]
 [ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_yafem"]
+[ext_resource type="Script" path="res://enemies/behaviours/Reposition.gd" id="9_bvcci"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_njmvc"]
 resource_local_to_scene = true
@@ -198,6 +199,9 @@ script = ExtResource("1_qs5qa")
 
 [node name="Knockback Controller" type="Node" parent="."]
 script = ExtResource("8_yafem")
+
+[node name="Reposition" type="Node" parent="."]
+script = ExtResource("9_bvcci")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
