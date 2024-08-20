@@ -8,10 +8,10 @@ extends CharacterBody2D
 @export var weight: float
 @export var bounceness: float
 @export var rest_needed_time: float
-@export var xp_value: float
 
 @export_category("Other vars")
 @export var movement_type: String
+@export var experience_gem: PackedScene
 @export var death_effect_prefab: PackedScene
 @export var damage_ui_prefab: PackedScene
 @export var death_effect_scale: float
@@ -32,6 +32,7 @@ var suffered_damages_id: Array[int] = []
 @onready var area2d: Area2D = $Area2D
 @onready var strike_area2d: Area2D = $StrikeArea2D
 @onready var damage_ui_pos: Marker2D = $DamageUIPos
+@onready var experience_pos: Marker2D = $ExperiencePos
 @onready var dash_hit: Dash_Hit = $DashHit
 
 var is_resting: bool = false
@@ -129,6 +130,18 @@ func update_is_striking():
 
 func die():
 	if is_striking: return
+	instantiate_skul()
+	instantiate_experience_gem()
+	var index = randf_range(0, 100)
+	if(index <= 2):
+		var meat_object = meat_scene.instantiate()
+		meat_object.position = position
+		get_parent().add_child(meat_object)
+	GameManager.kills += 1
+	queue_free()
+
+func instantiate_skul():
+	return
 	if death_effect_prefab:
 		var death_effect_object = death_effect_prefab.instantiate()
 		death_effect_object.position = position
@@ -138,14 +151,11 @@ func die():
 			#
 			pass
 		get_parent().add_child(death_effect_object)
-	var index = randf_range(0, 100)
-	if(index <= 2):
-		var meat_object = meat_scene.instantiate()
-		meat_object.position = position
-		get_parent().add_child(meat_object)
-	GameManager.kills += 1
-	LevelingController.gain_experience(xp_value)
-	queue_free()
+
+func instantiate_experience_gem():
+	var gem = experience_gem.instantiate()
+	gem.global_position = experience_pos.global_position
+	get_parent().add_child(gem)
 
 func do_rest():
 	rest_time = rest_needed_time

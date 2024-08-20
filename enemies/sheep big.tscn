@@ -1,6 +1,7 @@
-[gd_scene load_steps=21 format=3 uid="uid://b7nfuvu2ejw5a"]
+[gd_scene load_steps=22 format=3 uid="uid://b7nfuvu2ejw5a"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_xv6sj"]
+[ext_resource type="PackedScene" uid="uid://chixiaaokl054" path="res://misc/Gems/gem_1.tscn" id="2_h82e6"]
 [ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_xbqp8"]
 [ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_jhust"]
 [ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_063by"]
@@ -194,6 +195,7 @@ weight = 7.0
 bounceness = 6.0
 rest_needed_time = 1.0
 movement_type = "drag_movement"
+experience_gem = ExtResource("2_h82e6")
 death_effect_prefab = ExtResource("2_xbqp8")
 damage_ui_prefab = ExtResource("3_jhust")
 death_effect_scale = 0.9
@@ -213,6 +215,7 @@ shape = SubResource("CapsuleShape2D_mgme6")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Area2D" type="Area2D" parent="." groups=["player_enemies"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -25)
@@ -252,5 +255,5 @@ libraries = {
 autoplay = "idle"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]

@@ -8,49 +8,46 @@ func _ready():
 	change_status(1)
 
 func change_status(level: int): 
-	player.sword_damage = 10
-	player.sword_knockback_force = 750
-	player.max_enemies_knockback = 30
-	player.speed = 2.5
-	#match level:
-		#1:
+	match level:
+		1:
 			#player.sword_damage = 4
-			#player.sword_knockback_force = 150
-			#player.max_enemies_knockback = 1
-			#player.speed = 2
-		#2:
+			player.sword_damage = 100
+			player.sword_knockback_force = 150
+			player.max_enemies_knockback = 1
+			player.speed = 2
+		2:
 			#player.sword_damage = 8
-			#player.sword_knockback_force = 250
-			#player.max_enemies_knockback = 3
-			#player.speed = 2.5
-		#3:
-			#player.sword_knockback_force = 280
-			#player.max_enemies_knockback = 5
-		#4:
-			##improve critical chance
-			##improve critical damage
-			#pass
-		#5:
-			#player.sword_knockback_force = 310
-			#player.max_enemies_knockback = 7
-		#6:
-			##improve critical chance
-			##improve critical damage
-			#pass
-		#7:
-			#player.sword_damage = 12
-			#player.sword_knockback_force = 350
-		#8:
-			#player.sword_damage = 12
-			#player.sword_knockback_force = 350
-		#9:
-			#player.sword_damage = 12
-			#player.sword_knockback_force = 350
-		#10:
-			##knockback_force 500
-			##sword_damage 15
-			##mov_speed 3
-			#pass
+			player.sword_knockback_force = 250
+			player.max_enemies_knockback = 3
+			player.speed = 2.5
+		3:
+			player.sword_knockback_force = 280
+			player.max_enemies_knockback = 5
+		4:
+			#improve critical chance
+			#improve critical damage
+			pass
+		5:
+			player.sword_knockback_force = 310
+			player.max_enemies_knockback = 7
+		6:
+			#improve critical chance
+			#improve critical damage
+			pass
+		7:
+			player.sword_damage = 12
+			player.sword_knockback_force = 350
+		8:
+			player.sword_damage = 12
+			player.sword_knockback_force = 350
+		9:
+			player.sword_damage = 12
+			player.sword_knockback_force = 350
+		10:
+			#knockback_force 500
+			#sword_damage 15
+			#mov_speed 3
+			pass
 
 
 

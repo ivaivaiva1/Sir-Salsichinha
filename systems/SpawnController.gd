@@ -38,15 +38,13 @@ func call_action(action_name: String):
 # Exemplo de funções agendadas
 func min_00_secs_00():
 	mob_spawner.time_pawn = 2
-	mob_spawner.time_sheep = 10
-	mob_spawner.time_pawn_blue = 10
-	#mob_spawner.time_torch_yellow = 10
 
 func min_00_secs_40():
 	mob_spawner.time_sheep = 10
 
 func min_01_secs_00():
-	mob_spawner.spawn_special_monster(mob_spawner.pawn_blue)
+	#mob_spawner.spawn_special_monster(mob_spawner.pawn_blue)
+	pass
 
 func min_30_secs_00():
 	# Adicione a lógica aqui

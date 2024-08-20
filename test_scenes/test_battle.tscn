@@ -1,33 +1,43 @@
-[gd_scene load_steps=8 format=3 uid="uid://cuh1arc88iii"]
+[gd_scene load_steps=4 format=3 uid="uid://cuh1arc88iii"]
 
 [ext_resource type="PackedScene" uid="uid://bbaq72ngobmw1" path="res://player/player.tscn" id="1_q1jom"]
-[ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="2_tduj8"]
-[ext_resource type="PackedScene" uid="uid://bkxacenkudy3r" path="res://enemies/pawn red.tscn" id="3_wblb1"]
-[ext_resource type="PackedScene" uid="uid://b842t75ru46wf" path="res://enemies/Torch_Ghost_Yellow/torch_ghost_yellow.tscn" id="4_du181"]
-[ext_resource type="PackedScene" uid="uid://ccycxp4nib7yo" path="res://enemies/pawn_blue.tscn" id="4_j5ixy"]
-[ext_resource type="PackedScene" uid="uid://cenncpwdd6sr0" path="res://enemies/pawn_mini.tscn" id="5_8m6co"]
-[ext_resource type="PackedScene" uid="uid://djh7jr6ghidmo" path="res://enemies/pawn_big.tscn" id="6_335ne"]
+[ext_resource type="PackedScene" uid="uid://d3fpypedn3irp" path="res://UI/game_ui.tscn" id="2_driwv"]
+[ext_resource type="PackedScene" uid="uid://chixiaaokl054" path="res://misc/Gems/gem_1.tscn" id="3_n77ug"]
 
 [node name="TestBattle" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_q1jom")]
-position = Vector2(192, 340)
+position = Vector2(701, 523)
 max_health = 500
 
-[node name="Pawn" parent="." instance=ExtResource("2_tduj8")]
-position = Vector2(749, 314)
+[node name="GameUI" parent="." instance=ExtResource("2_driwv")]
 
-[node name="Pawn Red" parent="." instance=ExtResource("3_wblb1")]
-position = Vector2(893, 307)
+[node name="Gem 1" parent="." instance=ExtResource("3_n77ug")]
+position = Vector2(597, 305)
 
-[node name="Pawn Blue" parent="." instance=ExtResource("4_j5ixy")]
-position = Vector2(814, 310)
+[node name="Gem 2" parent="." instance=ExtResource("3_n77ug")]
+position = Vector2(705, 278)
 
-[node name="Pawn Mini" parent="." instance=ExtResource("5_8m6co")]
-position = Vector2(680, 320)
+[node name="Gem 3" parent="." instance=ExtResource("3_n77ug")]
+position = Vector2(853, 342)
 
-[node name="Pawn Big" parent="." instance=ExtResource("6_335ne")]
-position = Vector2(1014, 289)
+[node name="Gem 4" parent="." instance=ExtResource("3_n77ug")]
+position = Vector2(1000, 375)
 
-[node name="Torch Ghost Yellow" parent="." instance=ExtResource("4_du181")]
-position = Vector2(468, 329.286)
+[node name="Gem 5" parent="." instance=ExtResource("3_n77ug")]
+position = Vector2(1085, 320)
+
+[node name="Gem 6" parent="." instance=ExtResource("3_n77ug")]
+position = Vector2(436, 290)
+
+[node name="Gem 7" parent="." instance=ExtResource("3_n77ug")]
+position = Vector2(345, 390)
+
+[node name="Gem 8" parent="." instance=ExtResource("3_n77ug")]
+position = Vector2(209, 447)
+
+[node name="Gem 9" parent="." instance=ExtResource("3_n77ug")]
+position = Vector2(98, 466)
+
+[node name="Gem 10" parent="." instance=ExtResource("3_n77ug")]
+position = Vector2(506, 396)

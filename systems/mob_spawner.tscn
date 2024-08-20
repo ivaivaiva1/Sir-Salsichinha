@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://systems/mob_spawner.gd" id="1_ehhe5"]
 [ext_resource type="PackedScene" uid="uid://bkxacenkudy3r" path="res://enemies/pawn red.tscn" id="2_px5wh"]
-[ext_resource type="PackedScene" uid="uid://ga6qgfhod7uv" path="res://enemies/tatu.tscn" id="2_qbbnu"]
+[ext_resource type="PackedScene" uid="uid://bcefmaju7ccqn" path="res://enemies/sheep.tscn" id="3_nbjrm"]
 [ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="3_sn7ao"]
 [ext_resource type="PackedScene" uid="uid://cn67lseuq84q1" path="res://enemies/bisão.tscn" id="4_fctf6"]
 [ext_resource type="PackedScene" uid="uid://b842t75ru46wf" path="res://enemies/Torch_Ghost_Yellow/torch_ghost_yellow.tscn" id="4_goaj5"]
@@ -23,7 +23,7 @@ point_count = 5
 position = Vector2(581, 330)
 script = ExtResource("1_ehhe5")
 pawn = ExtResource("3_sn7ao")
-sheep = ExtResource("2_qbbnu")
+sheep = ExtResource("3_nbjrm")
 pawn_blue = ExtResource("4_fctf6")
 pawn_red = ExtResource("2_px5wh")
 pawn_big = ExtResource("6_fftex")
@@ -36,14 +36,12 @@ torch_red = ExtResource("10_u5h8n")
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(-17.0143, 16.9541)
 scale = Vector2(0.853517, 0.855311)
-
 curve = SubResource("Curve2D_33tt0")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 unique_name_in_owner = true
-position = Vector2(-796.687, -425.016)
+position = Vector2(-796.687, -425.017)
 rotation = -1.5708
-
 progress = 5167.0
 
 [node name="_Timer_101948" type="Timer" parent="Path2D/PathFollow2D"]

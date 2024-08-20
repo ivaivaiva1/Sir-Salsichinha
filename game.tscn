@@ -116,3 +116,12 @@ position = Vector2(7432.5, 320)
 shape = SubResource("RectangleShape2D_ofaae")
 disabled = true
 debug_color = Color(0.690196, 0, 0.0117647, 0.419608)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -1000
+offset_left = -63411.0
+offset_top = -38165.0
+offset_right = -56560.0
+offset_bottom = -34446.0
+scale = Vector2(21, 21)
+color = Color(0.607843, 0.72549, 0.305882, 1)

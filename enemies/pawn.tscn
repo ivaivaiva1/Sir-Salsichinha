@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://cp3lkcabj2a6h"]
+[gd_scene load_steps=22 format=3 uid="uid://cp3lkcabj2a6h"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_egxte"]
 [ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="1_qs5qa"]
 [ext_resource type="Texture2D" uid="uid://bnlo48w450esu" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="2_cxpjj"]
 [ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_jjofm"]
+[ext_resource type="PackedScene" uid="uid://chixiaaokl054" path="res://misc/Gems/gem_1.tscn" id="2_vf3lj"]
 [ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="3_5asm1"]
 [ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_ydpu8"]
 [ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_pdasv"]
@@ -144,8 +145,8 @@ health = 40
 weight = 3.0
 bounceness = 6.0
 rest_needed_time = 1.0
-xp_value = 1.0
 movement_type = "default_movement"
+experience_gem = ExtResource("2_vf3lj")
 death_effect_prefab = ExtResource("2_jjofm")
 damage_ui_prefab = ExtResource("3_ydpu8")
 death_effect_scale = 0.9
@@ -160,6 +161,7 @@ vframes = 6
 frame = 6
 
 [node name="Body2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(-1.19209e-07, 16)
 rotation = -1.56234
 shape = SubResource("CapsuleShape2D_y87au")
@@ -194,6 +196,9 @@ libraries = {
 
 [node name="DamageUIPos" type="Marker2D" parent="."]
 position = Vector2(0, -55)
+
+[node name="ExperiencePos" type="Marker2D" parent="."]
+position = Vector2(0, 6)
 
 [node name="FollowPlayer" type="Node" parent="."]
 script = ExtResource("1_qs5qa")

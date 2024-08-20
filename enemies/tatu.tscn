@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://ga6qgfhod7uv"]
+[gd_scene load_steps=22 format=3 uid="uid://ga6qgfhod7uv"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_7o01l"]
 [ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_grlsl"]
+[ext_resource type="PackedScene" uid="uid://chixiaaokl054" path="res://misc/Gems/gem_1.tscn" id="2_yl5vr"]
 [ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_1v8yl"]
 [ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_kmwlc"]
 [ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="5_vri6l"]
@@ -193,8 +194,8 @@ damage = 20.0
 health = 30
 bounceness = 3.0
 rest_needed_time = 1.0
-xp_value = 2.0
 movement_type = "drag_movement"
+experience_gem = ExtResource("2_yl5vr")
 death_effect_prefab = ExtResource("2_grlsl")
 damage_ui_prefab = ExtResource("3_1v8yl")
 death_effect_scale = 0.9
@@ -253,5 +254,5 @@ libraries = {
 autoplay = "idle"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]

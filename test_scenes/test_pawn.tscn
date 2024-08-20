@@ -1,9 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqglpbw8lqs7f"]
+[gd_scene load_steps=17 format=3 uid="uid://bqglpbw8lqs7f"]
 
 [ext_resource type="Texture2D" uid="uid://biypnnv8oumla" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_0dine"]
 [ext_resource type="PackedScene" uid="uid://bbaq72ngobmw1" path="res://player/player.tscn" id="2_0yn10"]
 [ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="3_tokra"]
+[ext_resource type="PackedScene" uid="uid://cenncpwdd6sr0" path="res://enemies/pawn_mini.tscn" id="5_jiw6s"]
 [ext_resource type="PackedScene" uid="uid://d3fpypedn3irp" path="res://UI/game_ui.tscn" id="5_nk7b7"]
+[ext_resource type="PackedScene" uid="uid://ccycxp4nib7yo" path="res://enemies/pawn_blue.tscn" id="6_ifons"]
+[ext_resource type="PackedScene" uid="uid://djh7jr6ghidmo" path="res://enemies/pawn_big.tscn" id="7_pc43k"]
+[ext_resource type="PackedScene" uid="uid://bkxacenkudy3r" path="res://enemies/pawn red.tscn" id="8_3f5d7"]
+[ext_resource type="PackedScene" uid="uid://ga6qgfhod7uv" path="res://enemies/tatu.tscn" id="9_xo5oy"]
+[ext_resource type="PackedScene" uid="uid://cn67lseuq84q1" path="res://enemies/bisão.tscn" id="10_o2cco"]
+[ext_resource type="PackedScene" uid="uid://bcefmaju7ccqn" path="res://enemies/sheep.tscn" id="11_tmohq"]
+[ext_resource type="PackedScene" uid="uid://b7nfuvu2ejw5a" path="res://enemies/sheep big.tscn" id="12_xqpk3"]
+[ext_resource type="PackedScene" uid="uid://b1ikot3kbdjj6" path="res://enemies/Torch_Ghost_Blue/torch_ghost_blue.tscn" id="13_yx85w"]
+[ext_resource type="PackedScene" uid="uid://b842t75ru46wf" path="res://enemies/Torch_Ghost_Yellow/torch_ghost_yellow.tscn" id="14_lvhmu"]
+[ext_resource type="PackedScene" uid="uid://bpcb52l7k4e8h" path="res://enemies/Torch_Ghost_Red/torch_ghost_red.tscn" id="15_nn8m7"]
+[ext_resource type="Texture2D" uid="uid://dpkcb1bjyh3ll" path="res://addons/Pixel Art Gem Pack - Animated/GEM 1/GEM 1 - BLUE - Spritesheet.png" id="16_7qau6"]
 
 [node name="TestPawn" type="Node2D"]
 
@@ -13,13 +25,47 @@ position = Vector2(1730, 767)
 texture = ExtResource("1_0dine")
 
 [node name="Player" parent="." instance=ExtResource("2_0yn10")]
-position = Vector2(118, 362)
-speed = 25.0
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.55, 0.55)
+position = Vector2(131, 339)
+speed = 10.0
 
 [node name="GameUI" parent="." instance=ExtResource("5_nk7b7")]
 
 [node name="Pawn" parent="." instance=ExtResource("3_tokra")]
-position = Vector2(743, 324)
+position = Vector2(660, 300)
+
+[node name="Pawn Mini" parent="." instance=ExtResource("5_jiw6s")]
+position = Vector2(588, 307)
+
+[node name="Pawn Blue" parent="." instance=ExtResource("6_ifons")]
+position = Vector2(749, 294)
+
+[node name="Pawn Big" parent="." instance=ExtResource("7_pc43k")]
+position = Vector2(965, 262)
+
+[node name="Pawn Red" parent="." instance=ExtResource("8_3f5d7")]
+position = Vector2(840, 284)
+
+[node name="Tatu" parent="." instance=ExtResource("9_xo5oy")]
+position = Vector2(585, 490)
+
+[node name="Bisão" parent="." instance=ExtResource("10_o2cco")]
+position = Vector2(711, 488)
+
+[node name="Sheep" parent="." instance=ExtResource("11_tmohq")]
+position = Vector2(583, 629)
+
+[node name="Sheep Big" parent="." instance=ExtResource("12_xqpk3")]
+position = Vector2(709, 648)
+
+[node name="Torch Ghost Blue" parent="." instance=ExtResource("13_yx85w")]
+position = Vector2(741, 153)
+
+[node name="Torch Ghost Yellow" parent="." instance=ExtResource("14_lvhmu")]
+position = Vector2(631, 172)
+
+[node name="Torch Ghost Red" parent="." instance=ExtResource("15_nn8m7")]
+position = Vector2(868, 113)
+
+[node name="Gem1-Blue-Spritesheet" type="Sprite2D" parent="."]
+position = Vector2(333, 418)
+texture = ExtResource("16_7qau6")
