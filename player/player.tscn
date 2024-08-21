@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://bbaq72ngobmw1"]
+[gd_scene load_steps=21 format=3 uid="uid://bbaq72ngobmw1"]
 
 [ext_resource type="Texture2D" uid="uid://biypnnv8oumla" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_pohw4"]
 [ext_resource type="Script" path="res://player/Player Scripts/player.gd" id="1_tjkta"]
 [ext_resource type="Script" path="res://player/Player Scripts/Status Progression.gd" id="3_l1nxw"]
+[ext_resource type="Script" path="res://player/Player Scripts/DoAttack.gd" id="3_lu7xg"]
 
 [sub_resource type="Animation" id="Animation_621t3"]
 length = 0.001
@@ -49,14 +50,14 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("DoAttack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [&"down"],
+"args": ["down"],
 "method": &"apply_damage"
 }]
 }
@@ -95,14 +96,14 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("DoAttack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [&"side"],
+"args": ["side"],
 "method": &"apply_damage"
 }]
 }
@@ -155,14 +156,14 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath(".")
+tracks/1/path = NodePath("DoAttack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [&"up"],
+"args": ["up"],
 "method": &"apply_damage"
 }]
 }
@@ -246,10 +247,6 @@ _data = {
 "run": SubResource("Animation_djwyv")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tfs0v"]
-radius = 35.0002
-height = 122.0
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xe4tq"]
 radius = 9.0
 height = 18.0
@@ -263,6 +260,10 @@ bg_color = Color(1, 0, 0, 1)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mkqyb"]
 radius = 12.0
 height = 62.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tfs0v"]
+radius = 35.0002
+height = 122.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 rotation = -6.28319
@@ -279,45 +280,18 @@ flip_h = true
 hframes = 6
 vframes = 8
 
+[node name="DoAttack" type="Node" parent="."]
+script = ExtResource("3_lu7xg")
+
+[node name="Status Progression" type="Node" parent="."]
+script = ExtResource("3_l1nxw")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_y3ufe")
 }
 autoplay = "idle"
-
-[node name="SwordAreaRight" type="Area2D" parent="."]
-visible = false
-position = Vector2(41.0001, -30.9998)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaRight"]
-shape = SubResource("CapsuleShape2D_tfs0v")
-debug_color = Color(0, 0.6, 0.701961, 0)
-
-[node name="SwordAreaLeft" type="Area2D" parent="."]
-visible = false
-position = Vector2(-40.9999, -31.0002)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaLeft"]
-shape = SubResource("CapsuleShape2D_tfs0v")
-debug_color = Color(0, 0.6, 0.701961, 0)
-
-[node name="SwordAreaUp" type="Area2D" parent="."]
-visible = false
-position = Vector2(0.000415373, -93)
-rotation = 1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaUp"]
-shape = SubResource("CapsuleShape2D_tfs0v")
-debug_color = Color(0, 0.6, 0.701961, 0)
-
-[node name="SwordAreaDown" type="Area2D" parent="."]
-visible = false
-position = Vector2(-0.000165256, 37)
-rotation = 1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaDown"]
-shape = SubResource("CapsuleShape2D_tfs0v")
-debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -345,5 +319,40 @@ position = Vector2(9.3794e-05, -21)
 shape = SubResource("CapsuleShape2D_mkqyb")
 debug_color = Color(0, 0.6, 0.701961, 0.517647)
 
-[node name="Status Progression" type="Node" parent="."]
-script = ExtResource("3_l1nxw")
+[node name="SwordAreaRight" type="Area2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(41.0001, -30.9998)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaRight"]
+shape = SubResource("CapsuleShape2D_tfs0v")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="SwordAreaLeft" type="Area2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-40.9999, -31.0002)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaLeft"]
+shape = SubResource("CapsuleShape2D_tfs0v")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="SwordAreaUp" type="Area2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0.000415373, -93)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaUp"]
+shape = SubResource("CapsuleShape2D_tfs0v")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="SwordAreaDown" type="Area2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-0.000165256, 37)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaDown"]
+shape = SubResource("CapsuleShape2D_tfs0v")
+debug_color = Color(0, 0.6, 0.701961, 0)
