@@ -82,7 +82,7 @@ tracks/2/keys = {
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../..")
+tracks/3/path = NodePath("%ScaleController/..")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -110,33 +110,38 @@ base_font = SubResource("SystemFont_2pset")
 [sub_resource type="LabelSettings" id="LabelSettings_r118w"]
 font = SubResource("FontVariation_i5gcn")
 font_size = 24
-font_color = Color(0.427451, 0.180392, 0.843137, 1)
-outline_color = Color(0, 0, 0, 1)
 
 [node name="DamageUi" type="Node2D"]
 z_index = 1000
 script = ExtResource("1_coiq0")
+normalColor = Color(1, 0, 0.0156863, 1)
+criticalColor = Color(0.941176, 0.941176, 0.054902, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../Node2D/Label")
+root_node = NodePath("../ScaleController/LabelFather/Label")
 libraries = {
 "": SubResource("AnimationLibrary_t7ids")
 }
 autoplay = "default"
 
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="Label" type="Label" parent="Node2D"]
+[node name="ScaleController" type="Node2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, 15)
+
+[node name="LabelFather" type="Node2D" parent="ScaleController"]
+
+[node name="Label" type="Label" parent="ScaleController/LabelFather"]
+unique_name_in_owner = true
+z_index = 1000
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -33.0
-offset_top = -29.0
-offset_right = 30.0
-offset_bottom = 42.0
+offset_left = -31.0
+offset_top = -60.0
+offset_right = 32.0
+offset_bottom = 11.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "65

@@ -67,7 +67,26 @@ func do_strike(striked_area: Area2D):
 	var major_knockback = major_knockback_force
 	await get_tree().create_timer(0.05).timeout
 	if enemy != null:
-		enemy.get_hited(major_knockback, direction, adjust_damage(major_knockback.force_damage))
+		#major_knockback.force_damage = adjust_damage(major_knockback.force_damage)
+		var is_critical: bool = calculate_if_is_critical(major_knockback.is_critical, major_knockback.critical_chance)
+		enemy.get_hited(major_knockback, direction, is_critical)
+
+func calculate_if_is_critical(font_is_critical: bool, critical_chance: float) -> bool: 
+	var rand: int = randi_range(0, 100)
+	if font_is_critical:
+		if rand <= critical_chance:
+			return true
+		else:
+			rand = randi_range(0, 100)
+			if rand <= critical_chance:
+				return true
+			else:
+				return false
+	else:
+		if rand <= critical_chance:
+			return true
+		else:
+			return false
 
 # Adjust the damage of the bounce based on the enemy's weight
 func adjust_damage(base_force_power: float) -> float:
@@ -77,7 +96,7 @@ func adjust_damage(base_force_power: float) -> float:
 	var adjustment: float = min_adjustment + (weight / max_weight) * (max_adjustment - min_adjustment)
 	return base_force_power * adjustment
 
-func get_hited(damage_instance: DamageController.Damage_Instance, knockback_direction: Vector2, real_damage: float):
+func get_hited(damage_instance: DamageController.Damage_Instance, knockback_direction: Vector2, is_critical: bool):
 	if dash_hit: dash_hit.is_following_player = false
 	if damage_instance.force_id in suffered_damages_id: return
 	suffered_damages_id.append(damage_instance.force_id)
@@ -88,16 +107,19 @@ func get_hited(damage_instance: DamageController.Damage_Instance, knockback_dire
 		is_striking = true
 		knockback_controller.call_knockback_controller(damage_instance, knockback_direction)
 		animation_player.play("idle")
+	var real_damage: float = damage_instance.force_damage 
+	if is_critical: real_damage *= damage_instance.critical_multiplier
 	if real_damage > 0:
-		take_damage(real_damage)
+		take_damage(real_damage, is_critical)
 
-func take_damage(damage_amount: int):
+func take_damage(damage_amount: int, is_critical: bool):
 	if(is_resting):
 		animation_player.play("idle")
 		is_resting = false
-	var real_damage = randf_range((damage_amount / 1.30), (damage_amount * 1.30))
+	var real_damage = randf_range((damage_amount / 1.05), (damage_amount * 1.05))
 	health -= real_damage
 	var damage_ui = damage_ui_prefab.instantiate()
+	if is_critical: damage_ui.is_critical = true
 	damage_ui.value = real_damage
 	damage_ui.global_position = damage_ui_pos.global_position
 	get_parent().add_child(damage_ui)

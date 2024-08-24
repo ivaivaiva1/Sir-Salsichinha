@@ -38,10 +38,10 @@ func adjust_decay_time(base_decay_time: float) -> float:
 	var adjustment: float = min_adjustment + (weight / max_weight) * (max_adjustment - min_adjustment)
 	return base_decay_time * adjustment
 
-# Adjust the decay time of the bounce based on the enemy's weight
+# Adjust knockback damage based on the enemy's weight
 func adjust_force_power(base_force_power: float) -> float:
-	var max_adjustment: float = 1  # Decrease by 20% for weight 10
-	var min_adjustment: float = 1.2  # Increase by 20% for weight 
+	var max_adjustment: float = 1  # Decrease by 20% for weight 0
+	var min_adjustment: float = 1.2  # Increase by 20% for weight 10
 	var max_weight: float = 10.0
 	var weight: float = enemy.weight
 	var adjustment: float = min_adjustment + (weight / max_weight) * (max_adjustment - min_adjustment)

@@ -10,7 +10,6 @@ func _process(delta):
 
 func check_if_player_is_far():
 	if abs(enemy.position.x - GameManager.player_position.x) > 2000 or abs(enemy.position.y - GameManager.player_position.y) > 2000:
-		print(abs(enemy.born_time - GameManager.time_elapsed))
 		if abs(enemy.born_time - GameManager.time_elapsed) < 140:
 			var new_position: Vector2 = get_new_position()
 			enemy_reposition(new_position)

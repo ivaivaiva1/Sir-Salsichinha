@@ -8,40 +8,60 @@ var player: Player
 @onready var sword_area_up: Area2D = %SwordAreaUp
 @onready var sword_area_down: Area2D = %SwordAreaDown
 
-var attack_cast: float = 0
+var time_to_last_attack: float = 0
+var is_pending_attack: bool = false
+var last_attack_type: String
+var attack_index: int
+var can_pending_normal_attack: bool = false
 
 func _ready():
 	player = get_parent()
 
 func _process(delta):
-	update_attack_cast(delta)
+	print(attack_index)
+	time_to_last_attack += delta
 	if Input.is_action_just_pressed("attack"):
-		attack()
+		if player.is_attacking:
+			if attack_index == 1 or can_pending_normal_attack:
+				is_pending_attack =  true
+		else:
+			attack()
+	if is_pending_attack:
+		if !player.is_attacking:
+			attack()
+	if time_to_last_attack > 0.8 and attack_index == 1: 
+		attack_index = 0
 
 # Inicia o ataque
 func attack():
-	if player.is_attacking:
-		return
-	
-	#var choseAttack = randi_range(0, 1)
-	#if choseAttack == 0:
-	#	animation_player.play("attack_side_1")
-	#elif choseAttack == 1:
-	#	animation_player.play("attack_side_2")
+	if player.is_attacking: return
+	if attack_index == 2: attack_index = 0
+	var rand: int = randi_range(0, 100)
+	if attack_index == 1 or rand <= player.critical_chance:
+		if player.input_vector.y > 0:
+			animation_player.play("attack_down_2")
+		elif player.input_vector.y < 0:
+			animation_player.play("attack_up_2")
+		else:
+			animation_player.play("attack_side_2")
+		last_attack_type = "Critical"
+	else: 
+		if player.input_vector.y > 0:
+			animation_player.play("attack_down_1")
+		elif player.input_vector.y < 0:
+			animation_player.play("attack_up_1")
+		else:
+			animation_player.play("attack_side_1")
+		last_attack_type = "Normal"
+	can_pending_normal_attack = false
 	player.can_flip = false
-	if player.input_vector.y > 0:
-		animation_player.play("attack_down_1")
-	elif player.input_vector.y < 0:
-		animation_player.play("attack_up_1")
-	else:
-		animation_player.play("attack_side_1")
-	attack_cast = 0.6
+	attack_index += 1
+	is_pending_attack = false
+	time_to_last_attack = 0
 	player.is_attacking = true
 	player.can_flip = false
-	await get_tree().create_timer(0.5).timeout 
-	player.can_flip = true
 
-func apply_damage(attack_direction: String):
+func apply_damage(attack_direction: String, is_critical: bool = false):
 	var areas = get_hited_enemys(attack_direction)
 	var total_direction = Vector2(0, 0)
 	var enemies_hit = []
@@ -50,8 +70,8 @@ func apply_damage(attack_direction: String):
 		if area.is_in_group("player_enemies"):
 			var enemy: Enemy = area.get_parent()
 			var direction = calculate_knockback_direction(enemy)
-			var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance(player.sword_damage, player.sword_knockback_force, player.max_enemies_knockback)
-			enemy.get_hited(new_damage_instance, direction, new_damage_instance.force_damage)
+			var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance(player.sword_damage, player.sword_knockback_force, player.max_enemies_knockback, is_critical, player.critical_chance, player.critical_multiplier)
+			enemy.get_hited(new_damage_instance, direction, is_critical)
 			enemy.pump()
 			total_direction += direction
 			enemies_hit.append(enemy)  
@@ -63,14 +83,21 @@ func apply_damage(attack_direction: String):
 		var average_direction = total_direction / enemies_hit.size()
 		player.receive_knockback(-average_direction, 0.25, max_bounceness)
 
+func set_can_flip_true():
+	player.can_flip = true
+	can_pending_normal_attack = true
+
 # Conta o cooldown de ataque
-func update_attack_cast(delta: float):
-	if player.is_attacking:
-		attack_cast -= delta
-		if attack_cast <= 0.0:
-			player.is_attacking = false
-			player.is_running = false
-			animation_player.play("idle")
+func attack_is_finished():
+	#if player.is_attacking:
+		#attack_cast -= delta
+		#if attack_cast <= 0.0:
+			#player.is_attacking = false
+			#player.is_running = false
+			#animation_player.play("idle")
+	player.is_attacking = false
+	player.is_running = false
+	animation_player.play("idle")
 
 # Função que obtém os corpos sobrepostos
 func get_hited_enemys(attack_direction: String) -> Array:
@@ -84,7 +111,6 @@ func get_hited_enemys(attack_direction: String) -> Array:
 			else:
 				return sword_area_left.get_overlapping_areas()
 	else:
-		print("no attack")
 		return sword_area_right.get_overlapping_areas()
 
 func get_max_bounceness(enemies_hit: Array) -> float:

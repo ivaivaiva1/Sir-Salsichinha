@@ -4,6 +4,8 @@ extends CharacterBody2D
 @export_category("Balancing Vars")
 @export var speed: float = 2.5
 @export var sword_damage: int = 0
+@export var critical_chance: float = 10
+@export var critical_multiplier: float = 1.5
 @export var sword_knockback_force: float = 700
 @export var max_health: int = 100
 @export var max_enemies_knockback: int = 30
@@ -20,10 +22,6 @@ var health: int = 0
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var hit_box: Area2D = $Area2D
-#@onready var sword_area_left: Area2D = $SwordAreaLeft
-#@onready var sword_area_right: Area2D = $SwordAreaRight
-#@onready var sword_area_up: Area2D = $SwordAreaUp
-#@onready var sword_area_down: Area2D = $SwordAreaDown
 @onready var sprite2d: Sprite2D = $Sprite2D
 @onready var health_bar: ProgressBar = $HealthBar
 
@@ -31,7 +29,6 @@ var input_vector: Vector2 = Vector2(0, 0)
 var is_running: bool = false
 var was_running: bool = false
 var is_attacking: bool = false
-#var attack_cast: float = 0
 var take_damage_cooldown: float = 0
 var frame_freeze_cooldown: float = 0
 @export var frame_freeze_time: float = 0.1
@@ -41,6 +38,8 @@ func _ready():
 	# Ritual
 	#do_ritual()
 	health = max_health
+	health_bar.max_value = max_health
+	health_bar.value = health
 	GameManager.player = self
 	pass
 
@@ -50,11 +49,6 @@ func _process(delta):
 	# Input
 	read_input()
 	
-	# Ataque
-	#update_attack_cast(delta)
-	#if Input.is_action_just_pressed("attack"):
-		#attack()
-	
 	# Animações
 	rotate_sprite()
 	play_run_idle_animation()
@@ -62,61 +56,6 @@ func _process(delta):
 	# Update frame freeze cooldown
 	if frame_freeze_cooldown > 0:
 		frame_freeze_cooldown -= delta
-
-## Inicia o ataque
-#func attack():
-	#if is_attacking:
-		#return
-	#
-	##var choseAttack = randi_range(0, 1)
-	##if choseAttack == 0:
-	##	animation_player.play("attack_side_1")
-	##elif choseAttack == 1:
-	##	animation_player.play("attack_side_2")
-	#can_flip = false
-	#var attack_direction: String
-	#if input_vector.y > 0:
-		#animation_player.play("attack_down_1")
-	#elif input_vector.y < 0:
-		#animation_player.play("attack_up_1")
-	#else:
-		#animation_player.play("attack_side_1")
-	#attack_cast = 0.6
-	#is_attacking = true
-	#can_flip = false
-	#await get_tree().create_timer(0.5).timeout 
-	#can_flip = true
-#
-#func apply_damage(attack_direction: String):
-	#var areas = get_hited_enemys(attack_direction)
-	#var total_direction = Vector2(0, 0)
-	#var enemies_hit = []
-	#
-	#for area in areas:
-		#if area.is_in_group("player_enemies"):
-			#var enemy: Enemy = area.get_parent()
-			#var direction = calculate_knockback_direction(enemy)
-			#var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance(sword_damage, sword_knockback_force, max_enemies_knockback)
-			#enemy.get_hited(new_damage_instance, direction, new_damage_instance.force_damage)
-			#enemy.pump()
-			#total_direction += direction
-			#enemies_hit.append(enemy)  
-	#
-	#var max_bounceness = get_max_bounceness(enemies_hit)
-	#
-	#if enemies_hit.size() > 0:
-		#pump()
-		#var average_direction = total_direction / enemies_hit.size()
-		#receive_knockback(-average_direction, 0.25, max_bounceness)
-#
-## Conta o cooldown de ataque
-#func update_attack_cast(delta: float):
-	#if is_attacking:
-		#attack_cast -= delta
-		#if attack_cast <= 0.0:
-			#is_attacking = false
-			#is_running = false
-			#animation_player.play("idle")
 
 func _physics_process(delta):
 	do_move()
@@ -167,34 +106,6 @@ func rotate_sprite():
 		elif keep_input_x < 0:
 			sprite.flip_h = true
 
-## Função que obtém os corpos sobrepostos
-#func get_hited_enemys(attack_direction: String) -> Array:
-	#if attack_direction == "up":
-		#return sword_area_up.get_overlapping_areas()
-	#elif attack_direction == "down":
-		#return sword_area_down.get_overlapping_areas()
-	#elif attack_direction == "side":
-			#if not sprite.flip_h:
-				#return sword_area_right.get_overlapping_areas()
-			#else:
-				#return sword_area_left.get_overlapping_areas()
-	#else:
-		#print("no attack")
-		#return sword_area_right.get_overlapping_areas()
-
-
-# Função para obter o bounceness máximo dos inimigos atingidos
-#func get_max_bounceness(enemies_hit: Array) -> float:
-	#var max_bounceness = 0.0
-	#for enemy in enemies_hit:
-		#if enemy.bounceness > max_bounceness:
-			#max_bounceness = enemy.bounceness
-	#return max_bounceness
-
-# Função que calcula a direção do knockback para um inimigo
-#func calculate_knockback_direction(enemy: Enemy) -> Vector2:
-	#return (enemy.global_position - global_position).normalized()
-
 # Função que aplica o knockback ao player
 func receive_knockback(knockback_direction: Vector2, stop_time: float, enemy_bounceness: float):
 	knockback = knockback_direction * adjust_auto_knockback(enemy_bounceness)
@@ -222,7 +133,6 @@ func call_manager():
 func take_damage(amount: int):
 	if health <= 0: return
 	
-	health_bar.max_value = max_health
 	health_bar.value = health
 	
 	health -= amount
@@ -255,6 +165,7 @@ func heal(amount: int) -> int:
 	health += amount
 	if health > max_health:
 		health = max_health
+	health_bar.value = health
 	return health
 
 func pump():
