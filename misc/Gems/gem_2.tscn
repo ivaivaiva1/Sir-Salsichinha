@@ -1,8 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://chixiaaokl054"]
+[gd_scene load_steps=14 format=3 uid="uid://cony1dc86c2v7"]
 
-[ext_resource type="Script" path="res://misc/Gems/gem.gd" id="1_awlkj"]
-[ext_resource type="Texture2D" uid="uid://drn1je4eio715" path="res://addons/Pixel Art Gem Pack - Animated/GEM 3/GEM 3 - BLUE - Spritesheet.png" id="1_kdveh"]
-[ext_resource type="Texture2D" uid="uid://c2nu61r5rxak8" path="res://addons/Pixel Art Gem Pack - Animated/Spark/Spark - Spritesheet.png" id="3_m4cgi"]
+[ext_resource type="Script" path="res://misc/Gems/gem.gd" id="1_pk67y"]
+[ext_resource type="Texture2D" uid="uid://chp1lflaod322" path="res://addons/Pixel Art Gem Pack - Animated/GEM 3/GEM 3 - RED - Spritesheet.png" id="2_0pl61"]
+[ext_resource type="Texture2D" uid="uid://c2nu61r5rxak8" path="res://addons/Pixel Art Gem Pack - Animated/Spark/Spark - Spritesheet.png" id="3_qlxt1"]
 
 [sub_resource type="Animation" id="Animation_x5lnx"]
 length = 0.001
@@ -213,16 +213,15 @@ _data = {
 "spawn": SubResource("Animation_58oad")
 }
 
-[node name="Gem 1" type="CharacterBody2D"]
-scale = Vector2(0.7, 0.7)
-script = ExtResource("1_awlkj")
-xp_value = 1.0
+[node name="Gem 2" type="CharacterBody2D"]
+script = ExtResource("1_pk67y")
+xp_value = 5.0
 
 [node name="GemSprite" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 z_index = -100
 position = Vector2(0, -14)
-texture = ExtResource("1_kdveh")
+texture = ExtResource("2_0pl61")
 hframes = 11
 frame = 10
 
@@ -230,7 +229,7 @@ frame = 10
 z_index = 100
 position = Vector2(2, -14)
 scale = Vector2(4, 4)
-texture = ExtResource("3_m4cgi")
+texture = ExtResource("3_qlxt1")
 hframes = 11
 
 [node name="SparkAnim" type="AnimationPlayer" parent="."]

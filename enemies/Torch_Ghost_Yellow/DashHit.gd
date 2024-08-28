@@ -1,5 +1,5 @@
 extends Node
-class_name Dash_Hit
+#class_name Dash_Hit
 
 var enemy: Enemy
 

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bkxacenkudy3r" path="res://enemies/pawn red.tscn" id="2_px5wh"]
 [ext_resource type="PackedScene" uid="uid://bcefmaju7ccqn" path="res://enemies/sheep.tscn" id="3_nbjrm"]
 [ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="3_sn7ao"]
-[ext_resource type="PackedScene" uid="uid://cn67lseuq84q1" path="res://enemies/bisão.tscn" id="4_fctf6"]
+[ext_resource type="PackedScene" uid="uid://ccycxp4nib7yo" path="res://enemies/pawn_blue.tscn" id="4_10amy"]
 [ext_resource type="PackedScene" uid="uid://b842t75ru46wf" path="res://enemies/Torch_Ghost_Yellow/torch_ghost_yellow.tscn" id="4_goaj5"]
 [ext_resource type="PackedScene" uid="uid://djh7jr6ghidmo" path="res://enemies/pawn_big.tscn" id="6_fftex"]
 [ext_resource type="PackedScene" uid="uid://cenncpwdd6sr0" path="res://enemies/pawn_mini.tscn" id="8_gfnc6"]
@@ -24,7 +24,7 @@ position = Vector2(581, 330)
 script = ExtResource("1_ehhe5")
 pawn = ExtResource("3_sn7ao")
 sheep = ExtResource("3_nbjrm")
-pawn_blue = ExtResource("4_fctf6")
+pawn_blue = ExtResource("4_10amy")
 pawn_red = ExtResource("2_px5wh")
 pawn_big = ExtResource("6_fftex")
 pawn_mini = ExtResource("8_gfnc6")

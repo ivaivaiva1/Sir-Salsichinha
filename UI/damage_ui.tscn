@@ -114,8 +114,8 @@ font_size = 24
 [node name="DamageUi" type="Node2D"]
 z_index = 1000
 script = ExtResource("1_coiq0")
-normalColor = Color(1, 0, 0.0156863, 1)
-criticalColor = Color(0.941176, 0.941176, 0.054902, 1)
+normalColor = Color(0.890196, 0.223529, 0.254902, 1)
+criticalColor = Color(0.8, 1, 0.105882, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../ScaleController/LabelFather/Label")

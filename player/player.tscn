@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://bbaq72ngobmw1"]
+[gd_scene load_steps=25 format=3 uid="uid://bbaq72ngobmw1"]
 
 [ext_resource type="Texture2D" uid="uid://biypnnv8oumla" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_pohw4"]
 [ext_resource type="Script" path="res://player/Player Scripts/player.gd" id="1_tjkta"]
 [ext_resource type="Script" path="res://player/Player Scripts/Status Progression.gd" id="3_l1nxw"]
 [ext_resource type="Script" path="res://player/Player Scripts/DoAttack.gd" id="3_lu7xg"]
+[ext_resource type="Texture2D" uid="uid://b3737ag182t8y" path="res://addons/kenney_particle-pack/PNG (Transparent)/star_08.png" id="3_tq043"]
 
 [sub_resource type="Animation" id="Animation_621t3"]
 length = 0.001
@@ -144,7 +145,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id="Animation_atm1u"]
 resource_name = "attack_side_2"
 length = 0.48
-step = 0.08
+step = 0.02
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -314,6 +315,68 @@ _data = {
 "run": SubResource("Animation_djwyv")
 }
 
+[sub_resource type="Animation" id="Animation_ujimd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%AnimationPlayer/../CriticalEffect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%AnimationPlayer/../CriticalEffect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.075, 0.075)]
+}
+
+[sub_resource type="Animation" id="Animation_qraqg"]
+resource_name = "critical_effect"
+length = 0.55
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("%AnimationPlayer/../CriticalEffect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.02, 0.32, 0.52),
+"transitions": PackedFloat32Array(1, 1, 0.31864),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("%AnimationPlayer/../CriticalEffect:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.02, 0.52),
+"transitions": PackedFloat32Array(0.277393, 1),
+"update": 0,
+"values": [Vector2(0.075, 0.075), Vector2(0.4, 0.4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pk62u"]
+_data = {
+"RESET": SubResource("Animation_ujimd"),
+"critical_effect": SubResource("Animation_qraqg")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xe4tq"]
 radius = 9.0
 height = 18.0
@@ -343,7 +406,6 @@ max_enemies_knockback = 100
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -32)
 texture = ExtResource("1_pohw4")
-flip_h = true
 hframes = 6
 vframes = 8
 
@@ -353,12 +415,27 @@ script = ExtResource("3_lu7xg")
 [node name="Status Progression" type="Node" parent="."]
 script = ExtResource("3_l1nxw")
 
+[node name="CriticalEffect" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+z_index = 90
+position = Vector2(51, -5.99978)
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("3_tq043")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_y3ufe")
 }
 autoplay = "idle"
+
+[node name="AnimationCrit" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+root_node = NodePath("../AnimationPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_pk62u")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

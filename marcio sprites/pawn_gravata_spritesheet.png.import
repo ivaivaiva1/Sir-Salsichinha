@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://draw4ux4aowkb"
-path="res://.godot/imported/bison2.png-a3976981adeb47e0f311c5e2782ec661.ctex"
+uid="uid://b8p0nxdn0acjc"
+path="res://.godot/imported/pawn_gravata_spritesheet.png-c51ba09b12aa3dbd39b2ad93ef4bdc71.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://marcio sprites/bison2.png"
-dest_files=["res://.godot/imported/bison2.png-a3976981adeb47e0f311c5e2782ec661.ctex"]
+source_file="res://marcio sprites/pawn_gravata_spritesheet.png"
+dest_files=["res://.godot/imported/pawn_gravata_spritesheet.png-c51ba09b12aa3dbd39b2ad93ef4bdc71.ctex"]
 
 [params]
 

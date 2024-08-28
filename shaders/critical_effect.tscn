@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://s5wy423oble7"]
+
+[ext_resource type="Texture2D" uid="uid://bttml0ecdpo8e" path="res://addons/kenney_particle-pack/PNG (Transparent)/star_07.png" id="1_gqrto"]
+[ext_resource type="Texture2D" uid="uid://b3737ag182t8y" path="res://addons/kenney_particle-pack/PNG (Transparent)/star_08.png" id="2_5tiu5"]
+[ext_resource type="Texture2D" uid="uid://fcm4pucxya0u" path="res://addons/kenney_particle-pack/PNG (Transparent)/star_09.png" id="3_wd404"]
+
+[node name="CriticalEffect" type="Node2D"]
+
+[node name="Star07" type="Sprite2D" parent="."]
+position = Vector2(-60, 464)
+texture = ExtResource("1_gqrto")
+
+[node name="Star08" type="Sprite2D" parent="."]
+position = Vector2(-22, 197)
+texture = ExtResource("2_5tiu5")
+
+[node name="Star09" type="Sprite2D" parent="."]
+position = Vector2(188, 137)
+texture = ExtResource("3_wd404")

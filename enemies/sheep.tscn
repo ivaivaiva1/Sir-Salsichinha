@@ -1,8 +1,8 @@
-[gd_scene load_steps=22 format=3 uid="uid://bcefmaju7ccqn"]
+[gd_scene load_steps=24 format=3 uid="uid://bcefmaju7ccqn"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_5plw8"]
 [ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_6c1lq"]
-[ext_resource type="PackedScene" uid="uid://chixiaaokl054" path="res://misc/Gems/gem_1.tscn" id="2_n1gy6"]
+[ext_resource type="PackedScene" uid="uid://dyebq5jhhifr2" path="res://misc/Gems/gem_4.tscn" id="2_573g4"]
 [ext_resource type="Texture2D" uid="uid://dsbr72ipgto0e" path="res://addons/Tiny Swords/Resources/Sheep/HappySheep_Bouncing.png" id="3_2ryns"]
 [ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_fkisk"]
 [ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="3_owa2y"]
@@ -10,61 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_r26or"]
 [ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_ybrkh"]
 [ext_resource type="Script" path="res://enemies/behaviours/follow_player_drag.gd" id="9_ujhh4"]
+[ext_resource type="Script" path="res://enemies/behaviours/Reposition.gd" id="11_wvt6d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lfqla"]
 resource_local_to_scene = true
 shader = ExtResource("3_owa2y")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mgme6"]
-radius = 5.99995
-height = 33.8407
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7n1ll"]
-radius = 14.9993
-height = 38.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e1avy"]
-radius = 16.0
-height = 46.0
-
-[sub_resource type="Animation" id="Animation_ehfvn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_7wq4b"]
-resource_name = "hit_flash"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_3r2co"]
-_data = {
-"RESET": SubResource("Animation_ehfvn"),
-"hit_flash": SubResource("Animation_7wq4b")
-}
 
 [sub_resource type="Animation" id="Animation_21qug"]
 length = 0.001
@@ -103,6 +55,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
 }
 
 [sub_resource type="Animation" id="Animation_xx550"]
@@ -160,6 +124,20 @@ tracks/3/keys = {
 "method": &"hit_player"
 }]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"is_attack_finished"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_7omyd"]
 resource_name = "idle"
@@ -177,11 +155,78 @@ tracks/0/keys = {
 "values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_7e0m6"]
+resource_name = "resting"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ycyst"]
 _data = {
 "RESET": SubResource("Animation_21qug"),
 "attack": SubResource("Animation_xx550"),
-"idle": SubResource("Animation_7omyd")
+"idle": SubResource("Animation_7omyd"),
+"resting": SubResource("Animation_7e0m6")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mgme6"]
+radius = 5.99995
+height = 33.8407
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7n1ll"]
+radius = 14.9993
+height = 38.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e1avy"]
+radius = 16.0
+height = 46.0
+
+[sub_resource type="Animation" id="Animation_ehfvn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7wq4b"]
+resource_name = "hit_flash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3r2co"]
+_data = {
+"RESET": SubResource("Animation_ehfvn"),
+"hit_flash": SubResource("Animation_7wq4b")
 }
 
 [node name="Sheep" type="CharacterBody2D" groups=["enemies"]]
@@ -189,12 +234,14 @@ position = Vector2(0, 9)
 motion_mode = 1
 script = ExtResource("1_5plw8")
 speed = 2.0
-damage = 20.0
-health = 30
+damage = 10.0
+health = 55
 bounceness = 3.0
 rest_needed_time = 1.0
+attack_range = 30.0
+attack_cooldown = 1.0
 movement_type = "drag_movement"
-experience_gem = ExtResource("2_n1gy6")
+experience_gem = ExtResource("2_573g4")
 death_effect_prefab = ExtResource("2_6c1lq")
 damage_ui_prefab = ExtResource("3_fkisk")
 death_effect_scale = 0.9
@@ -205,6 +252,12 @@ material = SubResource("ShaderMaterial_lfqla")
 position = Vector2(0, -26)
 texture = ExtResource("3_2ryns")
 hframes = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ycyst")
+}
+autoplay = "idle"
 
 [node name="Body2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -242,18 +295,15 @@ position = Vector2(-1, -22)
 [node name="FollowPlayer" type="Node" parent="."]
 script = ExtResource("4_83k6h")
 
-[node name="Knockback Controller" type="Node" parent="."]
-script = ExtResource("8_ybrkh")
-
 [node name="Drag_Follow_Player" type="Node2D" parent="."]
 script = ExtResource("9_ujhh4")
 drag_factor = 0.1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_ycyst")
-}
-autoplay = "idle"
+[node name="Knockback Controller" type="Node" parent="."]
+script = ExtResource("8_ybrkh")
+
+[node name="Reposition" type="Node" parent="."]
+script = ExtResource("11_wvt6d")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]

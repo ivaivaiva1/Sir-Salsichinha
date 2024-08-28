@@ -4,17 +4,17 @@ extends CharacterBody2D
 @export_category("Balancing Vars")
 @export var speed: float = 2.5
 @export var sword_damage: int = 0
-@export var critical_chance: float = 10
+@export var critical_chance: float = 20
 @export var critical_multiplier: float = 1.5
 @export var sword_knockback_force: float = 700
 @export var max_health: int = 100
 @export var max_enemies_knockback: int = 30
-@export var auto_knock_back_force: float = 500
+@export var auto_knock_back_force: float = 300
 #max 900 min 500?
 
 @export_category("Other vars")
 var knockback: Vector2 = Vector2(0, 0)
-var knockback_tween
+var knockback_tween	
 var keep_input_x: float = 0
 var can_flip: bool = true
 var health: int = 0
@@ -120,8 +120,8 @@ func receive_knockback(knockback_direction: Vector2, stop_time: float, enemy_bou
 func adjust_auto_knockback(bounceness: float) -> float:
 	var min_bounceness = 0.0
 	var max_bounceness = 10.0
-	var min_knockback = sword_knockback_force / 1.3
-	var max_knockback = sword_knockback_force * 1.3
+	var min_knockback = auto_knock_back_force / 1.3
+	var max_knockback = auto_knock_back_force * 1.3
 	
 	# Regra de três para mapear o bounceness para a força do knockback
 	var knockback_force = min_knockback + (bounceness - min_bounceness) / (max_bounceness - min_bounceness) * (max_knockback - min_knockback)

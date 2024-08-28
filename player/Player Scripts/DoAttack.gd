@@ -3,10 +3,12 @@ extends Node
 var player: Player
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var animation_crit: AnimationPlayer = %AnimationCrit
 @onready var sword_area_left: Area2D = %SwordAreaLeft
 @onready var sword_area_right: Area2D = %SwordAreaRight
 @onready var sword_area_up: Area2D = %SwordAreaUp
 @onready var sword_area_down: Area2D = %SwordAreaDown
+@onready var critical_effect_sprite: Sprite2D = %CriticalEffect
 
 var time_to_last_attack: float = 0
 var is_pending_attack: bool = false
@@ -18,7 +20,6 @@ func _ready():
 	player = get_parent()
 
 func _process(delta):
-	print(attack_index)
 	time_to_last_attack += delta
 	if Input.is_action_just_pressed("attack"):
 		if player.is_attacking:
@@ -40,11 +41,15 @@ func attack():
 	if attack_index == 1 or rand <= player.critical_chance:
 		if player.input_vector.y > 0:
 			animation_player.play("attack_down_2")
+			set_critical_effect_position("down")
 		elif player.input_vector.y < 0:
 			animation_player.play("attack_up_2")
+			set_critical_effect_position("up")
 		else:
 			animation_player.play("attack_side_2")
+			set_critical_effect_position("side")
 		last_attack_type = "Critical"
+		animation_crit.play("critical_effect")
 	else: 
 		if player.input_vector.y > 0:
 			animation_player.play("attack_down_1")
@@ -82,6 +87,15 @@ func apply_damage(attack_direction: String, is_critical: bool = false):
 		player.pump()
 		var average_direction = total_direction / enemies_hit.size()
 		player.receive_knockback(-average_direction, 0.25, max_bounceness)
+
+func set_critical_effect_position(attack_direction: String):
+	if attack_direction == "up": critical_effect_sprite.position = Vector2(-6, -100)
+	if attack_direction == "down": critical_effect_sprite.position = Vector2(9, 14)
+	if attack_direction == "side":
+		if player.sprite.flip_h:
+			critical_effect_sprite.position = Vector2(-51, -6)
+		else:
+			critical_effect_sprite.position = Vector2(51, -6)
 
 func set_can_flip_true():
 	player.can_flip = true

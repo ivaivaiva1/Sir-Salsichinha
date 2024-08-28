@@ -13,7 +13,8 @@ var is_critical: bool = false
 func _ready():
 	labelTxt.text = str(value)
 	if is_critical:
+		#scaleController.scale = Vector2(1.2, 1.2)
 		labelTxt.modulate = criticalColor
 	else:
-		scaleController.scale = Vector2(0.8, 0.8)
+		scaleController.scale = Vector2(0.7, 0.7)
 		labelTxt.modulate = normalColor

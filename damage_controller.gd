@@ -17,6 +17,7 @@ func create_damage_instance(force_damage: float, force_power: float, max_hited_e
 	damage_instance.force_id = randi_range(0, 1000000)
 	damage_instance.force_damage = force_damage
 	damage_instance.is_critical = is_critical
+	damage_instance.critical_chance = critical_chance
 	damage_instance.critical_multiplier = critical_multiplier
 	damage_instance.force_decay_time = force_decay_time
 	if is_critical:

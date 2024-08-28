@@ -40,7 +40,6 @@ func _physics_process(delta: float) -> void:
 		_current_velocity += corrected_change * delta
 		enemy.position += _current_velocity * delta
 
-
 func set_move_direction():
 	var difference = GameManager.player_position - enemy.position
 	direction = difference.normalized()

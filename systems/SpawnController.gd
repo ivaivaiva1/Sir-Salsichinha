@@ -35,17 +35,44 @@ func call_action(action_name: String):
 	else:
 		print("Method '%s' not found in SpawnController" % action_name)
 
-# Exemplo de funções agendadas
-func min_00_secs_00():
-	mob_spawner.time_pawn = 0.2
+#func min_00_secs_00():
+	#mob_spawner.time_pawn = 0.3
+	#mob_spawner.time_pawn_blue = 0.6
+	#mob_spawner.time_pawn_red = 2
 
-func min_00_secs_40():
-	mob_spawner.time_sheep = 3
+func min_00_secs_00():
+	mob_spawner.time_pawn = 0.1
+
+func min_00_secs_30():
+	mob_spawner.time_pawn = 0.2
+	mob_spawner.time_pawn_blue = 1
 
 func min_01_secs_00():
-	#mob_spawner.spawn_special_monster(mob_spawner.pawn_blue)
-	pass
+	mob_spawner.time_pawn = 0.2
+	mob_spawner.time_pawn_blue = 0.8
+	mob_spawner.time_pawn_red = 3
+	mob_spawner.time_sheep = 5
 
-func min_30_secs_00():
-	# Adicione a lógica aqui
-	print("func")
+func min_01_secs_30():
+	mob_spawner.time_pawn = 0.3
+	mob_spawner.time_pawn_blue = 0.6
+	mob_spawner.time_pawn_red = 2.5
+	mob_spawner.time_sheep = 3
+
+func min_02_secs_30():
+	mob_spawner.time_pawn = 0.3
+	mob_spawner.time_pawn_blue = 0.6
+	mob_spawner.time_pawn_red = 2
+	mob_spawner.time_sheep = 2
+
+func min_03_secs_00():
+	mob_spawner.time_pawn = 0.3
+	mob_spawner.time_pawn_blue = 0.6
+	mob_spawner.time_pawn_red = 2
+	mob_spawner.time_sheep = 1
+
+func min_03_secs_30():
+	mob_spawner.time_pawn = 0.3
+	mob_spawner.time_pawn_blue = 0.4
+	mob_spawner.time_pawn_red = 2
+	mob_spawner.time_sheep = 1

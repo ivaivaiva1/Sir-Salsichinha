@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_5jnob"]
 [ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_ns5if"]
 [ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="5_oj0ny"]
-[ext_resource type="Texture2D" uid="uid://draw4ux4aowkb" path="res://marcio sprites/bison2.png" id="6_787cf"]
 [ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="7_4c0gu"]
+[ext_resource type="Texture2D" uid="uid://che7nex540ev1" path="res://marcio sprites/pawn_bandana_spritesheet.png" id="7_ernu7"]
 [ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_fdde1"]
 [ext_resource type="Script" path="res://enemies/behaviours/follow_player_drag.gd" id="9_u4d3d"]
 
@@ -202,12 +202,13 @@ meat_scene = ExtResource("4_ns5if")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_lfqla")
-position = Vector2(7, -46)
+position = Vector2(2, -48)
 scale = Vector2(1.5, 1.5)
-texture = ExtResource("6_787cf")
+texture = ExtResource("7_ernu7")
+hframes = 6
+vframes = 3
 
 [node name="Body2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-11, -30)
 rotation = -1.56681
 shape = SubResource("CapsuleShape2D_mgme6")
@@ -254,5 +255,5 @@ libraries = {
 autoplay = "idle"
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]

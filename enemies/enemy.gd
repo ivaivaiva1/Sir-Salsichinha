@@ -8,6 +8,8 @@ extends CharacterBody2D
 @export var weight: float
 @export var bounceness: float
 @export var rest_needed_time: float
+@export var attack_range: float
+@export var attack_cooldown: float
 
 @export_category("Other vars")
 @export var movement_type: String
@@ -18,6 +20,9 @@ extends CharacterBody2D
 @export var meat_scene: PackedScene
 var born_time: float
 var major_knockback_force: DamageController.Damage_Instance
+var distance_to_player: float
+var attack_timer: float = 0
+
 
 var is_striking: bool = false
 var actual_knockback: Vector2 = Vector2(0, 0)
@@ -41,8 +46,16 @@ var rest_time: float = 0
 func _ready():
 	born_time = GameManager.time_elapsed
 
+## Player's collision area
+#func _on_area_2d_area_entered(area):
+	#if actual_knockback != Vector2(0, 0): return
+	#if area.is_in_group("player"):
+		#do_rest()
+		#animation_player.play("attack")
+
 func _process(delta):
 	check_actualKnockback_and_strike()
+	distance_to_player = position.distance_to(GameManager.player_position)
 	actual_knockback_float = actual_knockback.x + actual_knockback.y
 	if rest_time > 0:
 		rest_time -= delta
@@ -50,6 +63,16 @@ func _process(delta):
 		animation_player.play("idle")
 		is_resting = false
 		pass
+	
+	if attack_timer > 0: attack_timer -= delta
+	
+	if distance_to_player < attack_range:
+		if attack_timer > 0: return
+		if actual_knockback != Vector2(0, 0): return
+		if is_resting: return
+		animation_player.play("attack")
+		attack_timer = attack_cooldown
+		do_rest()
 	
 	if health <= 0:
 		die()
@@ -68,22 +91,28 @@ func do_strike(striked_area: Area2D):
 	await get_tree().create_timer(0.05).timeout
 	if enemy != null:
 		#major_knockback.force_damage = adjust_damage(major_knockback.force_damage)
-		var is_critical: bool = calculate_if_is_critical(major_knockback.is_critical, major_knockback.critical_chance)
-		enemy.get_hited(major_knockback, direction, is_critical)
+		var critical_hit: bool
+		critical_hit = calculate_if_is_critical(major_knockback.is_critical, major_knockback.critical_chance)
+		enemy.get_hited(major_knockback, direction, critical_hit)
 
-func calculate_if_is_critical(font_is_critical: bool, critical_chance: float) -> bool: 
-	var rand: int = randi_range(0, 100)
+func calculate_if_is_critical(font_is_critical: bool, critical_chance: float) -> bool: 	
+	var rand: float 
+	rand = randf_range(0, 100)
+	print(critical_chance)
 	if font_is_critical:
 		if rand <= critical_chance:
+			print("true")
 			return true
 		else:
-			rand = randi_range(0, 100)
+			rand = randf_range(0, 100)
 			if rand <= critical_chance:
+				print("true")
 				return true
 			else:
 				return false
 	else:
 		if rand <= critical_chance:
+			print("true")
 			return true
 		else:
 			return false
@@ -133,13 +162,6 @@ func strike_enemies_around():
 			do_strike(area)
 	pass
 
-# Player's collision area
-func _on_area_2d_area_entered(area):
-	if actual_knockback != Vector2(0, 0): return
-	if area.is_in_group("player"):
-		do_rest()
-		animation_player.play("attack")
-
 func hit_player():
 	if GameManager.is_game_over: return
 	#var player: Player = area.get_parent()
@@ -182,6 +204,9 @@ func instantiate_experience_gem():
 func do_rest():
 	rest_time = rest_needed_time
 	is_resting = true
+
+func is_attack_finished():
+	animation_player.play("resting")
 
 func pump():
 	return

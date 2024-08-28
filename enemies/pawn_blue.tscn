@@ -1,13 +1,15 @@
-[gd_scene load_steps=20 format=3 uid="uid://ccycxp4nib7yo"]
+[gd_scene load_steps=23 format=3 uid="uid://ccycxp4nib7yo"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_pngfh"]
 [ext_resource type="PackedScene" uid="uid://cmyqkd1nbcqnd" path="res://misc/skull.tscn" id="2_kq2ae"]
+[ext_resource type="PackedScene" uid="uid://swjwmswu0wjm" path="res://misc/Gems/gem_3.tscn" id="2_uvh6u"]
 [ext_resource type="PackedScene" uid="uid://x4gpmeviy4rk" path="res://UI/damage_ui.tscn" id="3_mdi6u"]
 [ext_resource type="PackedScene" uid="uid://cobflyrvjfd68" path="res://misc/meat.tscn" id="4_csrv0"]
 [ext_resource type="Shader" uid="uid://cgrmd1wfjcgit" path="res://shaders/hit_flash.tres" id="5_ulka2"]
-[ext_resource type="Texture2D" uid="uid://bnlo48w450esu" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="6_kowde"]
+[ext_resource type="Texture2D" uid="uid://dqpif4g7b0luv" path="res://marcio sprites/pawn_bandana_spritesheet.png" id="6_v8o1n"]
 [ext_resource type="Script" path="res://enemies/behaviours/follow_player.gd" id="7_hk2bh"]
 [ext_resource type="Script" path="res://systems/knockback_controller.gd" id="8_aaq3v"]
+[ext_resource type="Script" path="res://enemies/behaviours/Reposition.gd" id="10_pdp47"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_njmvc"]
 resource_local_to_scene = true
@@ -31,43 +33,57 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector2i(0, 1)]
+"values": [6]
 }
 
 [sub_resource type="Animation" id="Animation_uvr88"]
 resource_name = "attack"
 length = 0.62
-tracks/0/type = "value"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath(".")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [Vector2i(0, 3), Vector2i(1, 3), Vector2i(2, 3), Vector2i(3, 3), Vector2i(4, 3), Vector2i(5, 3)]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"hit_player"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"is_attack_finished"
 }]
 }
 
@@ -78,21 +94,39 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
+"values": [6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_yt3ht"]
+resource_name = "resting"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cofel"]
 _data = {
 "RESET": SubResource("Animation_i525s"),
 "attack": SubResource("Animation_uvr88"),
-"idle": SubResource("Animation_v1gmn")
+"idle": SubResource("Animation_v1gmn"),
+"resting": SubResource("Animation_yt3ht")
 }
 
 [sub_resource type="Animation" id="Animation_yhc1u"]
@@ -134,42 +168,43 @@ _data = {
 
 [node name="Pawn Blue" type="CharacterBody2D" groups=["enemies"]]
 y_sort_enabled = true
-position = Vector2(0, -30)
-scale = Vector2(1.25, 1.25)
+scale = Vector2(0.95, 0.95)
 motion_mode = 1
 script = ExtResource("1_pngfh")
-speed = 0.6
-damage = 70.0
-health = 200
+speed = 1.3
+damage = 80.0
+health = 60
 weight = 5.0
 bounceness = 6.0
 rest_needed_time = 1.0
-xp_value = 10.0
+attack_range = 50.0
+attack_cooldown = 1.0
 movement_type = "default_movement"
+experience_gem = ExtResource("2_uvh6u")
 death_effect_prefab = ExtResource("2_kq2ae")
 damage_ui_prefab = ExtResource("3_mdi6u")
 death_effect_scale = 0.9
 meat_scene = ExtResource("4_csrv0")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.8, 1.3, 1)
 y_sort_enabled = true
 material = SubResource("ShaderMaterial_njmvc")
-texture = ExtResource("6_kowde")
+position = Vector2(2.11758e-22, -26.3158)
+texture = ExtResource("6_v8o1n")
 hframes = 6
-vframes = 6
+vframes = 3
 frame = 6
 
 [node name="Body2D" type="CollisionShape2D" parent="."]
 visible = false
-position = Vector2(-9.31323e-10, 20)
+position = Vector2(-4.02713e-09, -2.10526)
 rotation = -1.56234
 shape = SubResource("CapsuleShape2D_y87au")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Area2D" type="Area2D" parent="." groups=["player_enemies"]]
 visible = false
-position = Vector2(-0.769231, 26.1538)
+position = Vector2(1.05263, 3.15789)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-2, -29)
@@ -177,7 +212,7 @@ shape = SubResource("CapsuleShape2D_71pim")
 
 [node name="StrikeArea2D" type="Area2D" parent="." groups=["enemies"]]
 visible = false
-position = Vector2(0.769231, 26.9231)
+position = Vector2(4.21053, 1.05263)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea2D"]
 position = Vector2(-4, -26)
@@ -195,13 +230,19 @@ libraries = {
 }
 
 [node name="DamageUIPos" type="Marker2D" parent="."]
-position = Vector2(-5, -50)
+position = Vector2(0, -64.2105)
+
+[node name="ExperiencePos" type="Marker2D" parent="."]
+position = Vector2(1.05263, -18.9474)
 
 [node name="FollowPlayer" type="Node" parent="."]
 script = ExtResource("7_hk2bh")
 
 [node name="Knockback Controller" type="Node" parent="."]
 script = ExtResource("8_aaq3v")
+
+[node name="Reposition" type="Node" parent="."]
+script = ExtResource("10_pdp47")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
