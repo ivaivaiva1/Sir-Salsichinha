@@ -3,7 +3,7 @@ extends Node
 var player: Player 
 
 func _ready():
-	player = get_parent()
+	player = get_parent().get_parent()
 	LevelingController.connect("update_player_status", Callable(self, "change_status"))
 	change_status(1)
 

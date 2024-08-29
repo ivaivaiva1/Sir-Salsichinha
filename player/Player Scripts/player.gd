@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export_category("Balancing Vars")
 @export var speed: float = 2.5
 @export var sword_damage: int = 0
-@export var critical_chance: float = 20
+@export var critical_chance: float = 5
 @export var critical_multiplier: float = 1.5
 @export var sword_knockback_force: float = 700
 @export var max_health: int = 100
@@ -20,9 +20,8 @@ var can_flip: bool = true
 var health: int = 0
 
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var hit_box: Area2D = $Area2D
-@onready var sprite2d: Sprite2D = $Sprite2D
+@onready var animation_player: AnimationPlayer = %MainPlayer
+@onready var hit_box: Area2D = %Area2D
 @onready var health_bar: ProgressBar = $HealthBar
 
 var input_vector: Vector2 = Vector2(0, 0)
@@ -175,10 +174,10 @@ func pump():
 	scale_tween.set_trans(Tween.TRANS_QUINT)
 	
 	# Aumentar
-	scale_tween.tween_property(sprite2d, "scale", Vector2(1.3, 0.7), 0.1)
-	scale_tween.tween_property(sprite2d, "scale", Vector2(0.7, 1.3), 0.15)
+	scale_tween.tween_property(sprite, "scale", Vector2(1.3, 0.7), 0.1)
+	scale_tween.tween_property(sprite, "scale", Vector2(0.7, 1.3), 0.15)
 	
 	#Diminuir
 	scale_tween.set_ease(Tween.EASE_IN)
 	scale_tween.set_trans(Tween.TRANS_QUINT)
-	scale_tween.tween_property(sprite2d, "scale", Vector2(1, 1), 0.1)
+	scale_tween.tween_property(sprite, "scale", Vector2(1, 1), 0.1)

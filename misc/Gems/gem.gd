@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var xp_value: float
 
 var blink_timer: float = 0
-var blind_cooldown: float = 4
+var blink_cooldown: float = 12
 
 var move_direction: Vector2
 
@@ -21,11 +21,11 @@ func _process(delta):
 	if blink_timer > 0:
 		blink_timer -= delta
 	if blink_timer <= 0:
-		blink_timer = blind_cooldown
+		blink_timer = randf_range(blink_cooldown / 1.3, blink_cooldown * 1.3)
 		animation_player.play("blink")
 	
 	if !state_escape and !state_follow:
-		if is_near_player(100):
+		if is_near_player(150):
 			start_gem_escape()
 	
 	if state_escape:

@@ -17,17 +17,6 @@ shader = ExtResource("3_5asm1")
 shader_parameter/enabled = false
 shader_parameter/tint = Color(1, 1, 1, 1)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y87au"]
-radius = 7.00821
-height = 35.9987
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_71pim"]
-radius = 19.0
-height = 54.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_prtl7"]
-radius = 38.0132
-
 [sub_resource type="Animation" id="Animation_i525s"]
 length = 0.001
 tracks/0/type = "value"
@@ -141,6 +130,17 @@ _data = {
 "resting": SubResource("Animation_vjbdf")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_y87au"]
+radius = 6.00824
+height = 33.9988
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_71pim"]
+radius = 19.0
+height = 54.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_prtl7"]
+radius = 38.0132
+
 [sub_resource type="Animation" id="Animation_yhc1u"]
 length = 0.001
 tracks/0/type = "value"
@@ -205,8 +205,14 @@ texture = ExtResource("2_cxpjj")
 hframes = 6
 vframes = 6
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_cofel")
+}
+autoplay = "idle"
+
 [node name="Body2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.86235e-09, -4)
+position = Vector2(-1, -6)
 rotation = -1.56234
 shape = SubResource("CapsuleShape2D_y87au")
 debug_color = Color(0, 0.6, 0.701961, 0)
@@ -226,12 +232,6 @@ position = Vector2(3, 3)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StrikeArea2D"]
 position = Vector2(-4, -26)
 shape = SubResource("CircleShape2D_prtl7")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_cofel")
-}
-autoplay = "idle"
 
 [node name="HitFlash" type="AnimationPlayer" parent="."]
 libraries = {

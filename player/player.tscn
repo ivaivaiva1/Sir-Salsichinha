@@ -6,6 +6,10 @@
 [ext_resource type="Script" path="res://player/Player Scripts/DoAttack.gd" id="3_lu7xg"]
 [ext_resource type="Texture2D" uid="uid://b3737ag182t8y" path="res://addons/kenney_particle-pack/PNG (Transparent)/star_08.png" id="3_tq043"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xe4tq"]
+radius = 15.0
+height = 30.0
+
 [sub_resource type="Animation" id="Animation_621t3"]
 length = 0.001
 tracks/0/type = "value"
@@ -51,7 +55,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DoAttack")
+tracks/1/path = NodePath("Scripts/DoAttack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -88,7 +92,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DoAttack")
+tracks/1/path = NodePath("Scripts/DoAttack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -124,7 +128,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DoAttack")
+tracks/1/path = NodePath("Scripts/DoAttack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -161,7 +165,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DoAttack")
+tracks/1/path = NodePath("Scripts/DoAttack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -197,7 +201,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DoAttack")
+tracks/1/path = NodePath("Scripts/DoAttack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -234,7 +238,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DoAttack")
+tracks/1/path = NodePath("Scripts/DoAttack")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -377,16 +381,6 @@ _data = {
 "critical_effect": SubResource("Animation_qraqg")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xe4tq"]
-radius = 9.0
-height = 18.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uo4p8"]
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q85dn"]
-bg_color = Color(1, 0, 0, 1)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mkqyb"]
 radius = 12.0
 height = 62.0
@@ -394,6 +388,12 @@ height = 62.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tfs0v"]
 radius = 35.0002
 height = 122.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uo4p8"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q85dn"]
+bg_color = Color(1, 0, 0, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 rotation = -6.28319
@@ -409,11 +409,85 @@ texture = ExtResource("1_pohw4")
 hframes = 6
 vframes = 8
 
-[node name="DoAttack" type="Node" parent="."]
+[node name="Body2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.999969, -7)
+shape = SubResource("CapsuleShape2D_xe4tq")
+debug_color = Color(0, 0.6, 0.701961, 0.407843)
+
+[node name="Scripts" type="Node2D" parent="."]
+
+[node name="DoAttack" type="Node" parent="Scripts"]
 script = ExtResource("3_lu7xg")
 
-[node name="Status Progression" type="Node" parent="."]
+[node name="Status Progression" type="Node" parent="Scripts"]
 script = ExtResource("3_l1nxw")
+
+[node name="AnimationPlayers" type="Node2D" parent="."]
+
+[node name="MainPlayer" type="AnimationPlayer" parent="AnimationPlayers"]
+unique_name_in_owner = true
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_y3ufe")
+}
+autoplay = "idle"
+
+[node name="CriticalEffectPlayer" type="AnimationPlayer" parent="AnimationPlayers"]
+unique_name_in_owner = true
+root_node = NodePath("../MainPlayer")
+libraries = {
+"": SubResource("AnimationLibrary_pk62u")
+}
+
+[node name="Colliders&Areas" type="Node2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Colliders&Areas" groups=["player"]]
+unique_name_in_owner = true
+position = Vector2(8.93276e-06, -2)
+
+[node name="HitBox" type="CollisionShape2D" parent="Colliders&Areas/Area2D"]
+visible = false
+position = Vector2(9.3794e-05, -21)
+shape = SubResource("CapsuleShape2D_mkqyb")
+debug_color = Color(0, 0.6, 0.701961, 0.517647)
+
+[node name="SwordAreaRight" type="Area2D" parent="Colliders&Areas"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(41.0001, -30.9998)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders&Areas/SwordAreaRight"]
+shape = SubResource("CapsuleShape2D_tfs0v")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="SwordAreaLeft" type="Area2D" parent="Colliders&Areas"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-40.9999, -31.0002)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders&Areas/SwordAreaLeft"]
+shape = SubResource("CapsuleShape2D_tfs0v")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="SwordAreaUp" type="Area2D" parent="Colliders&Areas"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0.000415373, -93)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders&Areas/SwordAreaUp"]
+shape = SubResource("CapsuleShape2D_tfs0v")
+debug_color = Color(0, 0.6, 0.701961, 0)
+
+[node name="SwordAreaDown" type="Area2D" parent="Colliders&Areas"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(-0.000165256, 37)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders&Areas/SwordAreaDown"]
+shape = SubResource("CapsuleShape2D_tfs0v")
+debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="CriticalEffect" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -422,26 +496,6 @@ z_index = 90
 position = Vector2(51, -5.99978)
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("3_tq043")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-libraries = {
-"": SubResource("AnimationLibrary_y3ufe")
-}
-autoplay = "idle"
-
-[node name="AnimationCrit" type="AnimationPlayer" parent="."]
-unique_name_in_owner = true
-root_node = NodePath("../AnimationPlayer")
-libraries = {
-"": SubResource("AnimationLibrary_pk62u")
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(1.78814e-05, -4)
-shape = SubResource("CapsuleShape2D_xe4tq")
-debug_color = Color(0, 0.6, 0.701961, 0.407843)
 
 [node name="HealthBar" type="ProgressBar" parent="."]
 z_index = -999
@@ -453,50 +507,3 @@ theme_override_styles/background = SubResource("StyleBoxFlat_uo4p8")
 theme_override_styles/fill = SubResource("StyleBoxFlat_q85dn")
 value = 100.0
 show_percentage = false
-
-[node name="Area2D" type="Area2D" parent="." groups=["player"]]
-position = Vector2(8.93276e-06, -2)
-
-[node name="HitBox" type="CollisionShape2D" parent="Area2D"]
-visible = false
-position = Vector2(9.3794e-05, -21)
-shape = SubResource("CapsuleShape2D_mkqyb")
-debug_color = Color(0, 0.6, 0.701961, 0.517647)
-
-[node name="SwordAreaRight" type="Area2D" parent="."]
-unique_name_in_owner = true
-visible = false
-position = Vector2(41.0001, -30.9998)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaRight"]
-shape = SubResource("CapsuleShape2D_tfs0v")
-debug_color = Color(0, 0.6, 0.701961, 0)
-
-[node name="SwordAreaLeft" type="Area2D" parent="."]
-unique_name_in_owner = true
-visible = false
-position = Vector2(-40.9999, -31.0002)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaLeft"]
-shape = SubResource("CapsuleShape2D_tfs0v")
-debug_color = Color(0, 0.6, 0.701961, 0)
-
-[node name="SwordAreaUp" type="Area2D" parent="."]
-unique_name_in_owner = true
-visible = false
-position = Vector2(0.000415373, -93)
-rotation = 1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaUp"]
-shape = SubResource("CapsuleShape2D_tfs0v")
-debug_color = Color(0, 0.6, 0.701961, 0)
-
-[node name="SwordAreaDown" type="Area2D" parent="."]
-unique_name_in_owner = true
-visible = false
-position = Vector2(-0.000165256, 37)
-rotation = 1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SwordAreaDown"]
-shape = SubResource("CapsuleShape2D_tfs0v")
-debug_color = Color(0, 0.6, 0.701961, 0)

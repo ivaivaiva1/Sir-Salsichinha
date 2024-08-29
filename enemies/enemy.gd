@@ -98,21 +98,17 @@ func do_strike(striked_area: Area2D):
 func calculate_if_is_critical(font_is_critical: bool, critical_chance: float) -> bool: 	
 	var rand: float 
 	rand = randf_range(0, 100)
-	print(critical_chance)
 	if font_is_critical:
 		if rand <= critical_chance:
-			print("true")
 			return true
 		else:
 			rand = randf_range(0, 100)
 			if rand <= critical_chance:
-				print("true")
 				return true
 			else:
 				return false
 	else:
 		if rand <= critical_chance:
-			print("true")
 			return true
 		else:
 			return false

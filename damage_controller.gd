@@ -31,6 +31,7 @@ func create_damage_instance(force_damage: float, force_power: float, max_hited_e
 
 func check_max_hited_enemies(damage_instance: Damage_Instance) -> bool:
 	damage_instance.max_hited_enemies -= 1
+	print(damage_instance.max_hited_enemies)
 	var damage_is_enabled: bool
 	if damage_instance.max_hited_enemies < 0:
 		#apagar damage_instance

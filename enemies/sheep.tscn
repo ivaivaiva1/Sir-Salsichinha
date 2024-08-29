@@ -180,13 +180,13 @@ _data = {
 "resting": SubResource("Animation_7e0m6")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mgme6"]
-radius = 5.99995
-height = 33.8407
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3cyuc"]
+radius = 4.99982
+height = 29.982
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7n1ll"]
-radius = 14.9993
-height = 38.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_q057x"]
+radius = 16.0
+height = 42.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e1avy"]
 radius = 16.0
@@ -260,19 +260,18 @@ libraries = {
 autoplay = "idle"
 
 [node name="Body2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(-1, -15)
-rotation = -1.56681
-shape = SubResource("CapsuleShape2D_mgme6")
+position = Vector2(0, -14)
+rotation = -1.56234
+shape = SubResource("CapsuleShape2D_3cyuc")
 debug_color = Color(0, 0.6, 0.701961, 0)
 
 [node name="Area2D" type="Area2D" parent="." groups=["player_enemies"]]
-visible = false
+position = Vector2(2, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -25)
-rotation = -1.57047
-shape = SubResource("CapsuleShape2D_7n1ll")
+position = Vector2(-2, -28)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_q057x")
 
 [node name="StrikeArea2D" type="Area2D" parent="." groups=["enemies"]]
 
@@ -305,6 +304,5 @@ script = ExtResource("8_ybrkh")
 [node name="Reposition" type="Node" parent="."]
 script = ExtResource("11_wvt6d")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
-[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]

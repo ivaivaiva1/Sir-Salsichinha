@@ -2,8 +2,8 @@ extends Node
 
 var player: Player
 
-@onready var animation_player: AnimationPlayer = %AnimationPlayer
-@onready var animation_crit: AnimationPlayer = %AnimationCrit
+@onready var animation_player: AnimationPlayer = %MainPlayer
+@onready var animation_crit: AnimationPlayer = %CriticalEffectPlayer
 @onready var sword_area_left: Area2D = %SwordAreaLeft
 @onready var sword_area_right: Area2D = %SwordAreaRight
 @onready var sword_area_up: Area2D = %SwordAreaUp
@@ -17,7 +17,7 @@ var attack_index: int
 var can_pending_normal_attack: bool = false
 
 func _ready():
-	player = get_parent()
+	player = get_parent().get_parent()
 
 func _process(delta):
 	time_to_last_attack += delta

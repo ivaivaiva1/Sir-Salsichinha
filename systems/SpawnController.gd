@@ -41,38 +41,67 @@ func call_action(action_name: String):
 	#mob_spawner.time_pawn_red = 2
 
 func min_00_secs_00():
-	mob_spawner.time_pawn = 0.1
+	mob_spawner.time_pawn = 0.2
 
-func min_00_secs_30():
+func min_01_secs_00():
 	mob_spawner.time_pawn = 0.2
 	mob_spawner.time_pawn_blue = 1
 
-func min_01_secs_00():
+func min_01_secs_30():
+	mob_spawner.time_pawn = 0.2
+	mob_spawner.time_pawn_blue = 0.8
+	mob_spawner.time_sheep = 5
+
+func min_02_secs_00():
 	mob_spawner.time_pawn = 0.2
 	mob_spawner.time_pawn_blue = 0.8
 	mob_spawner.time_pawn_red = 3
 	mob_spawner.time_sheep = 5
 
-func min_01_secs_30():
+func min_02_secs_30():
 	mob_spawner.time_pawn = 0.3
 	mob_spawner.time_pawn_blue = 0.6
 	mob_spawner.time_pawn_red = 2.5
 	mob_spawner.time_sheep = 3
 
-func min_02_secs_30():
+func min_03_secs_30():
 	mob_spawner.time_pawn = 0.3
 	mob_spawner.time_pawn_blue = 0.6
 	mob_spawner.time_pawn_red = 2
 	mob_spawner.time_sheep = 2
 
-func min_03_secs_00():
+func min_04_secs_30():
 	mob_spawner.time_pawn = 0.3
 	mob_spawner.time_pawn_blue = 0.6
 	mob_spawner.time_pawn_red = 2
 	mob_spawner.time_sheep = 1
 
-func min_03_secs_30():
+func min_05_secs_00():
 	mob_spawner.time_pawn = 0.3
 	mob_spawner.time_pawn_blue = 0.4
 	mob_spawner.time_pawn_red = 2
+	mob_spawner.time_sheep = 1
+
+func min_05_secs_30():
+	mob_spawner.time_pawn = 0.5
+	mob_spawner.time_pawn_blue = 0.4
+	mob_spawner.time_pawn_red = 1.8
+	mob_spawner.time_sheep = 1
+
+func min_06_secs_00():
+	mob_spawner.time_pawn = 1
+	mob_spawner.time_pawn_blue = 0.2
+	mob_spawner.time_pawn_red = 1.8
+	mob_spawner.time_sheep = 1
+
+func min_06_secs_30():
+	mob_spawner.time_pawn = 1.5
+	mob_spawner.time_pawn_blue = 0.2
+	mob_spawner.time_pawn_red = 1.5
+	mob_spawner.time_sheep = 1
+
+func min_07_secs_00():
+	mob_spawner.time_pawn = 2
+	mob_spawner.time_pawn_blue = 0.2
+	mob_spawner.time_pawn_red = 1
 	mob_spawner.time_sheep = 1

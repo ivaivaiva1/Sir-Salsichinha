@@ -214,7 +214,7 @@ _data = {
 }
 
 [node name="Gem 4" type="CharacterBody2D"]
-scale = Vector2(1.05, 1.05)
+scale = Vector2(0.855, 0.855)
 script = ExtResource("1_5pbtf")
 xp_value = 10.0
 

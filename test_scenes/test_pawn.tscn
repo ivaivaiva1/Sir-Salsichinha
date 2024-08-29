@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://biypnnv8oumla" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_0dine"]
 [ext_resource type="PackedScene" uid="uid://bbaq72ngobmw1" path="res://player/player.tscn" id="2_0yn10"]
-[ext_resource type="PackedScene" uid="uid://bcefmaju7ccqn" path="res://enemies/sheep.tscn" id="4_gm2t7"]
+[ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="4_quign"]
 [ext_resource type="PackedScene" uid="uid://d3fpypedn3irp" path="res://UI/game_ui.tscn" id="5_nk7b7"]
 
 [node name="TestPawn" type="Node2D"]
@@ -15,9 +15,267 @@ texture = ExtResource("1_0dine")
 [node name="Player" parent="." instance=ExtResource("2_0yn10")]
 position = Vector2(131, 339)
 speed = 10.0
+sword_knockback_force = 1300.0
+max_enemies_knockback = 400
 
 [node name="GameUI" parent="." instance=ExtResource("5_nk7b7")]
 
-[node name="Sheep" parent="." instance=ExtResource("4_gm2t7")]
-position = Vector2(407, 404)
-health = 55
+[node name="Pawn" parent="." instance=ExtResource("4_quign")]
+position = Vector2(597, 369)
+speed = 0.0
+
+[node name="Pawn65" parent="." instance=ExtResource("4_quign")]
+position = Vector2(518, 369)
+speed = 0.0
+
+[node name="Pawn2" parent="." instance=ExtResource("4_quign")]
+position = Vector2(597, 310)
+speed = 0.0
+
+[node name="Pawn3" parent="." instance=ExtResource("4_quign")]
+position = Vector2(597, 249)
+speed = 0.0
+
+[node name="Pawn4" parent="." instance=ExtResource("4_quign")]
+position = Vector2(597, 185)
+speed = 0.0
+
+[node name="Pawn5" parent="." instance=ExtResource("4_quign")]
+position = Vector2(598, 616)
+speed = 0.0
+
+[node name="Pawn6" parent="." instance=ExtResource("4_quign")]
+position = Vector2(598, 557)
+speed = 0.0
+
+[node name="Pawn7" parent="." instance=ExtResource("4_quign")]
+position = Vector2(598, 496)
+speed = 0.0
+
+[node name="Pawn8" parent="." instance=ExtResource("4_quign")]
+position = Vector2(598, 432)
+speed = 0.0
+
+[node name="Pawn9" parent="." instance=ExtResource("4_quign")]
+position = Vector2(668, 369)
+speed = 0.0
+
+[node name="Pawn10" parent="." instance=ExtResource("4_quign")]
+position = Vector2(668, 310)
+speed = 0.0
+
+[node name="Pawn11" parent="." instance=ExtResource("4_quign")]
+position = Vector2(668, 249)
+speed = 0.0
+
+[node name="Pawn12" parent="." instance=ExtResource("4_quign")]
+position = Vector2(668, 185)
+speed = 0.0
+
+[node name="Pawn13" parent="." instance=ExtResource("4_quign")]
+position = Vector2(669, 616)
+speed = 0.0
+
+[node name="Pawn14" parent="." instance=ExtResource("4_quign")]
+position = Vector2(669, 557)
+speed = 0.0
+
+[node name="Pawn15" parent="." instance=ExtResource("4_quign")]
+position = Vector2(669, 496)
+speed = 0.0
+
+[node name="Pawn16" parent="." instance=ExtResource("4_quign")]
+position = Vector2(669, 432)
+speed = 0.0
+
+[node name="Pawn17" parent="." instance=ExtResource("4_quign")]
+position = Vector2(737, 368)
+speed = 0.0
+
+[node name="Pawn18" parent="." instance=ExtResource("4_quign")]
+position = Vector2(737, 309)
+speed = 0.0
+
+[node name="Pawn19" parent="." instance=ExtResource("4_quign")]
+position = Vector2(737, 248)
+speed = 0.0
+
+[node name="Pawn20" parent="." instance=ExtResource("4_quign")]
+position = Vector2(737, 184)
+speed = 0.0
+
+[node name="Pawn21" parent="." instance=ExtResource("4_quign")]
+position = Vector2(738, 615)
+speed = 0.0
+
+[node name="Pawn22" parent="." instance=ExtResource("4_quign")]
+position = Vector2(738, 556)
+speed = 0.0
+
+[node name="Pawn23" parent="." instance=ExtResource("4_quign")]
+position = Vector2(738, 495)
+speed = 0.0
+
+[node name="Pawn24" parent="." instance=ExtResource("4_quign")]
+position = Vector2(738, 431)
+speed = 0.0
+
+[node name="Pawn25" parent="." instance=ExtResource("4_quign")]
+position = Vector2(802, 368)
+speed = 0.0
+
+[node name="Pawn26" parent="." instance=ExtResource("4_quign")]
+position = Vector2(802, 309)
+speed = 0.0
+
+[node name="Pawn27" parent="." instance=ExtResource("4_quign")]
+position = Vector2(802, 248)
+speed = 0.0
+
+[node name="Pawn28" parent="." instance=ExtResource("4_quign")]
+position = Vector2(802, 184)
+speed = 0.0
+
+[node name="Pawn29" parent="." instance=ExtResource("4_quign")]
+position = Vector2(803, 615)
+speed = 0.0
+
+[node name="Pawn30" parent="." instance=ExtResource("4_quign")]
+position = Vector2(803, 556)
+speed = 0.0
+
+[node name="Pawn31" parent="." instance=ExtResource("4_quign")]
+position = Vector2(803, 495)
+speed = 0.0
+
+[node name="Pawn32" parent="." instance=ExtResource("4_quign")]
+position = Vector2(803, 431)
+speed = 0.0
+
+[node name="Pawn33" parent="." instance=ExtResource("4_quign")]
+position = Vector2(870, 369)
+speed = 0.0
+
+[node name="Pawn34" parent="." instance=ExtResource("4_quign")]
+position = Vector2(870, 310)
+speed = 0.0
+
+[node name="Pawn35" parent="." instance=ExtResource("4_quign")]
+position = Vector2(870, 249)
+speed = 0.0
+
+[node name="Pawn36" parent="." instance=ExtResource("4_quign")]
+position = Vector2(870, 185)
+speed = 0.0
+
+[node name="Pawn37" parent="." instance=ExtResource("4_quign")]
+position = Vector2(871, 616)
+speed = 0.0
+
+[node name="Pawn38" parent="." instance=ExtResource("4_quign")]
+position = Vector2(871, 557)
+speed = 0.0
+
+[node name="Pawn39" parent="." instance=ExtResource("4_quign")]
+position = Vector2(871, 496)
+speed = 0.0
+
+[node name="Pawn40" parent="." instance=ExtResource("4_quign")]
+position = Vector2(871, 432)
+speed = 0.0
+
+[node name="Pawn41" parent="." instance=ExtResource("4_quign")]
+position = Vector2(938, 366)
+speed = 0.0
+
+[node name="Pawn42" parent="." instance=ExtResource("4_quign")]
+position = Vector2(938, 307)
+speed = 0.0
+
+[node name="Pawn43" parent="." instance=ExtResource("4_quign")]
+position = Vector2(938, 246)
+speed = 0.0
+
+[node name="Pawn44" parent="." instance=ExtResource("4_quign")]
+position = Vector2(938, 182)
+speed = 0.0
+
+[node name="Pawn45" parent="." instance=ExtResource("4_quign")]
+position = Vector2(939, 613)
+speed = 0.0
+
+[node name="Pawn46" parent="." instance=ExtResource("4_quign")]
+position = Vector2(939, 554)
+speed = 0.0
+
+[node name="Pawn47" parent="." instance=ExtResource("4_quign")]
+position = Vector2(939, 493)
+speed = 0.0
+
+[node name="Pawn48" parent="." instance=ExtResource("4_quign")]
+position = Vector2(939, 429)
+speed = 0.0
+
+[node name="Pawn49" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1007, 363)
+speed = 0.0
+
+[node name="Pawn50" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1007, 304)
+speed = 0.0
+
+[node name="Pawn51" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1007, 243)
+speed = 0.0
+
+[node name="Pawn52" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1007, 179)
+speed = 0.0
+
+[node name="Pawn53" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1008, 610)
+speed = 0.0
+
+[node name="Pawn54" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1008, 551)
+speed = 0.0
+
+[node name="Pawn55" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1008, 490)
+speed = 0.0
+
+[node name="Pawn56" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1008, 426)
+speed = 0.0
+
+[node name="Pawn57" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1078, 362)
+speed = 0.0
+
+[node name="Pawn58" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1078, 303)
+speed = 0.0
+
+[node name="Pawn59" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1078, 242)
+speed = 0.0
+
+[node name="Pawn60" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1078, 178)
+speed = 0.0
+
+[node name="Pawn61" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1079, 609)
+speed = 0.0
+
+[node name="Pawn62" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1079, 550)
+speed = 0.0
+
+[node name="Pawn63" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1079, 489)
+speed = 0.0
+
+[node name="Pawn64" parent="." instance=ExtResource("4_quign")]
+position = Vector2(1079, 425)
+speed = 0.0
