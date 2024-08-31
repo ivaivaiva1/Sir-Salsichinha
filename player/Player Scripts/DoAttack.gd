@@ -70,12 +70,11 @@ func apply_damage(attack_direction: String, is_critical: bool = false):
 	var areas = get_hited_enemys(attack_direction)
 	var total_direction = Vector2(0, 0)
 	var enemies_hit = []
-	
+	var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance(player.sword_damage, player.sword_knockback_force, player.max_enemies_knockback, is_critical, player.critical_chance, player.critical_multiplier)
 	for area in areas:
 		if area.is_in_group("player_enemies"):
 			var enemy: Enemy = area.get_parent()
 			var direction = calculate_knockback_direction(enemy)
-			var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance(player.sword_damage, player.sword_knockback_force, player.max_enemies_knockback, is_critical, player.critical_chance, player.critical_multiplier)
 			enemy.get_hited(new_damage_instance, direction, is_critical)
 			enemy.pump()
 			total_direction += direction

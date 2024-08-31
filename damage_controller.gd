@@ -38,3 +38,10 @@ func check_max_hited_enemies(damage_instance: Damage_Instance) -> bool:
 		return false  
 	else:
 		return true
+
+func destroy_damage_instance(damage_instance: Damage_Instance):
+	if damage_instance in all_game_damages:
+		all_game_damages.erase(damage_instance)
+		damage_instance = null 
+	if damage_instance == null:
+		print("null")

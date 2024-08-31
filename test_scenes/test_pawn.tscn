@@ -12,12 +12,6 @@ visible = false
 position = Vector2(1730, 767)
 texture = ExtResource("1_0dine")
 
-[node name="Player" parent="." instance=ExtResource("2_0yn10")]
-position = Vector2(131, 339)
-speed = 10.0
-sword_knockback_force = 1300.0
-max_enemies_knockback = 400
-
 [node name="GameUI" parent="." instance=ExtResource("5_nk7b7")]
 
 [node name="Pawn" parent="." instance=ExtResource("4_quign")]
@@ -279,3 +273,7 @@ speed = 0.0
 [node name="Pawn64" parent="." instance=ExtResource("4_quign")]
 position = Vector2(1079, 425)
 speed = 0.0
+
+[node name="Player" parent="." instance=ExtResource("2_0yn10")]
+position = Vector2(388, 364)
+max_enemies_knockback = 101

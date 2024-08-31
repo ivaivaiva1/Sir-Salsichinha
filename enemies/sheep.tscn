@@ -304,5 +304,5 @@ script = ExtResource("8_ybrkh")
 [node name="Reposition" type="Node" parent="."]
 script = ExtResource("11_wvt6d")
 
-[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]
 [connection signal="area_entered" from="StrikeArea2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="StrikeArea2D" to="." method="_on_strike_area_2d_area_entered"]

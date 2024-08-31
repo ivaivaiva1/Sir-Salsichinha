@@ -82,18 +82,18 @@ func check_actualKnockback_and_strike():
 		var areas_around = strike_area2d.get_overlapping_areas()
 		for area in areas_around:
 			if area.is_in_group("enemies"):
-				do_strike(area)
+				var enemy: Enemy = area.get_parent()
+				do_strike(enemy)
 
-func do_strike(striked_area: Area2D):
-	var enemy: Enemy = striked_area.get_parent()
-	var direction = calculate_knockback_direction(enemy)
+func do_strike(striked_enemy: Enemy):
+	var direction = calculate_knockback_direction(striked_enemy)
 	var major_knockback = major_knockback_force
 	await get_tree().create_timer(0.05).timeout
-	if enemy != null:
+	if striked_enemy != null:
 		#major_knockback.force_damage = adjust_damage(major_knockback.force_damage)
 		var critical_hit: bool
 		critical_hit = calculate_if_is_critical(major_knockback.is_critical, major_knockback.critical_chance)
-		enemy.get_hited(major_knockback, direction, critical_hit)
+		striked_enemy.get_hited(major_knockback, direction, critical_hit)
 
 func calculate_if_is_critical(font_is_critical: bool, critical_chance: float) -> bool: 	
 	var rand: float 
@@ -125,7 +125,13 @@ func get_hited(damage_instance: DamageController.Damage_Instance, knockback_dire
 	if dash_hit: dash_hit.is_following_player = false
 	if damage_instance.force_id in suffered_damages_id: return
 	suffered_damages_id.append(damage_instance.force_id)
-	if not DamageController.check_max_hited_enemies(damage_instance): return
+	if damage_instance.max_hited_enemies <= 0: 
+		DamageController.destroy_damage_instance(damage_instance)
+		print(damage_instance.force_damage)
+		return
+	else:
+		damage_instance.max_hited_enemies -= 1
+		print(damage_instance.max_hited_enemies)
 	if damage_instance == null: return
 	if damage_instance.force_power > 0:
 		GameManager.im_hited()

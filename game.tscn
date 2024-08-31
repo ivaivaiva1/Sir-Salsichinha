@@ -556,6 +556,8 @@ game_over_ui_scene = ExtResource("1_gq0a3")
 
 [node name="Player" parent="." instance=ExtResource("1_p4arj")]
 position = Vector2(552, 365)
+max_health = 1000000
+max_enemies_knockback = 108
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(5.06079e-05, -11)
