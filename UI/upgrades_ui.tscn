@@ -1,0 +1,190 @@
+[gd_scene load_steps=5 format=3 uid="uid://d1g2m6aj4bn4l"]
+
+[ext_resource type="Script" path="res://UI/upgrades_ui.gd" id="1_por6a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uio7y"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="SystemFont" id="SystemFont_rkod6"]
+font_names = PackedStringArray("Comic Sans MS")
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_lb3up"]
+line_spacing = -6.775
+font = SubResource("SystemFont_rkod6")
+font_size = 13
+font_color = Color(0, 0, 0, 1)
+
+[node name="UpgradesUI" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_por6a")
+
+[node name="Upgrade1" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -74.0
+offset_top = 6.0
+offset_right = -34.0
+offset_bottom = 46.0
+
+[node name="Panel" type="Panel" parent="Upgrade1"]
+modulate = Color(0.466667, 0.32549, 0.588235, 0.780392)
+layout_mode = 0
+offset_left = 261.0
+offset_top = 125.0
+offset_right = 500.0
+offset_bottom = 450.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uio7y")
+
+[node name="Panel4" type="Panel" parent="Upgrade1"]
+modulate = Color(0.709804, 0.709804, 0.709804, 1)
+layout_mode = 0
+offset_left = 291.0
+offset_top = 152.0
+offset_right = 471.0
+offset_bottom = 403.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uio7y")
+
+[node name="Panel5" type="Panel" parent="Upgrade1"]
+layout_mode = 0
+offset_left = 291.0
+offset_top = 310.0
+offset_right = 471.0
+offset_bottom = 410.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uio7y")
+
+[node name="Label" type="Label" parent="Upgrade1"]
+layout_mode = 0
+offset_left = 291.0
+offset_top = 310.0
+offset_right = 471.0
+offset_bottom = 409.0
+text = "Improve Player Damage"
+label_settings = SubResource("LabelSettings_lb3up")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button1" type="Button" parent="Upgrade1"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 265.0
+offset_top = 123.0
+offset_right = 497.0
+offset_bottom = 448.0
+
+[node name="Upgrade2" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 196.0
+offset_top = 6.0
+offset_right = 236.0
+offset_bottom = 46.0
+
+[node name="Panel" type="Panel" parent="Upgrade2"]
+modulate = Color(0.466667, 0.32549, 0.588235, 0.780392)
+layout_mode = 0
+offset_left = 261.0
+offset_top = 125.0
+offset_right = 500.0
+offset_bottom = 450.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uio7y")
+
+[node name="Panel4" type="Panel" parent="Upgrade2"]
+modulate = Color(0.709804, 0.709804, 0.709804, 1)
+layout_mode = 0
+offset_left = 291.0
+offset_top = 152.0
+offset_right = 471.0
+offset_bottom = 403.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uio7y")
+
+[node name="Panel5" type="Panel" parent="Upgrade2"]
+layout_mode = 0
+offset_left = 291.0
+offset_top = 310.0
+offset_right = 471.0
+offset_bottom = 410.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uio7y")
+
+[node name="Label" type="Label" parent="Upgrade2"]
+layout_mode = 0
+offset_left = 291.0
+offset_top = 310.0
+offset_right = 470.0
+offset_bottom = 409.0
+text = "Improve Player
+Movement Speed
+"
+label_settings = SubResource("LabelSettings_lb3up")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button2" type="Button" parent="Upgrade2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 265.0
+offset_top = 123.0
+offset_right = 497.0
+offset_bottom = 448.0
+
+[node name="Upgrade3" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 466.0
+offset_top = 6.0
+offset_right = 506.0
+offset_bottom = 46.0
+
+[node name="Panel" type="Panel" parent="Upgrade3"]
+modulate = Color(0.466667, 0.32549, 0.588235, 0.780392)
+layout_mode = 0
+offset_left = 261.0
+offset_top = 125.0
+offset_right = 500.0
+offset_bottom = 450.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uio7y")
+
+[node name="Panel4" type="Panel" parent="Upgrade3"]
+modulate = Color(0.709804, 0.709804, 0.709804, 1)
+layout_mode = 0
+offset_left = 291.0
+offset_top = 152.0
+offset_right = 471.0
+offset_bottom = 403.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uio7y")
+
+[node name="Panel5" type="Panel" parent="Upgrade3"]
+layout_mode = 0
+offset_left = 291.0
+offset_top = 310.0
+offset_right = 471.0
+offset_bottom = 410.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uio7y")
+
+[node name="Label" type="Label" parent="Upgrade3"]
+layout_mode = 0
+offset_left = 291.0
+offset_top = 310.0
+offset_right = 470.0
+offset_bottom = 409.0
+text = "Improve Player
+ Life Regen"
+label_settings = SubResource("LabelSettings_lb3up")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Button3" type="Button" parent="Upgrade3"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 265.0
+offset_top = 123.0
+offset_right = 497.0
+offset_bottom = 448.0
+
+[connection signal="pressed" from="Upgrade1/Button1" to="." method="_on_button_1_pressed"]
+[connection signal="pressed" from="Upgrade2/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="Upgrade3/Button3" to="." method="_on_button_3_pressed"]

@@ -3,7 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://bbaq72ngobmw1" path="res://player/player.tscn" id="1_kc7t3"]
 [ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="2_j4y58"]
 [ext_resource type="PackedScene" uid="uid://bcefmaju7ccqn" path="res://enemies/sheep.tscn" id="3_tull2"]
-[ext_resource type="PackedScene" uid="uid://bkxacenkudy3r" path="res://enemies/pawn red.tscn" id="4_g0iwv"]
+[ext_resource type="PackedScene" uid="uid://bkxacenkudy3r" path="res://enemies/pawn gravata.tscn" id="4_g0iwv"]
+
 
 [node name="TestUi" type="Node2D"]
 

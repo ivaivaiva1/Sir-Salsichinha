@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://c1hfqnqtf42hc"]
 
 [ext_resource type="Script" path="res://systems/mob_spawner.gd" id="1_ehhe5"]
-[ext_resource type="PackedScene" uid="uid://bkxacenkudy3r" path="res://enemies/pawn red.tscn" id="2_px5wh"]
+[ext_resource type="PackedScene" uid="uid://bkxacenkudy3r" path="res://enemies/pawn gravata.tscn" id="2_px5wh"]
 [ext_resource type="PackedScene" uid="uid://bcefmaju7ccqn" path="res://enemies/sheep.tscn" id="3_nbjrm"]
 [ext_resource type="PackedScene" uid="uid://cp3lkcabj2a6h" path="res://enemies/pawn.tscn" id="3_sn7ao"]
 [ext_resource type="PackedScene" uid="uid://ccycxp4nib7yo" path="res://enemies/pawn_blue.tscn" id="4_10amy"]

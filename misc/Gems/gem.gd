@@ -25,7 +25,8 @@ func _process(delta):
 		animation_player.play("blink")
 	
 	if !state_escape and !state_follow:
-		if is_near_player(150):
+		if GameManager.is_game_over: return
+		if is_near_player(GameManager.player.base_magnetic + GameManager.player.upgrade_sum_magnetic):
 			start_gem_escape()
 	
 	if state_escape:

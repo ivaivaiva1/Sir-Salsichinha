@@ -1,8 +1,9 @@
 [gd_scene load_steps=10 format=3 uid="uid://b6nai3c6y8vsw"]
 
 [ext_resource type="Script" path="res://UI/game_over_ui.gd" id="1_1w8aj"]
-[ext_resource type="Texture2D" uid="uid://b3qisawyyhyjo" path="res://addons/Tiny Swords/UI/Ribbons/Ribbon_Red_3Slides.png" id="1_d4cjn"]
-[ext_resource type="Texture2D" uid="uid://c61q8nmbxi8pt" path="res://addons/Tiny Swords/UI/Banners/Banner_Horizontal.png" id="2_dso7s"]
+[ext_resource type="Texture2D" uid="uid://b3qisawyyhyjo" path="res://addons/Tiny Swords/UI Resources/Ribbons/Ribbon_Red_3Slides.png" id="1_d4cjn"]
+[ext_resource type="Texture2D" uid="uid://c61q8nmbxi8pt" path="res://addons/Tiny Swords/UI Resources/Banners/Banner_Horizontal.png" id="2_dso7s"]
+
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ai36p"]
 texture = ExtResource("1_d4cjn")

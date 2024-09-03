@@ -13,6 +13,7 @@ func _ready():
 
 func _process(delta: float):	
 	if enemy.movement_type != "drag_movement": return
+	print(enemy.is_resting)
 	# Atualiza o drag factor para se aproximar do valor alvo
 	set_move_direction()
 	rotate_sprite()
@@ -27,11 +28,11 @@ func rotate_sprite():
 
 func _physics_process(delta: float) -> void:
 	if enemy.movement_type != "drag_movement": return
+	if enemy.is_resting: return
 	if(enemy.actual_knockback.x > 0 or enemy.actual_knockback.y):
 		enemy.velocity = enemy.actual_knockback
 		enemy.move_and_slide()
 	else:
-		if(enemy.is_resting): return
 		var desired_velocity: Vector2 = direction * (enemy.speed * 100)
 		
 		# Calcular a mudança na velocidade corrigida pelo drag_factor

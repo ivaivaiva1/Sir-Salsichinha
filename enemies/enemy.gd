@@ -23,7 +23,6 @@ var major_knockback_force: DamageController.Damage_Instance
 var distance_to_player: float
 var attack_timer: float = 0
 
-
 var is_striking: bool = false
 var actual_knockback: Vector2 = Vector2(0, 0)
 var actual_knockback_float: float
@@ -127,11 +126,9 @@ func get_hited(damage_instance: DamageController.Damage_Instance, knockback_dire
 	suffered_damages_id.append(damage_instance.force_id)
 	if damage_instance.max_hited_enemies <= 0: 
 		DamageController.destroy_damage_instance(damage_instance)
-		print(damage_instance.force_damage)
 		return
 	else:
 		damage_instance.max_hited_enemies -= 1
-		print(damage_instance.max_hited_enemies)
 	if damage_instance == null: return
 	if damage_instance.force_power > 0:
 		GameManager.im_hited()
@@ -166,9 +163,7 @@ func strike_enemies_around():
 
 func hit_player():
 	if GameManager.is_game_over: return
-	#var player: Player = area.get_parent()
 	GameManager.player.take_damage(damage)
-
 
 func update_is_striking():
 	if actual_knockback == Vector2(0, 0):
@@ -181,7 +176,7 @@ func die():
 	var index = randf_range(0, 100)
 	if(index <= 2):
 		var meat_object = meat_scene.instantiate()
-		meat_object.position = position
+		meat_object.global_position = experience_pos.global_position
 		get_parent().add_child(meat_object)
 	GameManager.kills += 1
 	queue_free()
@@ -209,6 +204,14 @@ func do_rest():
 
 func is_attack_finished():
 	animation_player.play("resting")
+	if GameManager.is_game_over: return
+	if GameManager.player.upgrade_sum_thorn == 0: return
+	var rand: float = randf_range(0, 100)
+	if rand <= (GameManager.player.base_critical_chance + GameManager.player.upgrade_sum_critical_chance):
+		take_damage((GameManager.player.upgrade_sum_thorn * (GameManager.player.base_critical_multiplier + GameManager.player.upgrade_sum_critical_multiplier)), true)
+	else:
+		take_damage(GameManager.player.upgrade_sum_thorn, false)
+
 
 func pump():
 	return

@@ -38,25 +38,25 @@ func attack():
 	if player.is_attacking: return
 	if attack_index == 2: attack_index = 0
 	var rand: int = randi_range(0, 100)
-	if attack_index == 1 or rand <= player.critical_chance:
+	if attack_index == 1 or rand <= (player.base_critical_chance + player.upgrade_sum_critical_chance):
 		if player.input_vector.y > 0:
-			animation_player.play("attack_down_2")
+			animation_player.play("attack_down_2", -1, player.upgrade_multiplier_attack_speed)
 			set_critical_effect_position("down")
 		elif player.input_vector.y < 0:
-			animation_player.play("attack_up_2")
+			animation_player.play("attack_up_2", -1, player.upgrade_multiplier_attack_speed)
 			set_critical_effect_position("up")
 		else:
-			animation_player.play("attack_side_2")
+			animation_player.play("attack_side_2", -1, player.upgrade_multiplier_attack_speed)
 			set_critical_effect_position("side")
 		last_attack_type = "Critical"
 		animation_crit.play("critical_effect")
 	else: 
 		if player.input_vector.y > 0:
-			animation_player.play("attack_down_1")
+			animation_player.play("attack_down_1", -1, player.upgrade_multiplier_attack_speed)
 		elif player.input_vector.y < 0:
-			animation_player.play("attack_up_1")
+			animation_player.play("attack_up_1", -1, player.upgrade_multiplier_attack_speed)
 		else:
-			animation_player.play("attack_side_1")
+			animation_player.play("attack_side_1", -1, player.upgrade_multiplier_attack_speed)
 		last_attack_type = "Normal"
 	can_pending_normal_attack = false
 	player.can_flip = false
@@ -70,7 +70,7 @@ func apply_damage(attack_direction: String, is_critical: bool = false):
 	var areas = get_hited_enemys(attack_direction)
 	var total_direction = Vector2(0, 0)
 	var enemies_hit = []
-	var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance(player.sword_damage, player.sword_knockback_force, player.max_enemies_knockback, is_critical, player.critical_chance, player.critical_multiplier)
+	var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance((player.base_sword_damage + player.upgrade_sum_sword_damage), (player.base_sword_knockback_force + player.upgrade_sum_knockback_force), (player.base_max_enemies_knockback + player.upgrade_sum_max_enemies_knockback), is_critical, (player.base_critical_chance + player.upgrade_sum_critical_chance), (player.base_critical_multiplier + player.upgrade_sum_critical_multiplier))
 	for area in areas:
 		if area.is_in_group("player_enemies"):
 			var enemy: Enemy = area.get_parent()

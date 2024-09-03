@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=3 uid="uid://swjwmswu0wjm"]
 
 [ext_resource type="Script" path="res://misc/Gems/gem.gd" id="1_dvql3"]
-[ext_resource type="Texture2D" uid="uid://bvus4meovv10v" path="res://addons/Pixel Art Gem Pack - Animated/GEM 3/GEM 3 - TURQUOISE - Spritesheet.png" id="2_feqfh"]
+[ext_resource type="Texture2D" uid="uid://dkgvrc75jteaq" path="res://marcio sprites/Gems/GEM_3_-_RED_-_Spritesheet_.png" id="2_tok70"]
 [ext_resource type="Texture2D" uid="uid://c2nu61r5rxak8" path="res://addons/Pixel Art Gem Pack - Animated/Spark/Spark - Spritesheet.png" id="3_kjg2x"]
 
 [sub_resource type="Animation" id="Animation_x5lnx"]
@@ -214,7 +214,6 @@ _data = {
 }
 
 [node name="Gem 3" type="CharacterBody2D"]
-scale = Vector2(0.675, 0.675)
 script = ExtResource("1_dvql3")
 xp_value = 2.0
 
@@ -222,7 +221,8 @@ xp_value = 2.0
 modulate = Color(1, 1, 1, 0)
 z_index = -100
 position = Vector2(0, -14)
-texture = ExtResource("2_feqfh")
+scale = Vector2(0.72, 0.72)
+texture = ExtResource("2_tok70")
 hframes = 11
 frame = 10
 
