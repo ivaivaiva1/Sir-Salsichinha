@@ -1,88 +1,138 @@
 [gd_scene load_steps=8 format=3 uid="uid://x4gpmeviy4rk"]
 
 [ext_resource type="Script" path="res://UI/damage_ui.gd" id="1_coiq0"]
+[ext_resource type="FontFile" uid="uid://cw82x163pvdhd" path="res://addons/fonts/pixelsix00.ttf" id="2_6fcyq"]
 
-[sub_resource type="Animation" id="Animation_q7sj8"]
+[sub_resource type="LabelSettings" id="LabelSettings_sxfjy"]
+line_spacing = 2.35
+font = ExtResource("2_6fcyq")
+font_size = 36
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_6eokj"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
+tracks/0/path = NodePath("ScaleController:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 0)]
+"values": [Vector2(0, -10)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("..:scale")
+tracks/1/path = NodePath("ScaleController/LabelFather:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("..:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScaleController/LabelFather:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
-[sub_resource type="Animation" id="Animation_kxhn4"]
+[sub_resource type="Animation" id="Animation_hsmqy"]
 resource_name = "default"
+length = 1.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("..:position")
+tracks/0/path = NodePath("ScaleController:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.15, 1),
+"times": PackedFloat32Array(0, 0.4, 1.3),
+"transitions": PackedFloat32Array(0.450625, 2.14355, 1),
 "update": 0,
-"values": [Vector2(0, 15), Vector2(0, -20)]
+"values": [Vector2(0, 15.95), Vector2(0, -20), Vector2(0, 150)]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("..:scale")
+tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 0.225),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(1.5, 1.5)]
+"times": PackedFloat32Array(1.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("..:modulate")
+tracks/2/path = NodePath("ScaleController/LabelFather:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.9, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_6m6ru"]
+resource_name = "default2"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScaleController:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.68302, 1),
+"update": 0,
+"values": [Vector2(0, 15.95), Vector2(0, -30)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ScaleController/LabelFather:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 1),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ScaleController/LabelFather:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(3.24901, 1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Vector2(1, 1), Vector2(0.8, 0.8)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("%Label/../../..")
+tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -94,24 +144,12 @@ tracks/3/keys = {
 }]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_t7ids"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qu5ev"]
 _data = {
-"RESET": SubResource("Animation_q7sj8"),
-"default": SubResource("Animation_kxhn4")
+"RESET": SubResource("Animation_6eokj"),
+"default": SubResource("Animation_hsmqy"),
+"default2": SubResource("Animation_6m6ru")
 }
-
-[sub_resource type="SystemFont" id="SystemFont_2pset"]
-font_names = PackedStringArray("Comic Sans MS")
-font_weight = 999
-
-[sub_resource type="FontVariation" id="FontVariation_i5gcn"]
-base_font = SubResource("SystemFont_2pset")
-
-[sub_resource type="LabelSettings" id="LabelSettings_r118w"]
-font = SubResource("FontVariation_i5gcn")
-font_size = 24
-outline_size = 3
-outline_color = Color(0, 0, 0, 1)
 
 [node name="DamageUi" type="Node2D"]
 z_index = 1000
@@ -119,36 +157,25 @@ script = ExtResource("1_coiq0")
 normalColor = Color(1, 1, 1, 1)
 criticalColor = Color(0.980392, 0.768627, 0, 1)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-root_node = NodePath("../ScaleController/LabelFather/Label")
-libraries = {
-"": SubResource("AnimationLibrary_t7ids")
-}
-autoplay = "default"
-speed_scale = 1.7
-
 [node name="ScaleController" type="Node2D" parent="."]
-position = Vector2(0, 15)
+position = Vector2(0, -10)
+scale = Vector2(0.8, 0.8)
 
 [node name="LabelFather" type="Node2D" parent="ScaleController"]
 
 [node name="Label" type="Label" parent="ScaleController/LabelFather"]
 unique_name_in_owner = true
-z_index = 1000
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -31.0
-offset_top = -60.0
-offset_right = 32.0
-offset_bottom = 11.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "65
-
-"
-label_settings = SubResource("LabelSettings_r118w")
+offset_left = -42.0
+offset_top = -58.95
+offset_right = 48.0
+offset_bottom = 1.05
+text = "65"
+label_settings = SubResource("LabelSettings_sxfjy")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qu5ev")
+}
+autoplay = "default"

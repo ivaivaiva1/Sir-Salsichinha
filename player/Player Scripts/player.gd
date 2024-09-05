@@ -6,7 +6,7 @@ extends CharacterBody2D
 @export var base_sword_damage: int = 30
 @export var base_critical_chance: float = 20
 @export var base_critical_multiplier: float = 1.8
-@export var base_block_chance: int = 20
+@export var base_block_chance: int = 80
 @export var base_sword_knockback_force: float = 500
 @export var base_max_health: int = 100
 @export var base_max_enemies_knockback: int = 100
@@ -26,10 +26,10 @@ var upgrade_sum_critical_multiplier: float = 0
 var upgrade_sum_block_chance: int = 0
 var upgrade_sum_max_health: int = 0
 var upgrade_sum_max_armor: int = 0
-var upgrade_sum_life_regen: float = 2
+var upgrade_sum_life_regen: float = 4
 var upgrade_sum_luck: int = 0
 var upgrade_sum_magnetic: int = 0
-var upgrade_sum_thorn: int = 0
+var upgrade_sum_thorn: int = 40
 
 
 @export_category("Other vars")
@@ -74,7 +74,7 @@ func _ready():
 
 func _process(delta):
 	call_manager()
-	call_life_regen()
+	call_life_regen(delta)
 	
 	# Input
 	read_input()
@@ -87,10 +87,10 @@ func _process(delta):
 	if frame_freeze_cooldown > 0:
 		frame_freeze_cooldown -= delta
 
-func call_life_regen():
+func call_life_regen(delta):
 	if health >= base_max_health + upgrade_sum_max_health: return
 	if upgrade_sum_life_regen == 0: return
-	health += upgrade_sum_life_regen / 100
+	health += delta * (upgrade_sum_life_regen)
 	health_bar.value = health
 	health_bar_trans.value = health
 
@@ -203,11 +203,12 @@ func die():
 	GameManager.is_game_over = true
 	queue_free()
 
-func heal(amount: int) -> int:
+func heal(amount: int):
 	health += amount
 	if health > base_max_health:
 		health = base_max_health
-	return health
+	health_bar.value = health
+	health_bar_trans.value = health
 
 func pump():
 	# --------------- Amassada --------------------
