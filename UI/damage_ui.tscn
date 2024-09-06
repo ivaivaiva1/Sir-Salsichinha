@@ -152,6 +152,7 @@ _data = {
 }
 
 [node name="DamageUi" type="Node2D"]
+visible = false
 z_index = 1000
 script = ExtResource("1_coiq0")
 normalColor = Color(1, 1, 1, 1)

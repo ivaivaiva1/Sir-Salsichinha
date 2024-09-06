@@ -76,6 +76,14 @@ func _process(delta):
 	call_manager()
 	call_life_regen(delta)
 	
+	if Input.is_action_just_pressed("pause"):
+		if Engine.time_scale != 0:
+			Engine.time_scale = 0
+		else:
+			Engine.time_scale = 1
+	
+	
+	
 	# Input
 	read_input()
 	
@@ -99,18 +107,24 @@ func _physics_process(delta):
 
 # Obtem o input vector
 func read_input():
-	input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down", 0.15)
+	var player_input = Input.get_vector("move_left", "move_right", "move_up", "move_down", 0.15)
 	
 	#Apagar deadzone do input vector
-	#var deadzone = 0.15
-	#if abs(input_vector.x) < 0.15:
-		#input_vector.x = 0.0
-	#if abs(input_vector.y) < 0.15:
-		#input_vector.x = 0.0
+	if abs(input_vector.x) < 0.15:
+		input_vector.x = 0.0
+	if abs(input_vector.y) < 0.15:
+		input_vector.y = 0.0
+	input_vector = player_input
 	
 	# Atualiza o is_running
 	was_running = is_running
 	is_running = not input_vector.is_zero_approx()
+
+func normalize_input_vector(InputVector: Vector2) -> Vector2:
+	var ControlDirection: Vector2 = Vector2(1, 0)
+	var DesiredDirection: Vector2 = Vector2(0, 1)
+	
+	return DesiredDirection.rotated(deg_to_rad(45) * floor(ControlDirection.angle_to(InputVector) / deg_to_rad(45)))
 
 # Move o Player
 func do_move():

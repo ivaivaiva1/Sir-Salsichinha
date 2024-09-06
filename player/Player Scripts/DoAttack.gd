@@ -75,8 +75,7 @@ func apply_damage(attack_direction: String, is_critical: bool = false):
 		if area.is_in_group("player_enemies"):
 			var enemy: Enemy = area.get_parent()
 			var direction = calculate_knockback_direction(enemy)
-			enemy.get_hited(new_damage_instance, direction, is_critical)
-			enemy.pump()
+			enemy.get_hited(new_damage_instance, direction, is_critical, "player sword")
 			total_direction += direction
 			enemies_hit.append(enemy)  
 	

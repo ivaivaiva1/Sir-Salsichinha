@@ -18,6 +18,10 @@ func _process(delta):
 	var seconds: int = time_elapsed_seconds % 60
 	var minutes: int = time_elapsed / 60
 	time_elapsed_string = "%02d:%02d" % [minutes, seconds]
+	if Input.is_action_just_pressed("reset"):
+		get_tree().reload_current_scene()
+		time_elapsed = 0
+		Engine.time_scale = 1
 
 func end_game():
 	if is_game_over: return
