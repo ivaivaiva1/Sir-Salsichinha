@@ -18,7 +18,7 @@ func _ready():
 		labelTxt.modulate = criticalColor
 		animation_player.speed_scale = 1.4
 	else:
-		scaleController.scale = Vector2(0.7, 0.7)
+		scaleController.scale = Vector2(0.65, 0.65)
 		labelTxt.modulate = normalColor
 		animation_player.speed_scale = 1.7
 

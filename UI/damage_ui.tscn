@@ -152,7 +152,6 @@ _data = {
 }
 
 [node name="DamageUi" type="Node2D"]
-visible = false
 z_index = 1000
 script = ExtResource("1_coiq0")
 normalColor = Color(1, 1, 1, 1)
@@ -179,4 +178,4 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_qu5ev")
 }
-autoplay = "default"
+autoplay = "default2"

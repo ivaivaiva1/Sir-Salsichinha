@@ -110,9 +110,9 @@ func read_input():
 	var player_input = Input.get_vector("move_left", "move_right", "move_up", "move_down", 0.15)
 	
 	#Apagar deadzone do input vector
-	if abs(input_vector.x) < 0.15:
+	if abs(input_vector.x) < 0.3:
 		input_vector.x = 0.0
-	if abs(input_vector.y) < 0.15:
+	if abs(input_vector.y) < 0.3:
 		input_vector.y = 0.0
 	input_vector = player_input
 	

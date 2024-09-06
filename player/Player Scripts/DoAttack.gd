@@ -39,10 +39,10 @@ func attack():
 	if attack_index == 2: attack_index = 0
 	var rand: int = randi_range(0, 100)
 	if attack_index == 1 or rand <= (player.base_critical_chance + player.upgrade_sum_critical_chance):
-		if player.input_vector.y > 0:
+		if player.input_vector.y > 0.5:
 			animation_player.play("attack_down_2", -1, player.upgrade_multiplier_attack_speed)
 			set_critical_effect_position("down")
-		elif player.input_vector.y < 0:
+		elif player.input_vector.y < -0.5:
 			animation_player.play("attack_up_2", -1, player.upgrade_multiplier_attack_speed)
 			set_critical_effect_position("up")
 		else:
@@ -51,9 +51,9 @@ func attack():
 		last_attack_type = "Critical"
 		animation_crit.play("critical_effect")
 	else: 
-		if player.input_vector.y > 0:
+		if player.input_vector.y > 0.5:
 			animation_player.play("attack_down_1", -1, player.upgrade_multiplier_attack_speed)
-		elif player.input_vector.y < 0:
+		elif player.input_vector.y < -0.5:
 			animation_player.play("attack_up_1", -1, player.upgrade_multiplier_attack_speed)
 		else:
 			animation_player.play("attack_side_1", -1, player.upgrade_multiplier_attack_speed)
