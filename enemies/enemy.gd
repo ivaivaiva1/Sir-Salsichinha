@@ -144,7 +144,7 @@ func get_hited(damage_instance: DamageController.Damage_Instance, knockback_dire
 		take_damage(damage, is_critical, hit_font)
 
 func take_damage(damage_amount: int, is_critical: bool, hit_font: String):
-	if hit_font == "player sword" or hit_font == "strike":
+	if hit_font == "player sword" or hit_font == "strike" or hit_font == "player block":
 		if(is_resting):
 			animation_player.play("idle")
 			is_resting = false
@@ -184,13 +184,7 @@ func strike_enemies_around():
 
 func hit_player():
 	if GameManager.is_game_over: return
-	GameManager.player.take_damage(damage)
-	if GameManager.player.upgrade_sum_thorn == 0: return
-	var rand: float = randf_range(0, 100)
-	if rand <= (GameManager.player.base_critical_chance + GameManager.player.upgrade_sum_critical_chance):
-		take_damage((GameManager.player.upgrade_sum_thorn * (GameManager.player.base_critical_multiplier + GameManager.player.upgrade_sum_critical_multiplier)), true, "thorn")
-	else:
-		take_damage(GameManager.player.upgrade_sum_thorn, false, "thorn")
+	GameManager.player.take_damage(damage, self)
 
 func is_attack_finished():
 	animation_player.play("resting")

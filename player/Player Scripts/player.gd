@@ -31,7 +31,6 @@ var upgrade_sum_luck: int = 0
 var upgrade_sum_magnetic: int = 0
 var upgrade_sum_thorn: int = 45
 
-
 @export_category("Other vars")
 var knockback: Vector2 = Vector2(0, 0)
 var knockback_tween	
@@ -49,6 +48,7 @@ var health: float = 0
 @onready var health_bar: ProgressBar = $HealthBar
 @onready var health_bar_trans: ProgressBar = $HealthBarTrans
 @onready var block_ui_pos: Marker2D = $BlockUIPos
+@onready var do_attack_gd: Node = %DoAttack
 
 
 var input_vector: Vector2 = Vector2(0, 0)
@@ -182,15 +182,16 @@ func adjust_auto_knockback(bounceness: float) -> float:
 func call_manager():
 	GameManager.player_position = position
 
-func take_damage(amount: int):
+func take_damage(amount: int, enemy: Enemy):
 	if health <= 0: return
 	var rand: int = randi_range(0, 100)
 	if rand <= (base_block_chance + upgrade_sum_block_chance):
 		var block_ui = block_ui_prefab.instantiate()
 		block_ui.global_position = block_ui_pos.global_position
 		get_parent().add_child(block_ui)
+		do_block_hit(enemy)
 		return
-	
+	do_thorn_hit(enemy)
 	var realDamage: float
 	realDamage = amount * (1 - (upgrade_sum_max_armor / 100))
 	if realDamage <= 0: return
@@ -227,6 +228,25 @@ func heal(amount: int):
 		health = base_max_health
 	health_bar.value = health
 	health_bar_trans.value = health
+
+func do_thorn_hit(enemy: Enemy):
+	if GameManager.player.upgrade_sum_thorn == 0: return
+	var rand: float = randf_range(0, 100)
+	if rand <= (GameManager.player.base_critical_chance + GameManager.player.upgrade_sum_critical_chance):
+		enemy.take_damage((upgrade_sum_thorn * (base_critical_multiplier + upgrade_sum_critical_multiplier)), true, "thorn")
+	else:
+		enemy.take_damage(upgrade_sum_thorn, false, "thorn")
+
+func do_block_hit(enemy: Enemy):
+	var direction = calculate_knockback_direction(enemy)
+	var is_critical: bool = false
+	var rand = randf_range(0, 100)
+	if rand <= base_critical_chance + upgrade_sum_critical_chance: is_critical = true
+	var new_damage_instance: DamageController.Damage_Instance = DamageController.create_damage_instance((base_sword_damage + upgrade_sum_sword_damage + upgrade_sum_thorn), (base_sword_knockback_force + upgrade_sum_knockback_force), (base_max_enemies_knockback + upgrade_sum_max_enemies_knockback), is_critical, (base_critical_chance + upgrade_sum_critical_chance), (base_critical_multiplier + upgrade_sum_critical_multiplier))
+	enemy.get_hited(new_damage_instance, direction, is_critical, "player block")
+
+func calculate_knockback_direction(enemy: Enemy) -> Vector2:
+	return (enemy.global_position - global_position).normalized()
 
 func pump():
 	# --------------- Amassada --------------------

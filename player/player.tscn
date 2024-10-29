@@ -830,6 +830,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.407843)
 [node name="Scripts" type="Node2D" parent="."]
 
 [node name="DoAttack" type="Node" parent="Scripts"]
+unique_name_in_owner = true
 script = ExtResource("3_lu7xg")
 
 [node name="Status Progression" type="Node" parent="Scripts"]
