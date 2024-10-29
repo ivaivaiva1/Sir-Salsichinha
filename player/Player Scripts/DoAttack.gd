@@ -37,8 +37,7 @@ func _process(delta):
 func attack():
 	if player.is_attacking: return
 	if attack_index == 2: attack_index = 0
-	var rand: int = randi_range(0, 100)
-	if attack_index == 1 or rand <= (player.base_critical_chance + player.upgrade_sum_critical_chance):
+	if attack_index == 1:
 		if player.input_vector.y > 0.5:
 			animation_player.play("attack_down_2", -1, player.upgrade_multiplier_attack_speed)
 			set_critical_effect_position("down")

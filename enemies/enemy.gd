@@ -101,16 +101,16 @@ func calculate_if_is_critical(font_is_critical: bool, critical_chance: float) ->
 	var rand: float 
 	rand = randf_range(0, 100)
 	if font_is_critical:
-		if rand <= critical_chance:
+		if rand <= critical_chance / 2:
 			return true
 		else:
 			rand = randf_range(0, 100)
-			if rand <= critical_chance:
+			if rand <= critical_chance / 4:
 				return true
 			else:
 				return false
 	else:
-		if rand <= critical_chance:
+		if rand <= critical_chance / 2:
 			return true
 		else:
 			return false
@@ -249,7 +249,7 @@ func pump(pump_index: int):
 		pump_player.play("pump_3")
 		actual_pump = 4
 	elif pump_index == 5:
-		pump_player.play("pump_3")
+		pump_player.play("pump_5")
 		actual_pump = 5
 
 func finish_pump():
@@ -261,7 +261,14 @@ func finish_flash():
 
 # Função que calcula a direção do knockback para um inimigo
 func calculate_knockback_direction(enemy: Enemy) -> Vector2:
-	return (enemy.global_position - global_position).normalized()
+	var enemy_position = enemy.global_position
+	var direction = (enemy_position - global_position).normalized()
+	var player_position = GameManager.player_position
+	var normalized_direction = direction.normalized()
+	var new_position = enemy_position + normalized_direction
+	if (new_position - player_position).length() < (enemy_position - player_position).length():
+		direction *= -1
+	return direction
 
 	# --------------- Desequilíbrio --------------------
 	#await get_tree().create_timer(0.35).timeout

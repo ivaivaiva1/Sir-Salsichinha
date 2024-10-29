@@ -23,9 +23,9 @@ LevelingController="*res://player/Player Scripts/Leveling Controller.gd"
 
 [display]
 
+window/size/viewport_width=1024
+window/size/viewport_height=896
 window/size/borderless=true
-window/size/window_width_override=1498
-window/size/window_height_override=842
 window/stretch/mode="canvas_items"
 
 [editor_plugins]

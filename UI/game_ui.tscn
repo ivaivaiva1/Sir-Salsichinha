@@ -9,7 +9,7 @@ subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_hg7oe"]
 font = SubResource("SystemFont_eboec")
-font_size = 70
+font_size = 85
 outline_size = 13
 outline_color = Color(0, 0, 0, 1)
 
@@ -30,7 +30,7 @@ subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_yy58m"]
 font = SubResource("SystemFont_wlsfi")
-font_size = 40
+font_size = 35
 font_color = Color(0.835294, 0.709804, 0.513726, 1)
 outline_size = 12
 outline_color = Color(0, 0, 0, 1)
@@ -45,30 +45,41 @@ bg_color = Color(0.713726, 0.909804, 0, 1)
 script = ExtResource("1_dcuoc")
 
 [node name="TimerLabel" type="Label" parent="."]
+unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -96.0
-offset_top = 12.0
-offset_right = 97.0
-offset_bottom = 111.0
+offset_left = -512.0
+offset_top = 5.0
+offset_right = 512.0
+offset_bottom = 160.0
 grow_horizontal = 2
 text = "00:00
 "
 label_settings = SubResource("LabelSettings_hg7oe")
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -6.0
+offset_top = 23.0
+offset_right = 1032.0
+offset_bottom = 51.0
+color = Color(0, 0, 0, 1)
 
 [node name="LevelLabel" type="Label" parent="."]
 unique_name_in_owner = true
-offset_left = 27.0
-offset_top = 20.0
-offset_right = 220.0
-offset_bottom = 119.0
+offset_left = -18.0
+offset_top = 23.0
+offset_right = 175.0
+offset_bottom = 122.0
 text = "Level: 1"
 label_settings = SubResource("LabelSettings_h17bb")
+horizontal_alignment = 1
 
 [node name="Dead" type="Sprite2D" parent="."]
-position = Vector2(1119, 27.8)
-scale = Vector2(1.2, 1.2)
+position = Vector2(989, 36)
+scale = Vector2(1.1, 1.1)
 texture = ExtResource("3_xvp84")
 hframes = 7
 vframes = 2
@@ -81,10 +92,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 424.0
-offset_top = -310.2
-offset_right = 514.0
-offset_bottom = -133.2
+offset_left = 359.0
+offset_top = -487.0
+offset_right = 449.0
+offset_bottom = -310.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "
@@ -93,12 +104,13 @@ text = "
 "
 label_settings = SubResource("LabelSettings_yy58m")
 horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="ExperienceBar" type="ProgressBar" parent="."]
 unique_name_in_owner = true
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 17.0
+offset_bottom = 26.0
 grow_horizontal = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_2eakd")
 theme_override_styles/fill = SubResource("StyleBoxFlat_d4u8x")

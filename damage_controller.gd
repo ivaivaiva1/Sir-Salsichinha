@@ -20,12 +20,8 @@ func create_damage_instance(force_damage: float, force_power: float, max_hited_e
 	damage_instance.critical_chance = critical_chance
 	damage_instance.critical_multiplier = critical_multiplier
 	damage_instance.force_decay_time = force_decay_time
-	if is_critical:
-		damage_instance.force_power = force_power * 1.3
-		damage_instance.max_hited_enemies = max_hited_enemies * 1.3
-	else:
-		damage_instance.force_power = force_power
-		damage_instance.max_hited_enemies = max_hited_enemies
+	damage_instance.force_power = force_power
+	damage_instance.max_hited_enemies = max_hited_enemies
 	all_game_damages.append(damage_instance)
 	return damage_instance
 

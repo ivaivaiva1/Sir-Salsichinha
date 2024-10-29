@@ -3,14 +3,14 @@ extends CharacterBody2D
 
 @export_category("Balancing Vars")
 @export var base_speed: float = 2.5
-@export var base_sword_damage: int = 20
-@export var base_critical_chance: float = 5
-@export var base_critical_multiplier: float = 1.5
+@export var base_sword_damage: int = 10
+@export var base_critical_chance: float = 40
+@export var base_critical_multiplier: float = 3
 @export var base_block_chance: int = 0
-@export var base_sword_knockback_force: float = 400
+@export var base_sword_knockback_force: float = 500
 @export var base_max_health: int = 300
 @export var base_max_enemies_knockback: int = 100
-@export var base_magnetic: float = 1000
+@export var base_magnetic: float = 150
 @export var base_luck: int = 10
 @export var base_auto_knock_back_force: float = 300
 
@@ -23,13 +23,13 @@ var upgrade_sum_knockback_force: int = 0
 var upgrade_sum_max_enemies_knockback: int = 0
 var upgrade_sum_critical_chance: int = 0
 var upgrade_sum_critical_multiplier: float = 0
-var upgrade_sum_block_chance: int = 0
+var upgrade_sum_block_chance: int = 30
 var upgrade_sum_max_health: int = 0
 var upgrade_sum_max_armor: float = 0
-var upgrade_sum_life_regen: float = 15
+var upgrade_sum_life_regen: float = 9
 var upgrade_sum_luck: int = 0
 var upgrade_sum_magnetic: int = 0
-var upgrade_sum_thorn: int = 80
+var upgrade_sum_thorn: int = 45
 
 
 @export_category("Other vars")

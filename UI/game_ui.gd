@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-@onready var timer_label: Label = $TimerLabel
+@onready var timer_label: Label = %TimerLabel
 @onready var gold_label: Label = %GoldLabel
 @onready var kills_label: Label = %KillsLabel
 @onready var level_label:  Label = %LevelLabel

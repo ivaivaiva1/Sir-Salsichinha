@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bbaq72ngobmw1"]
+[gd_scene load_steps=34 format=3 uid="uid://bbaq72ngobmw1"]
 
 [ext_resource type="Texture2D" uid="uid://biypnnv8oumla" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="1_pohw4"]
 [ext_resource type="Script" path="res://player/Player Scripts/player.gd" id="1_tjkta"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://player/Player Scripts/Status Progression.gd" id="3_l1nxw"]
 [ext_resource type="Script" path="res://player/Player Scripts/DoAttack.gd" id="3_lu7xg"]
 [ext_resource type="Texture2D" uid="uid://b3737ag182t8y" path="res://addons/kenney_particle-pack/PNG (Transparent)/star_08.png" id="3_tq043"]
+[ext_resource type="PackedScene" uid="uid://d3fpypedn3irp" path="res://UI/game_ui.tscn" id="7_vmpkh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xe4tq"]
 radius = 15.0
@@ -942,3 +943,5 @@ show_percentage = false
 [node name="BlockUIPos" type="Marker2D" parent="."]
 position = Vector2(-21.9999, -23.0001)
 metadata/_edit_group_ = true
+
+[node name="GameUI" parent="." instance=ExtResource("7_vmpkh")]
