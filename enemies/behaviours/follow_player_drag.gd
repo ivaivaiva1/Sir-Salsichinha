@@ -13,7 +13,6 @@ func _ready():
 
 func _process(delta: float):	
 	if enemy.movement_type != "drag_movement": return
-	print(enemy.is_resting)
 	# Atualiza o drag factor para se aproximar do valor alvo
 	set_move_direction()
 	rotate_sprite()

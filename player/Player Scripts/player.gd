@@ -2,20 +2,20 @@ class_name Player
 extends CharacterBody2D
 
 @export_category("Balancing Vars")
-@export var base_speed: float = 3
-@export var base_sword_damage: int = 30
-@export var base_critical_chance: float = 20
-@export var base_critical_multiplier: float = 1.8
-@export var base_block_chance: int = 80
-@export var base_sword_knockback_force: float = 500
-@export var base_max_health: int = 100
+@export var base_speed: float = 2.5
+@export var base_sword_damage: int = 20
+@export var base_critical_chance: float = 5
+@export var base_critical_multiplier: float = 1.5
+@export var base_block_chance: int = 0
+@export var base_sword_knockback_force: float = 400
+@export var base_max_health: int = 300
 @export var base_max_enemies_knockback: int = 100
-@export var base_magnetic: float = 300
+@export var base_magnetic: float = 1000
 @export var base_luck: int = 10
 @export var base_auto_knock_back_force: float = 300
 
 @export_category("Level UP Multipliers")
-var upgrade_multiplier_attack_speed: float = 1.3
+var upgrade_multiplier_attack_speed: float = 1
 var upgrade_multiplier_attack_range: float = 1
 var upgrade_sum_sword_damage: int = 0
 var upgrade_sum_movement_speed: float = 0
@@ -25,11 +25,11 @@ var upgrade_sum_critical_chance: int = 0
 var upgrade_sum_critical_multiplier: float = 0
 var upgrade_sum_block_chance: int = 0
 var upgrade_sum_max_health: int = 0
-var upgrade_sum_max_armor: int = 0
-var upgrade_sum_life_regen: float = 4
+var upgrade_sum_max_armor: float = 0
+var upgrade_sum_life_regen: float = 15
 var upgrade_sum_luck: int = 0
 var upgrade_sum_magnetic: int = 0
-var upgrade_sum_thorn: int = 40
+var upgrade_sum_thorn: int = 80
 
 
 @export_category("Other vars")
@@ -73,6 +73,8 @@ func _ready():
 	pass
 
 func _process(delta):
+	health_bar.value = health
+	health_bar_trans.value = health
 	call_manager()
 	call_life_regen(delta)
 	
@@ -99,8 +101,7 @@ func call_life_regen(delta):
 	if health >= base_max_health + upgrade_sum_max_health: return
 	if upgrade_sum_life_regen == 0: return
 	health += delta * (upgrade_sum_life_regen)
-	health_bar.value = health
-	health_bar_trans.value = health
+
 
 func _physics_process(delta):
 	do_move()
@@ -183,7 +184,6 @@ func call_manager():
 
 func take_damage(amount: int):
 	if health <= 0: return
-	
 	var rand: int = randi_range(0, 100)
 	if rand <= (base_block_chance + upgrade_sum_block_chance):
 		var block_ui = block_ui_prefab.instantiate()
@@ -191,7 +191,11 @@ func take_damage(amount: int):
 		get_parent().add_child(block_ui)
 		return
 	
-	health -= amount
+	var realDamage: float
+	realDamage = amount * (1 - (upgrade_sum_max_armor / 100))
+	if realDamage <= 0: return
+	health -= realDamage
+	
 	frameFreeze()
 	#Piscar player
 	pump()

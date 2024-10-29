@@ -6,7 +6,7 @@ func _ready():
 	player = get_parent().get_parent()
 	LevelingController.connect("update_player_status", Callable(self, "change_status"))
 	#change_status(1)
-#
+
 #func change_status(level: int): 
 	#match level:
 		#1:

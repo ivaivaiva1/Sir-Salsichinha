@@ -237,19 +237,19 @@ func do_rest():
 func pump(pump_index: int):
 	if actual_pump > pump_index: return
 	if pump_index == 1:
-		pump_player.play("pump_1")
+		pump_player.play("pump_3")
 		actual_pump = 1
 	elif pump_index == 2:
-		pump_player.play("pump_2")
+		pump_player.play("pump_3")
 		actual_pump = 2
 	elif pump_index == 3:
 		pump_player.play("pump_3")
 		actual_pump = 3
 	elif pump_index == 4:
-		pump_player.play("pump_4")
+		pump_player.play("pump_3")
 		actual_pump = 4
 	elif pump_index == 5:
-		pump_player.play("pump_5")
+		pump_player.play("pump_3")
 		actual_pump = 5
 
 func finish_pump():
@@ -275,4 +275,3 @@ func calculate_knockback_direction(enemy: Enemy) -> Vector2:
 	#rotation_tween.tween_property(self, "rotation_degrees", 6, 0.1)
 	#rotation_tween.tween_property(self, "rotation_degrees", -6, 0.1)
 	#rotation_tween.tween_property(self, "rotation_degrees", 0, 0.05)
-

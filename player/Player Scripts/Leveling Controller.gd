@@ -63,4 +63,3 @@ func level_up():
 	experience_required = get_riquered_levelup_experience(level + 1)
 	gem_value = get_gem_value(level)
 	emit_signal("update_player_status", level)
-
