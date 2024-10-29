@@ -35,7 +35,7 @@ func call_action(action_name: String):
 	else:
 		print("Method '%s' not found in SpawnController" % action_name)
 
-func min_00_secs_00():
+func min_00_secs_02():
 	mob_spawner.time_pawn = 0.2
 	mob_spawner.time_pawn_blue = 0.8
 	mob_spawner.time_pawn_red = 3

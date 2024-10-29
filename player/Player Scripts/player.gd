@@ -63,6 +63,13 @@ signal meat_collected(value:int)
 func _ready():
 	# Ritual
 	#do_ritual()
+	Engine.time_scale = 1
+	GameManager.kills = 0
+	GameManager.time_elapsed = 0
+	GameManager.is_game_over = false
+	LevelingController.level = 1
+	LevelingController.experience = 0
+	LevelingController.total_experience = 0
 	range_player.play("1.5")
 	health = base_max_health
 	health_bar.max_value = base_max_health
@@ -218,6 +225,7 @@ func frameFreeze():
 	frame_freeze_cooldown = frame_freeze_time
 
 func die():
+	get_tree().reload_current_scene()
 	GameManager.end_game()
 	GameManager.is_game_over = true
 	queue_free()
