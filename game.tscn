@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cisrofx8e15gh"]
+[gd_scene load_steps=12 format=3 uid="uid://cisrofx8e15gh"]
 
 [ext_resource type="PackedScene" uid="uid://b6nai3c6y8vsw" path="res://UI/game_over_ui.tscn" id="1_gq0a3"]
 [ext_resource type="PackedScene" uid="uid://bbaq72ngobmw1" path="res://player/player.tscn" id="1_p4arj"]
@@ -7,6 +7,15 @@
 [ext_resource type="Texture2D" uid="uid://b06k48ulfyfsj" path="res://addons/Tiny Swords/Terrain/Ground/Tilemap_Flat.png" id="7_jb4l5"]
 [ext_resource type="PackedScene" uid="uid://d1g2m6aj4bn4l" path="res://UI/upgrades_ui.tscn" id="7_nc6td"]
 [ext_resource type="AudioStream" uid="uid://dtrvjabbmtvqr" path="res://sounds/251461__joshuaempyre__arcade-music-loop.wav" id="8_hcdvv"]
+[ext_resource type="Shader" path="res://shaders/crt_fencerdev.gdshader" id="8_lql60"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iduvs"]
+shader = ExtResource("8_lql60")
+shader_parameter/crt_brightness = 1.0
+shader_parameter/crt_ghost = 2.3
+shader_parameter/crt_grid = 0.4
+shader_parameter/crt_white_noise = 0.3
+shader_parameter/crt_curve = 0.03
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tujgb"]
 texture = ExtResource("7_jb4l5")
@@ -537,11 +546,21 @@ texture_region_size = Vector2i(64, 64)
 tile_size = Vector2i(64, 64)
 sources/0 = SubResource("TileSetAtlasSource_tujgb")
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("game_ui")]
+[node name="Game" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_qx51r")
-game_ui = NodePath("")
 game_over_ui_scene = ExtResource("1_gq0a3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_iduvs")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Player" parent="." instance=ExtResource("1_p4arj")]
 position = Vector2(552, 365)
@@ -561,10 +580,10 @@ autoplay = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -1000
-offset_left = -63411.0
-offset_top = -38165.0
-offset_right = -56560.0
-offset_bottom = -34446.0
+offset_left = -63821.0
+offset_top = -38337.0
+offset_right = -56970.0
+offset_bottom = -34618.0
 scale = Vector2(21, 21)
 color = Color(0.972549, 0.94902, 0.45098, 1)
 

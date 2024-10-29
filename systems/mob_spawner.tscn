@@ -15,7 +15,7 @@
 
 [sub_resource type="Curve2D" id="Curve2D_33tt0"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -793.172, -496.842, 0, 0, 0, 0, 827.182, -494.503, 0, 0, 0, 0, 827.182, 500.456, 0, 0, 0, 0, -796.687, 502.795, 0, 0, 0, 0, -796.687, -494.503)
+"points": PackedVector2Array(0, 0, 0, 0, -686.571, -486.373, 0, 0, 0, 0, 731.093, -496.895, 0, 0, 0, 0, 731.093, 733.067, 0, 0, 0, 0, -688.914, 738.913, 0, 0, 0, 0, -701.802, -486.373)
 }
 point_count = 5
 
@@ -34,14 +34,14 @@ torch_blue = ExtResource("9_xshc0")
 torch_red = ExtResource("10_u5h8n")
 
 [node name="Path2D" type="Path2D" parent="."]
-position = Vector2(-17.0143, 16.9541)
+position = Vector2(-71, 12)
 scale = Vector2(0.853517, 0.855311)
 curve = SubResource("Curve2D_33tt0")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 unique_name_in_owner = true
-position = Vector2(-796.687, -425.017)
-rotation = -1.5708
+position = Vector2(-700.477, -360.342)
+rotation = -1.58131
 progress = 5167.0
 
 [node name="_Timer_101948" type="Timer" parent="Path2D/PathFollow2D"]
