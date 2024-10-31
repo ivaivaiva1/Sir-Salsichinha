@@ -7,7 +7,7 @@ extends CharacterBody2D
 @export var base_critical_chance: float = 40
 @export var base_critical_multiplier: float = 3
 @export var base_block_chance: int = 0
-@export var base_sword_knockback_force: float = 500
+@export var base_sword_knockback_force: float = 800
 @export var base_max_health: int = 300
 @export var base_max_enemies_knockback: int = 100
 @export var base_magnetic: float = 150
@@ -70,7 +70,7 @@ func _ready():
 	LevelingController.level = 1
 	LevelingController.experience = 0
 	LevelingController.total_experience = 0
-	range_player.play("1.5")
+	range_player.play("1")
 	health = base_max_health
 	health_bar.max_value = base_max_health
 	health_bar_trans.max_value = base_max_health
@@ -85,11 +85,11 @@ func _process(delta):
 	call_manager()
 	call_life_regen(delta)
 	
-	if Input.is_action_just_pressed("pause"):
-		if Engine.time_scale != 0:
-			Engine.time_scale = 0
-		else:
-			Engine.time_scale = 1
+	#if Input.is_action_just_pressed("pause"):
+		#if get_tree().paused == false:
+			#get_tree().paused = true
+		#else:
+			#get_tree().paused = false
 	
 	
 	
@@ -140,10 +140,15 @@ func do_move():
 	if is_attacking:
 		target_velocity *= 0.5
 	if(knockback != Vector2(0, 0)):
-		velocity = knockback
+		target_velocity = (target_velocity / 3) + knockback
+		var movement_direction = lerp(velocity, target_velocity, 0.35)
+		velocity = movement_direction
 	else:
 		var movement_direction = lerp(velocity, target_velocity, 0.35)
 		velocity = movement_direction
+	#target_velocity += knockback
+	#var movement_direction = lerp(velocity, target_velocity, 0.35)
+	#velocity = movement_direction
 	move_and_slide()
 
 # Toca as animações run e idle
@@ -167,7 +172,9 @@ func rotate_sprite():
 
 # Função que aplica o knockback ao player
 func receive_knockback(knockback_direction: Vector2, stop_time: float, enemy_bounceness: float):
-	knockback = knockback_direction * adjust_auto_knockback(enemy_bounceness)
+	#knockback = knockback_direction * adjust_auto_knockback(enemy_bounceness)
+	knockback = knockback_direction * ((base_sword_knockback_force + upgrade_sum_knockback_force) / 1.5)
+	#knockback = knockback_direction * 800
 	if knockback_tween:
 		knockback_tween.kill()
 	var knockback_tween = get_tree().create_tween()

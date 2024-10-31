@@ -3,7 +3,7 @@ class_name Dash_Hit
 
 var enemy: Enemy
 
-var ghost_scene = preload("res://enemies/Torch_Ghost/DashGhostScene.tscn")
+#var ghost_scene = preload("res://enemies/Torch_Ghost/DashGhostScene.tscn")
 var ghost: Sprite2D
 var can_dash: bool = true
 var spawn_ghost_cooldown: float = 0
@@ -38,8 +38,8 @@ func _process(delta):
 			enemy.animation_player.set_speed_scale(1.0)
 
 func instance_ghost():
-	ghost = ghost_scene.instantiate()
-	get_parent().get_parent().add_child(ghost)
+#	ghost = ghost_scene.instantiate()
+	#get_parent().get_parent().add_child(ghost)
 	var sprite = enemy.sprite2d
 	if not sprite: return
 	ghost.global_position = enemy.global_position
